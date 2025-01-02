@@ -1,0 +1,12 @@
+{
+  "name": "segs-blackjack-js",
+  "version": "1.0.0",
+  "description": "BBC Software Engineering Graduate Scheme tech test, developed using JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Simon Highfield",
+  "license": "MIT"
+}
