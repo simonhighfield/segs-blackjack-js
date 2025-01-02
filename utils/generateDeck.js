@@ -3,7 +3,8 @@ module.exports = generateDeck = () => {
 
     deck[0] = {
         "suit": "clubs",
-        "values": [1, 11]
+        "values": [1, 11],
+        "name": 'Ace'
     }
 
     return deck

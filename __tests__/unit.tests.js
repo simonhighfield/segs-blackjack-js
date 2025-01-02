@@ -20,7 +20,6 @@ describe("generateDeck() of cards", () => {
             test("A card's suit is one of clubs, diamonds, hearts, spades", () => {
                 const deck = generateDeck();
                 const card = deck[0]
-                expect(card).toHaveProperty('suit');
                 expect(card.suit).toBeOneOf(['clubs', 'diamonds', 'hearts', 'spades']);
             });
         })
@@ -43,8 +42,21 @@ describe("generateDeck() of cards", () => {
                     expect(value).toBeWithin(1,12)
                 });
             });
-    })
+        })
+        describe("Card name", () => {
+            test("A card has a name", () => {
+                const deck = generateDeck();
+                const card = deck[0]
+                expect(card).toHaveProperty('name');
+            });
+            test("A card's name is a string such as Ace, Two, Three, Jack, ... etc", () => {
+                const deck = generateDeck();
+                const card = deck[0]
+                const validNames = ['Ace', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King']
 
+                expect(card.name).toBeOneOf(validNames);
+            });
+        })
     })
     // A card has a valid suit, value, name
     // Every card is an object with valid suit and value
