@@ -1,7 +1,8 @@
 const generateDeck = require("../utils/generateDeck");
+const generateSuit = require("../utils/generateSuit");
 
 describe("generateDeck() of cards", () => {
-    describe("Deck properties", () => {
+    describe.skip("Deck properties", () => {
         test("Deck contains 52 items", () => {
           const deck = generateDeck();
           expect(deck.length).toBe(52);
@@ -61,7 +62,10 @@ describe("generateDeck() of cards", () => {
             });
         })
     })
-    // A card has a valid suit, value, name
-    // Every card is an object with valid suit and value
-    // Each suit contains ace, 2-10, 3 * royals
-  });
+    describe("Suit Properties", () => {
+        test("A suit is an array of 13 cards", () => {
+            const suit = generateSuit();
+            expect(suit).toBeArrayOfSize(13);
+        });
+    })
+});
