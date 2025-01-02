@@ -2,14 +2,18 @@
   "name": "segs-blackjack-js",
   "version": "1.0.0",
   "description": "BBC Software Engineering Graduate Scheme tech test, developed using JS",
-  "main": "index.js", 
+  "main": "index.js",
   "scripts": {
     "test": "jest"
+  },
+  "jest": {
+    "setupFilesAfterEnv": ["./testSetup.js"]
   },
   "keywords": [],
   "author": "Simon Highfield",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "jest-extended": "^4.0.2"
   }
 }

@@ -10,7 +10,13 @@ describe("generateDeck()", () => {
         const card = deck[0]
         expect(typeof card).toBe('object');
     });
-    // A card has a valid suit and a value
-    // Every card
+    test("A card has a valid suit", () => {
+        const deck = generateDeck();
+        const card = deck[0]
+        expect(card).toHaveProperty('suit');
+        expect(card.suit).toBeOneOf(['clubs', 'diamonds', 'hearts', 'spades']);
+    });
+    // A card has a valid suit, value, name
+    // Every card is an object with valid suit and value
     // Each suit contains ace, 2-10, 3 * royals
   });
