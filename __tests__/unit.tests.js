@@ -1,0 +1,1 @@
+console.log("running unit.tests.js with CLI shortcut");
