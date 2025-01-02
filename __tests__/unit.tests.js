@@ -16,21 +16,27 @@ describe("generateDeck()", () => {
         expect(card).toHaveProperty('suit');
         expect(card.suit).toBeOneOf(['clubs', 'diamonds', 'hearts', 'spades']);
     });
-    test("A card has a valid array of values", () => {
-        const deck = generateDeck();
-        const card = deck[0]
-        expect(card).toHaveProperty('values');
-        expect(card.values).toBeArray();
-
-        const values = card.values
-        expect(values.length).toBeWithin(1,3)
-
-        values.forEach(value => {
-            expect(value).toBeNumber()
-            expect(value).not.toBeNaN()
-            expect(value).toBeWithin(1,12)
+    describe("Card values", () => {
+        test("A card's values are in a valid array", () => {
+            const deck = generateDeck();
+            const card = deck[0]
+            expect(card).toHaveProperty('values');
+            expect(card.values).toBeArray();
+            expect(card.values.length).toBeWithin(1,3)
         });
-    });
+        test("A card's values are between 1 and 11 ", () => {
+            const deck = generateDeck();
+            const card = deck[0]
+            const values = card.values
+    
+            values.forEach(value => {
+                expect(value).toBeNumber()
+                expect(value).not.toBeNaN()
+                expect(value).toBeWithin(1,12)
+            });
+        });
+
+    })
     // A card has a valid suit, value, name
     // Every card is an object with valid suit and value
     // Each suit contains ace, 2-10, 3 * royals
