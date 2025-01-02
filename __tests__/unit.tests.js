@@ -1,10 +1,13 @@
 const generateDeck = require("../utils/generateDeck");
 
 describe("generateDeck() of cards", () => {
-    test("Deck contains 52 items", () => {
-      const deck = generateDeck();
-      expect(deck.length).toBe(52);
-    });
+    describe("Deck properties", () => {
+        test("Deck contains 52 items", () => {
+          const deck = generateDeck();
+          expect(deck.length).toBe(52);
+        });
+    })
+
     describe("Card properties", () => {
         test("A card is an object", () => {
             const deck = generateDeck();
