@@ -1,3 +1,4 @@
+const { expectedNames, lookupValueByName } = require("../data/testData");
 const generateDeck = require("../utils/generateDeck");
 const generateSuit = require("../utils/generateSuit");
 
@@ -67,11 +68,9 @@ describe("generateDeck() of cards", () => {
                 }
             });
             test("A card's name is a string such as Ace, Two, Three, Jack, ... etc", () => {
-                const validNames = ['Ace', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King']
-
                 for (let i = 0; i < deck.length; i++) { 
                     const card = deck[i]
-                    expect(card.name).toBeOneOf(validNames);
+                    expect(card.name).toBeOneOf(expectedNames);
                 }
             });
             
@@ -88,8 +87,6 @@ describe("generateDeck() of cards", () => {
             
         });
         test("A suit contains one of each card name ranging from Ace, Two, ... Queen, King", () => {
-            const expectedNames = ['Ace', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King']
-
             let actualNames = []
             for (let i = 0; i < suit.length; i++) { 
                 const card = suit[i]
@@ -98,26 +95,10 @@ describe("generateDeck() of cards", () => {
             
             expect(actualNames).toIncludeAllMembers(expectedNames)
         });
-        test("Each card name has the correct corresponding value", () => {
-            const expectedValues = {
-                "Ace": [1, 11],
-                "Two": [2],
-                "Three": [3],
-                "Four": [4],
-                "Five": [5],
-                "Six": [6],
-                "Seven": [7],
-                "Eight": [8],
-                "Nine": [9],
-                "Ten": [10],
-                "Jack": [10],
-                "Queen": [10],
-                "King": [10],
-            };
-            
+        test("Each card name has the correct corresponding value", () => {            
             for (let i = 0; i < suit.length; i++) { 
                 const card = suit[i];
-                expect(card.values).toEqual(expectedValues[card.name]);
+                expect(card.values).toEqual(lookupValueByName[card.name]);
             }
         })
     })

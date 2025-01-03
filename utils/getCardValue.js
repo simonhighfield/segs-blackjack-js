@@ -1,4 +1,4 @@
-module.exports = getCardValue = (i, cardNames) => {
+module.exports = getCardValue = (cardNames, i) => {
     if (cardNames[i] === "Ace") {
         return [1, 11];
     } else if (cardNames[i] === 'Jack' || cardNames[i] === 'Queen' || cardNames[i] === 'King') {
