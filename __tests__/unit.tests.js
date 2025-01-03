@@ -86,5 +86,16 @@ describe("generateDeck() of cards", () => {
             expect(suit).toBeArrayOfSize(13);
             
         });
+        test("A suit contains one of each card name ranging from Ace, Two, ... Queen, King", () => {
+            const expectedNames = ['Ace', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King']
+
+            let actualNames = []
+            for (let i = 0; i < suit.length; i++) { 
+                const card = suit[i]
+                actualNames.push(card.name)  
+            }
+            
+            expect(actualNames).toIncludeAllMembers(expectedNames)
+        });
     })
 });
