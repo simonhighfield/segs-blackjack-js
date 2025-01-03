@@ -67,7 +67,7 @@ describe("generateDeck() of cards", () => {
                     expect(card).toHaveProperty('name');
                 }
             });
-            test("A card's name is a string such as Ace, Two, Three, Jack, ... etc", () => {
+            test("A card's name is a string such as Ace, Two, Jack, etc", () => {
                 for (let i = 0; i < deck.length; i++) { 
                     const card = deck[i]
                     expect(card.name).toBeOneOf(expectedNames);
