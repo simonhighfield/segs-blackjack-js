@@ -71,8 +71,13 @@ describe("generateDeck() of cards", () => {
         })
     })
     describe("Suit Properties", () => {
+
+        let suit = []
+        beforeAll(() => {
+            suit = generateSuit();
+        });
+
         test("A suit is an array of 13 cards", () => {
-            const suit = generateSuit();
             expect(suit).toBeArrayOfSize(13);
         });
     })
