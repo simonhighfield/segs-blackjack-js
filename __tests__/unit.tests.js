@@ -74,6 +74,7 @@ describe("generateDeck() of cards", () => {
                     expect(card.name).toBeOneOf(validNames);
                 }
             });
+            
         })
     })
     describe("Suit Properties", () => {
@@ -97,5 +98,27 @@ describe("generateDeck() of cards", () => {
             
             expect(actualNames).toIncludeAllMembers(expectedNames)
         });
+        test("Each card name has the correct corresponding value", () => {
+            const expectedValues = {
+                "Ace": [1, 11],
+                "Two": [2],
+                "Three": [3],
+                "Four": [4],
+                "Five": [5],
+                "Six": [6],
+                "Seven": [7],
+                "Eight": [8],
+                "Nine": [9],
+                "Ten": [10],
+                "Jack": [10],
+                "Queen": [10],
+                "King": [10],
+            };
+            
+            for (let i = 0; i < suit.length; i++) { 
+                const card = suit[i];
+                expect(card.values).toEqual(expectedValues[card.name]);
+            }
+        })
     })
 });
