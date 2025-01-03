@@ -95,7 +95,7 @@ describe("generateDeck() of cards", () => {
             
             expect(actualNames).toIncludeAllMembers(expectedNames)
         });
-        test("Each card name has the correct corresponding value", () => {            
+        test("A suit has cards with names corresponding to the correct value", () => {            
             for (let i = 0; i < suit.length; i++) { 
                 const card = suit[i];
                 expect(card.values).toEqual(lookupValueByName[card.name]);
