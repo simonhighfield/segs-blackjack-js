@@ -1,17 +1,7 @@
-module.exports = generateDeck = () => {
-    const deck = new Array(52)
+const generateSuit = require("./generateSuit")
 
-    
-    
-    deck[0] = {
-        "suit": "clubs",
-        "values": [1, 11],
-        "name": 'Ace'
-    }
-
-
-
-
+module.exports = generateDeck = () => {    
+    const deck = generateSuit()
 
     return deck
 }
