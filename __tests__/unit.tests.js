@@ -76,7 +76,7 @@ describe("generateDeck() of cards", () => {
             });
         })
     })
-    describe.skip("Suit Properties", () => {
+    describe("Suit Properties", () => {
         let suit = []
         beforeAll(() => {
             suit = generateSuit();
@@ -86,13 +86,5 @@ describe("generateDeck() of cards", () => {
             expect(suit).toBeArrayOfSize(13);
             
         });
-        // test("A suit contains a full range of cards names from from Ace, Two, ... Queen, King", () => {
-        //     const validNames = ['Ace', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King']
-
-        //     suit.forEach((card)=> {
-        //         expect(card).toHaveProperty('name');
-        //         expect(card.name).toBeOneOf(validNames);
-        //     })
-        // });
     })
 });
