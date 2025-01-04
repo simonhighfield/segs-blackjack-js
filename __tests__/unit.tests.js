@@ -76,37 +76,39 @@ describe("generateDeck() of cards", () => {
             
         })
     })
-    describe("Suit Properties", () => {
-        let suit = []
-        const emblem = 'hearts'
-        beforeAll(() => {
-            suit = generateSuit(emblem);
-        });
-
-        test("A suit is an array of 13 cards", () => {
-            expect(suit).toBeArrayOfSize(13);
-            
-        });
-        test("A suit contains one of each card name ranging from Ace, Two, ... Queen, King", () => {
-            let actualNames = []
-            for (let i = 0; i < suit.length; i++) { 
-                const card = suit[i]
-                actualNames.push(card.name)  
-            }
-            
-            expect(actualNames).toIncludeAllMembers(expectedNames)
-        });
-        test("A suit has cards with names corresponding to the correct value", () => {            
-            for (let i = 0; i < suit.length; i++) { 
-                const card = suit[i];
-                expect(card.values).toEqual(lookupValueByName[card.name]);
-            }
-        })
-        test("A suit has all cards matching the input emblem", () => {     
-            for (let i = 0; i < suit.length; i++) { 
-                const card = suit[i];
-                expect(card.emblem).toBe(emblem);
-            }
+    describe("generateSuit()", () => {
+        describe("Suit Properties", () => {
+            let suit = []
+            const emblem = 'hearts'
+            beforeAll(() => {
+                suit = generateSuit(emblem);
+            });
+    
+            test("A suit is an array of 13 cards", () => {
+                expect(suit).toBeArrayOfSize(13);
+                
+            });
+            test("A suit contains one of each card name ranging from Ace, Two, ... Queen, King", () => {
+                let actualNames = []
+                for (let i = 0; i < suit.length; i++) { 
+                    const card = suit[i]
+                    actualNames.push(card.name)  
+                }
+                
+                expect(actualNames).toIncludeAllMembers(expectedNames)
+            });
+            test("A suit has cards with names corresponding to the correct value", () => {            
+                for (let i = 0; i < suit.length; i++) { 
+                    const card = suit[i];
+                    expect(card.values).toEqual(lookupValueByName[card.name]);
+                }
+            })
+            test("A suit has all cards matching the input emblem", () => {     
+                for (let i = 0; i < suit.length; i++) { 
+                    const card = suit[i];
+                    expect(card.emblem).toBe(emblem);
+                }
+            })
         })
     })
 });
