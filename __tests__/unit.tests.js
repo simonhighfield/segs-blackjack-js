@@ -79,7 +79,8 @@ describe("generateDeck() of cards", () => {
     describe("Suit Properties", () => {
         let suit = []
         beforeAll(() => {
-            suit = generateSuit();
+            const emblem = 'hearts'
+            suit = generateSuit(emblem);
         });
 
         test("A suit is an array of 13 cards", () => {
@@ -99,6 +100,12 @@ describe("generateDeck() of cards", () => {
             for (let i = 0; i < suit.length; i++) { 
                 const card = suit[i];
                 expect(card.values).toEqual(lookupValueByName[card.name]);
+            }
+        })
+        test("A suit has all cards matching that suit", () => {     
+            for (let i = 0; i < suit.length; i++) { 
+                const card = suit[i];
+                expect(card.suit).toBe('hearts');
             }
         })
     })
