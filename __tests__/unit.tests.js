@@ -24,17 +24,17 @@ describe("generateDeck() of cards", () => {
                 expect(typeof card).toBe('object');
             }
         });
-        describe("Card suit", () => {
-            test("A card has a suit", () => {
+        describe("Card emblem", () => {
+            test("A card has an emblem", () => {
                 for (let i = 0; i < deck.length; i++) {
                     const card = deck[i]                    
-                    expect(card).toHaveProperty('suit');
+                    expect(card).toHaveProperty('emblem');
                 }
             });
-            test("A card's suit is one of clubs, diamonds, hearts, spades", () => {
+            test("A card's emblem is one of clubs, diamonds, hearts, spades", () => {
                 for (let i = 0; i < deck.length; i++) { 
                     const card = deck[i]
-                    expect(card.suit).toBeOneOf(['clubs', 'diamonds', 'hearts', 'spades']);
+                    expect(card.emblem).toBeOneOf(['clubs', 'diamonds', 'hearts', 'spades']);
                 }
             });
         })
@@ -78,8 +78,8 @@ describe("generateDeck() of cards", () => {
     })
     describe("Suit Properties", () => {
         let suit = []
+        const emblem = 'hearts'
         beforeAll(() => {
-            const emblem = 'hearts'
             suit = generateSuit(emblem);
         });
 
@@ -102,10 +102,10 @@ describe("generateDeck() of cards", () => {
                 expect(card.values).toEqual(lookupValueByName[card.name]);
             }
         })
-        test("A suit has all cards matching that suit", () => {     
+        test("A suit has all cards matching the input emblem", () => {     
             for (let i = 0; i < suit.length; i++) { 
                 const card = suit[i];
-                expect(card.suit).toBe('hearts');
+                expect(card.emblem).toBe(emblem);
             }
         })
     })
