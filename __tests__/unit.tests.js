@@ -3,7 +3,7 @@ const generateDeck = require("../utils/generateDeck");
 const generateSuit = require("../utils/generateSuit");
 
 describe("generateDeck() of cards", () => {
-    describe("Deck properties", () => {
+    describe("Deck is a valid array ", () => {
         test("A deck is an array, with a length > 0", () => {
             const deck = generateDeck();
             
@@ -76,6 +76,7 @@ describe("generateDeck() of cards", () => {
             
         })
     })
+
     describe("generateSuit()", () => {
         describe("Suit Properties", () => {
             let suit = []

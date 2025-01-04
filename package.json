@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "t": "npm run test"
+    "t": "npm run test",
+    "unit": "jest unit.tests.js",
+    "int": "jest integration.tests.js"
   },
   "jest": {
     "setupFilesAfterEnv": ["./testSetup.js"]
