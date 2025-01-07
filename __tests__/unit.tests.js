@@ -179,10 +179,21 @@ describe("dealCard", () => {
         expect(newDeck).not.toPartiallyContain(expectedCardDealt)
     });
     test("Adds the first card from deck to the hand", () => {
-        let { newHand, newDeck } = dealCard(deck, hand)
-        let expectedFirstCardDealt = deck[0]
+        let { newHand } = dealCard(deck, hand)
+        let expectedCardDealt = deck[0]
         
         expect(newHand.length).toBe(1)
-        expect(newHand).toIncludeAllMembers([expectedFirstCardDealt])
+        expect(newHand).toIncludeAllMembers([expectedCardDealt])
+    });
+    test("Consecutively adds the front card from the deck to the hand", () => {
+        let { newHand, newDeck } = dealCard(deck, hand)
+        const expectedCardsDealt = deck.slice(0,2)
+        
+        hand = newHand;
+        deck = newDeck;
+        ({ newHand } = dealCard(deck, hand))      
+    
+        expect(newHand.length).toBe(2)
+        expect(newHand).toIncludeAllMembers(expectedCardsDealt)
     });
 })
