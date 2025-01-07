@@ -227,7 +227,17 @@ describe("updateScore", () => {
         hand = newHand;
         deck = newDeck;
     });
+    test("Throws an error if missing an input", () => {        
+        function updateWithoutInputs () {
+            updateScore()
+        }
+        expect(updateWithoutInputs).toThrow("both 'hand' and 'score' must be provided");
 
+        function updateWithoutScore () {
+            updateScore()
+        }
+        expect(updateWithoutScore).toThrow("both 'hand' and 'score' must be provided");
+    });
     test("Throws an error if 'hand' is not an array", () => {        
         function inputWrongTypes () {
             updateScore('shouldBeArray', 1)
@@ -240,5 +250,24 @@ describe("updateScore", () => {
         }
         expect(inputWrongTypes).toThrow("'score' should be a number");
     });
+    // test("Returns arrays for the deck and hand", () => {
+    //     const { newDeck, newHand } = dealCard(deck, hand)
 
+    //     expect(newDeck).toBeArray()
+    //     expect(newHand).toBeArray()
+    // });
+    // test("Returns new arrays, as oppose to references to the input arrays", () => {
+    //     const { newDeck, newHand } = dealCard(deck, hand)
+
+    //     expect(newDeck).not.toBe(deck)
+    //     expect(newHand).not.toBe(hand)
+    // });
+    // test("Does not mutate the input arrays", () => {
+    //     const deckCopy = [...deck]
+    //     const handCopy = [...hand]
+
+    //     dealCard(deck, hand)
+    //     expect(deck).toEqual(deckCopy)
+    //     expect(hand).toEqual(handCopy)
+    // });
 })
