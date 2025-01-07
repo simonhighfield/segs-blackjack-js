@@ -246,28 +246,20 @@ describe("updateScore", () => {
     });
     test("Throws an error if 'score' is not a number", () => {        
         function inputWrongTypes () {
-            updateScore([], 'shouldBeNumber')
+            updateScore([1], 'shouldBeNumber')
         }
         expect(inputWrongTypes).toThrow("'score' should be a number");
     });
-    // test("Returns arrays for the deck and hand", () => {
-    //     const { newDeck, newHand } = dealCard(deck, hand)
-
-    //     expect(newDeck).toBeArray()
-    //     expect(newHand).toBeArray()
-    // });
-    // test("Returns new arrays, as oppose to references to the input arrays", () => {
-    //     const { newDeck, newHand } = dealCard(deck, hand)
-
-    //     expect(newDeck).not.toBe(deck)
-    //     expect(newHand).not.toBe(hand)
-    // });
-    // test("Does not mutate the input arrays", () => {
-    //     const deckCopy = [...deck]
-    //     const handCopy = [...hand]
-
-    //     dealCard(deck, hand)
-    //     expect(deck).toEqual(deckCopy)
-    //     expect(hand).toEqual(handCopy)
-    // });
+    test("Throws an error if 'hand' is an empty array", () => {        
+        function inputEmptyHand () {
+            updateScore([], 1)
+        }
+        expect(inputEmptyHand).toThrow("'hand' should not be empty");
+    });
+    test("Throws an error if 'score' is less than 0", () => {        
+        function inputNegativeScore () {
+            updateScore([1], -1)
+        }
+        expect(inputNegativeScore).toThrow("'score' should not be negative");
+    });
 })
