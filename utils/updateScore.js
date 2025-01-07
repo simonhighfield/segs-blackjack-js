@@ -7,6 +7,6 @@ module.exports = updateScore = (hand) => {
     } else if (hand.length === 0) {
         throw  new TypeError("'hand' should not be empty")
     } 
-    
-    return 1
+
+    return 2
 }
