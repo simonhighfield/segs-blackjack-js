@@ -7,7 +7,9 @@
     "test": "jest",
     "t": "npm run test",
     "unit": "jest unit.tests.js",
-    "int": "jest integration.tests.js"
+    "u": "jest unit.tests.js",
+    "int": "jest integration.tests.js",
+    "i": "jest integration.tests.js"
   },
   "jest": {
     "setupFilesAfterEnv": ["./testSetup.js"]

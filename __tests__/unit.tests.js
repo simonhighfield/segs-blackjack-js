@@ -1,4 +1,5 @@
 const { expectedEmblems, expectedNames, lookupValueByName } = require("../data/testData");
+const dealCard = require("../utils/dealCard");
 const generateDeck = require("../utils/generateDeck");
 const generateSuit = require("../utils/generateSuit");
 
@@ -143,3 +144,15 @@ describe("generateDeck() of cards", () => {
         })
     })
 });
+
+describe("dealCard", () => {
+    test("Dealing a card returns arrays for the deck and hand", () => {
+        const deck = generateDeck();
+        const hand = []
+
+        const { newDeck, newHand } = dealCard(deck, hand)
+
+        expect(newDeck).toBeArray()
+        expect(newHand).toBeArray()
+    });
+})
