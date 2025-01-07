@@ -146,22 +146,29 @@ describe("generateDeck() of cards", () => {
 });
 
 describe("dealCard", () => {
-    test("Dealing a card returns arrays for the deck and hand", () => {
-        const deck = generateDeck();
-        const hand = []
+    let deck, hand = []
+    beforeEach(() => {
+        deck = generateDeck();
+    });
 
-        const { newDeck, newHand } = dealCard(deck, hand)
+    test("Dealing a card returns arrays for the deck and hand", () => {
+           const { newDeck, newHand } = dealCard(deck, hand)
 
         expect(newDeck).toBeArray()
         expect(newHand).toBeArray()
     });
-    test("Dealing card returns new arrays, as oppose to references to the input arrays ", () => {
-        const deck = generateDeck();
-        const hand = []
-
+    test("Dealing card returns new arrays, as oppose to references to the input arrays", () => {
         const { newDeck, newHand } = dealCard(deck, hand)
 
         expect(newDeck).not.toBe(deck)
         expect(newHand).not.toBe(hand)
+    });
+    test("Dealing card does not mutate the input arrays", () => {
+        const deckCopy = [...deck]
+        const handCopy = [...hand]
+
+        dealCard(deck, hand)
+        expect(deck).toEqual(deckCopy)
+        expect(hand).toEqual(handCopy)
     });
 })
