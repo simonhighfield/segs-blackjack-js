@@ -1,3 +1,10 @@
+exports.expectedEmblems = [
+    'clubs', 
+    'diamonds', 
+    'hearts', 
+    'spades'
+]
+
 exports.expectedNames = [
     'Ace', 
     'Two', 

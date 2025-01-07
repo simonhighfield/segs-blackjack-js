@@ -1,4 +1,4 @@
-const { expectedNames, lookupValueByName } = require("../data/testData");
+const { expectedEmblems, expectedNames, lookupValueByName } = require("../data/testData");
 const generateDeck = require("../utils/generateDeck");
 const generateSuit = require("../utils/generateSuit");
 
@@ -34,7 +34,7 @@ describe("generateDeck() of cards", () => {
             test("A card's emblem is one of clubs, diamonds, hearts, spades", () => {
                 for (let i = 0; i < deck.length; i++) { 
                     const card = deck[i]
-                    expect(card.emblem).toBeOneOf(['clubs', 'diamonds', 'hearts', 'spades']);
+                    expect(card.emblem).toBeOneOf(expectedEmblems);
                 }
             });
         })
@@ -133,13 +133,9 @@ describe("generateDeck() of cards", () => {
     
             test("A deck is an array of 52 cards", () => {
                 expect(deck).toBeArrayOfSize(52);
-                
-            });
+            })
             test("A deck contains 13 cards of each emblem", () => {
-
-                const emblems = ['clubs', 'diamonds', 'hearts', 'spades']
-                
-                emblems.forEach(emblem => {
+                expectedEmblems.forEach(emblem => {
                     const suit = deck.filter((card) => card.emblem === emblem)
                     expect(suit.length).toBe(13)
                 });                
