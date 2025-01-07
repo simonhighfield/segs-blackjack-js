@@ -155,4 +155,13 @@ describe("dealCard", () => {
         expect(newDeck).toBeArray()
         expect(newHand).toBeArray()
     });
+    test("Dealing card returns new arrays, as oppose to references to the input arrays ", () => {
+        const deck = generateDeck();
+        const hand = []
+
+        const { newDeck, newHand } = dealCard(deck, hand)
+
+        expect(newDeck).not.toBe(deck)
+        expect(newHand).not.toBe(hand)
+    });
 })
