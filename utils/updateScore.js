@@ -5,6 +5,8 @@ module.exports = updateScore = (hand, score) => {
 
     if (!Array.isArray(hand)) {
         throw  new TypeError("'hand' should be an array")
+    } else if (typeof score !== 'number') {
+        throw  new TypeError("'score' should be a number")
     }
 
     return {  }

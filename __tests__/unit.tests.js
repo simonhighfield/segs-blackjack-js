@@ -234,6 +234,11 @@ describe("updateScore", () => {
         }
         expect(inputWrongTypes).toThrow("'hand' should be an array");
     });
-
+    test("Throws an error if 'score' is not a number", () => {        
+        function inputWrongTypes () {
+            updateScore([], 'shouldBeNumber')
+        }
+        expect(inputWrongTypes).toThrow("'score' should be a number");
+    });
 
 })
