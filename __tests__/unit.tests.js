@@ -173,9 +173,10 @@ describe("dealCard", () => {
     });
     test("Removes the first card from the deck", () => {
         let { newDeck } = dealCard(deck, hand)
-        const expectedCardDealt = expectedDeck[0]
+        const expectedCardDealt = deck[0]
 
         expect(newDeck.length).toBe(51)
         expect(newDeck).not.toPartiallyContain(expectedCardDealt)
     });
+
 })
