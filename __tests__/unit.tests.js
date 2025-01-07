@@ -273,6 +273,13 @@ describe("updateScore", () => {
             expect(score).toBeNumber()
             expect(score).not.toBeNaN()
         });
+        test("Does not mutate the input hand", () => {
+            const hand = [1, 2]
+            const handCopy = [...hand]
+    
+            updateScore(hand, 3)
+            expect(hand).toEqual(handCopy)
+        });
 
     })
 })
