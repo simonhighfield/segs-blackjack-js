@@ -178,5 +178,11 @@ describe("dealCard", () => {
         expect(newDeck.length).toBe(51)
         expect(newDeck).not.toPartiallyContain(expectedCardDealt)
     });
-
+    test("Adds the first card from deck to the hand", () => {
+        let { newHand, newDeck } = dealCard(deck, hand)
+        let expectedFirstCardDealt = deck[0]
+        
+        expect(newHand.length).toBe(1)
+        expect(newHand).toIncludeAllMembers([expectedFirstCardDealt])
+    });
 })
