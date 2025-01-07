@@ -51,12 +51,6 @@ describe("generateDeck() of cards", () => {
                     expect(card.name).toBeOneOf(expectedNames);
                 }
             });
-            test("A card's names corresponds to the correct value", () => {            
-                for (let i = 0; i < deck.length; i++) { 
-                    const card = deck[i];
-                    expect(card.values).toEqual(lookupValueByName[card.name]);
-                }
-            })
         })
         describe("Card values", () => {
             test("A card's values are in a valid array", () => {
@@ -92,7 +86,6 @@ describe("generateDeck() of cards", () => {
                 }
             });
         })
-  
     })
 
     describe("generateSuit()", () => {
@@ -116,7 +109,12 @@ describe("generateDeck() of cards", () => {
                 
                 expect(actualNames).toIncludeAllMembers(expectedNames)
             });
-        
+            test("A suit has card names that correspond to the correct value", () => {            
+                for (let i = 0; i < suit.length; i++) { 
+                    const card = suit[i];
+                    expect(card.values).toEqual(lookupValueByName[card.name]);
+                }
+            })
             test("A suit has all cards matching the input emblem", () => {     
                 for (let i = 0; i < suit.length; i++) { 
                     const card = suit[i];
