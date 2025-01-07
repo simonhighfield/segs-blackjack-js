@@ -12,5 +12,5 @@ module.exports = updateScore = (hand, score) => {
         throw  new TypeError("'score' should not be negative")
     }
 
-    return {  }
+    return 1
 }

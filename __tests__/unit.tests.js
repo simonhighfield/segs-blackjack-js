@@ -265,4 +265,14 @@ describe("updateScore", () => {
             expect(inputNegativeScore).toThrow("'score' should not be negative");
         });
     })
+
+    describe("Functional checks", () => {
+        test("Returns a number", () => {
+            const score = updateScore([1], 1)
+    
+            expect(score).toBeNumber()
+            expect(score).not.toBeNaN()
+        });
+
+    })
 })
