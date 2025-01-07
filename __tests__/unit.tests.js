@@ -2,6 +2,7 @@ const { expectedEmblems, expectedNames, lookupValueByName, expectedDeck } = requ
 const dealCard = require("../utils/dealCard");
 const generateDeck = require("../utils/generateDeck");
 const generateSuit = require("../utils/generateSuit");
+const updateScore = require("../utils/updateScore");
 
 describe("generateDeck() of cards", () => {
     describe("Deck is a valid array ", () => {
@@ -209,4 +210,30 @@ describe("dealCard", () => {
         expect(newHand.length).toBe(2)
         expect(newHand).toIncludeAllMembers(expectedCardsDealt)
     });
+})
+
+describe("updateScore", () => {
+    let deck, hand;
+    let score = 0
+    beforeEach(() => {
+        deck = generateDeck();
+        hand = []
+        
+        let { newHand, newDeck } = dealCard(deck, hand)
+        hand = newHand;
+        deck = newDeck;
+        
+        ({ newDeck, newHand } = dealCard(deck, hand))
+        hand = newHand;
+        deck = newDeck;
+    });
+
+    test("Throws an error if 'hand' is not an array", () => {        
+        function inputWrongTypes () {
+            updateScore('shouldBeArray', 1)
+        }
+        expect(inputWrongTypes).toThrow("'hand' should be an array");
+    });
+
+
 })
