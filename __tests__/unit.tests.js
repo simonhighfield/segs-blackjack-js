@@ -146,9 +146,10 @@ describe("generateDeck() of cards", () => {
 });
 
 describe("dealCard", () => {
-    let deck, hand = []
+    let deck, hand;
     beforeEach(() => {
         deck = generateDeck();
+        hand = [];
     });
 
     test("Returns arrays for the deck and hand", () => {
@@ -185,7 +186,19 @@ describe("dealCard", () => {
         expect(newHand.length).toBe(1)
         expect(newHand).toIncludeAllMembers([expectedCardDealt])
     });
+    test("Consecutively removes the front card from the deck", () => {
+        let { newHand, newDeck } = dealCard(deck, hand)
+        const expectedCardsDealt = deck.slice(0,2)
+        
+        hand = newHand;
+        deck = newDeck;
+        ({ newDeck } = dealCard(deck, hand))
+    
+        expect(newDeck.length).toBe(50)
+        expect(newHand).not.toIncludeAllMembers(expectedCardsDealt)
+    });
     test("Consecutively adds the front card from the deck to the hand", () => {
+        
         let { newHand, newDeck } = dealCard(deck, hand)
         const expectedCardsDealt = deck.slice(0,2)
         
