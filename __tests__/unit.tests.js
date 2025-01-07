@@ -227,39 +227,42 @@ describe("updateScore", () => {
         hand = newHand;
         deck = newDeck;
     });
-    test("Throws an error if missing an input", () => {        
-        function updateWithoutInputs () {
-            updateScore()
-        }
-        expect(updateWithoutInputs).toThrow("both 'hand' and 'score' must be provided");
 
-        function updateWithoutScore () {
-            updateScore()
-        }
-        expect(updateWithoutScore).toThrow("both 'hand' and 'score' must be provided");
-    });
-    test("Throws an error if 'hand' is not an array", () => {        
-        function inputWrongTypes () {
-            updateScore('shouldBeArray', 1)
-        }
-        expect(inputWrongTypes).toThrow("'hand' should be an array");
-    });
-    test("Throws an error if 'score' is not a number", () => {        
-        function inputWrongTypes () {
-            updateScore([1], 'shouldBeNumber')
-        }
-        expect(inputWrongTypes).toThrow("'score' should be a number");
-    });
-    test("Throws an error if 'hand' is an empty array", () => {        
-        function inputEmptyHand () {
-            updateScore([], 1)
-        }
-        expect(inputEmptyHand).toThrow("'hand' should not be empty");
-    });
-    test("Throws an error if 'score' is less than 0", () => {        
-        function inputNegativeScore () {
-            updateScore([1], -1)
-        }
-        expect(inputNegativeScore).toThrow("'score' should not be negative");
-    });
+    describe("Error checks", () => {
+        test("Throws an error if missing an input", () => {        
+            function updateWithoutInputs () {
+                updateScore()
+            }
+            expect(updateWithoutInputs).toThrow("both 'hand' and 'score' must be provided");
+    
+            function updateWithoutScore () {
+                updateScore()
+            }
+            expect(updateWithoutScore).toThrow("both 'hand' and 'score' must be provided");
+        });
+        test("Throws an error if 'hand' is not an array", () => {        
+            function updatedWithWrongTypes () {
+                updateScore('shouldBeArray', 1)
+            }
+            expect(updatedWithWrongTypes).toThrow("'hand' should be an array");
+        });
+        test("Throws an error if 'score' is not a number", () => {        
+            function updatedWithWrongTypes () {
+                updateScore([1], 'shouldBeNumber')
+            }
+            expect(updatedWithWrongTypes).toThrow("'score' should be a number");
+        });
+        test("Throws an error if 'hand' is an empty array", () => {        
+            function inputEmptyHand () {
+                updateScore([], 1)
+            }
+            expect(inputEmptyHand).toThrow("'hand' should not be empty");
+        });
+        test("Throws an error if 'score' is less than 0", () => {        
+            function inputNegativeScore () {
+                updateScore([1], -1)
+            }
+            expect(inputNegativeScore).toThrow("'score' should not be negative");
+        });
+    })
 })
