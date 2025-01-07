@@ -123,4 +123,18 @@ describe("generateDeck() of cards", () => {
             })
         })
     })
+
+    describe("generateDeck", () => {
+        describe("Deck Properties", () => {
+            let deck = []
+            beforeAll(() => {
+                deck = generateDeck();
+            });
+    
+            test("A deck is an array of 52 cards", () => {
+                expect(deck).toBeArrayOfSize(52);
+                
+            });
+        })
+    })
 });
