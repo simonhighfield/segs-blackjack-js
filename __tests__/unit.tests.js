@@ -135,6 +135,15 @@ describe("generateDeck() of cards", () => {
                 expect(deck).toBeArrayOfSize(52);
                 
             });
+            test("A deck contains 13 cards of each emblem", () => {
+
+                const emblems = ['clubs', 'diamonds', 'hearts', 'spades']
+                
+                emblems.forEach(emblem => {
+                    const suit = deck.filter((card) => card.emblem === emblem)
+                    expect(suit.length).toBe(13)
+                });                
+            });
         })
     })
 });
