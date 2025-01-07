@@ -59,6 +59,18 @@ describe("generateDeck() of cards", () => {
                     });
                 }
             });
+            test("A card's values must be [1, 11] or [2-10]", () => {
+                for (let i = 0; i < deck.length; i++) { 
+                    const card = deck[i]
+                    const values = card.values
+
+                    if (values.length === 2) {
+                        expect(values).toIncludeAllMembers([1,11])
+                    } else {
+                        expect(values[0]).toBeWithin(2,11)
+                    }
+                }
+            });
         })
         describe("Card name", () => {
             test("A card has a name", () => {
