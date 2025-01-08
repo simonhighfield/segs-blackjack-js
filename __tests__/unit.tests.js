@@ -275,8 +275,11 @@ describe("updateScore", () => {
             expect(scores).toBeArrayOfSize(1)
             expect(scores[0]).toBeNumber()
         });
-        test.skip("Does not mutate the input hand", () => {
-            const hand = [1, 2]
+        test("Does not mutate the input hand", () => {
+            const hand = [
+                { "emblem": "clubs", "name": "Two", "values": [2] },
+                { "emblem": "diamonds", "name": "Four", "values": [4] }
+            ]
             const handCopy = [...hand]
     
             updateScore(hand)
