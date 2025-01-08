@@ -247,6 +247,28 @@ describe("updateScore", () => {
             }
             expect(inputEmptyHand).toThrow("'hand' should not be empty");
         });
+        test("Throws an error if 'hand' does not contain card objects with required keys", () => {        
+            function inputNoEmblemCard () {
+                updateScore([{ "invalidEmblem": "clubs", "name": "Two", "values": [2] }])
+            }
+            expect(inputNoEmblemCard).toThrow("'hand' should contain valid card objects");
+
+            function inputNoNameCard () {
+                updateScore([{ "emblem": "clubs", "invalidName": "Two", "values": [2] }])
+            }
+            expect(inputNoNameCard).toThrow("'hand' should contain valid card objects");
+
+            function inputNoValuesCard () {
+                updateScore([{ "emblem": "clubs", "name": "Two", "invalidValues": [2] }])
+            }
+            expect(inputNoValuesCard).toThrow("'hand' should contain valid card objects");
+
+            function inputEmptyObject () {
+                updateScore([{ }])
+            }
+            expect(inputEmptyObject).toThrow("'hand' should contain valid card objects");
+
+        });
     })
 
     describe("Functional checks", () => {
