@@ -213,20 +213,20 @@ describe("dealCard", () => {
 })
 
 describe("updateScore", () => {
-    let deck, hand;
-    let score = 0
-    beforeEach(() => {
-        deck = generateDeck();
-        hand = []
+    // let deck, hand;
+    // let score = 0
+    // beforeEach(() => {
+    //     deck = generateDeck();
+    //     hand = []
         
-        let { newHand, newDeck } = dealCard(deck, hand)
-        hand = newHand;
-        deck = newDeck;
+    //     let { newHand, newDeck } = dealCard(deck, hand)
+    //     hand = newHand;
+    //     deck = newDeck;
         
-        ({ newDeck, newHand } = dealCard(deck, hand))
-        hand = newHand;
-        deck = newDeck;
-    });
+    //     ({ newDeck, newHand } = dealCard(deck, hand))
+    //     hand = newHand;
+    //     deck = newDeck;
+    // });
 
     describe("Hand Error checks", () => {
         test("Throws an error if missing an input", () => {        
@@ -242,31 +242,40 @@ describe("updateScore", () => {
             expect(updatedWithWrongTypes).toThrow("'hand' should be an array");
         });
         test("Throws an error if 'hand' is an empty array", () => {        
-            function inputEmptyHand () {
+            function updateWithEmptyHand () {
                 updateScore([])
             }
-            expect(inputEmptyHand).toThrow("'hand' should not be empty");
+            expect(updateWithEmptyHand).toThrow("'hand' should not be empty");
         });        
     })
 
     describe("Card Error Checks", () => {
-        function testInvalidCard(invalidCard) {
-            expect(() => updateScore([invalidCard])).toThrow("'hand' should contain valid card objects");
-        }
-    
         test("Throws an error if cards are empty", () => {
-            testInvalidCard({});
+            function updateWithEmptyCard() {
+                updateScore([{}]);
+            }
+            expect(updateWithEmptyCard).toThrow("'hand' should contain valid card objects");
         });
-        test("Throws an error if cards do not have an 'emblem'", () => {
-            testInvalidCard({ invalidEmblem: "clubs", name: "Two", values: [2] });
+        test("Throws an error if cards do not contain 'emblem'", () => {
+            function updateWithoutEmblem() {
+                updateScore([{ invalidEmblem: "clubs", name: "Two", values: [2] }]);
+            }
+            expect(updateWithoutEmblem).toThrow("'hand' should contain valid card objects");
         });
-        test("Throws an error if cards do not have a 'name'", () => {
-            testInvalidCard({ emblem: "clubs", invalidName: "Two", values: [2] });
-        });        
-        test("Throws an error if cards do not have 'values'", () => {
-            testInvalidCard({ emblem: "clubs", name: "Two", invalidValues: [2] });
+        test("Throws an error if cards do not contain 'name'", () => {
+            function updateWithoutName() {
+                updateScore([{ emblem: "clubs", invalidName: "Two", values: [2] }]);
+            }
+            expect(updateWithoutName).toThrow("'hand' should contain valid card objects");
+        });
+        test("Throws an error if cards do not contain 'values'", () => {
+            function updateWithoutValues() {
+                updateScore([{ emblem: "clubs", name: "Two", invalidValues: [2] }]);
+            }
+            expect(updateWithoutValues).toThrow("'hand' should contain valid card objects");
         });
     });
+    
 
     describe("Functional Checks", () => {
         test("Does not mutate the input hand", () => {
@@ -283,12 +292,14 @@ describe("updateScore", () => {
 
     describe("Output Checks", () => {
         test("Returns scores as an array", () => {
-            const scores = updateScore([{ "emblem": "clubs", "name": "Two", "values": [2] }])
+            const hand = [{ "emblem": "clubs", "name": "Two", "values": [2] }]
+            const scores = updateScore(hand)
     
             expect(scores).toBeArray()
         });
         test("Each score is a number", () => {
-            const scores = updateScore([{ "emblem": "clubs", "name": "Two", "values": [2] }])
+            const hand = [{ "emblem": "clubs", "name": "Two", "values": [2] }]
+            const scores = updateScore(hand)
     
             scores.forEach(score => {
                 expect(score).toBeNumber()
@@ -301,8 +312,26 @@ describe("updateScore", () => {
 
     describe("Numeracy", () => {
         test("Returns the score from a hand of one single-value card", () => {
-            const actualScores = updateScore([{ "emblem": "clubs", "name": "Two", "values": [2] }])
-            const expectedScores = [2]
+            const hand = [{ "emblem": "clubs", "name": "Two", "values": [2] }]
+            const actualScores = updateScore(hand)
+            const expectedScores = hand[0].values
+            
+            expect(actualScores).toEqual(expectedScores)
+        });
+        test("Returns the score from a hand of two single-value card", () => {
+            const hand = [
+                { "emblem": "clubs", "name": "Two", "values": [2] },
+                { "emblem": "diamonds", "name": "Four", "values": [4] }
+            ]
+            const actualScores = updateScore(hand)
+            const expectedScores = [6]       
+        
+            expect(actualScores).toEqual(expectedScores)
+        });
+        test.skip("Returns both scores from a hand of one ace card", () => {
+            const hand = [{ "emblem": "clubs", "name": "Ace", "values": [1, 11] }]
+            const actualScores = updateScore(hand)
+            const expectedScores = hand[0].values
             
             expect(actualScores).toEqual(expectedScores)
         });
