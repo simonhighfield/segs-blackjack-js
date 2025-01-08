@@ -8,5 +8,10 @@ module.exports = updateScore = (hand) => {
         throw  new TypeError("'hand' should not be empty")
     } 
 
-    return 2
+    const handCopy = [...hand]
+    const card = handCopy[0]
+    const values = card.values
+    const score = values[0]
+    
+    return score
 }
