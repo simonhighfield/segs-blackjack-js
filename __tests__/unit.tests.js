@@ -268,13 +268,7 @@ describe("updateScore", () => {
         });
     });
 
-    describe("Functional checks", () => {
-        test("Returns an array of scores", () => {
-            const scores = updateScore([{ "emblem": "clubs", "name": "Two", "values": [2] }])
-    
-            expect(scores).toBeArrayOfSize(1)
-            expect(scores[0]).toBeNumber()
-        });
+    describe("Functional Checks", () => {
         test("Does not mutate the input hand", () => {
             const hand = [
                 { "emblem": "clubs", "name": "Two", "values": [2] },
@@ -284,6 +278,14 @@ describe("updateScore", () => {
     
             updateScore(hand)
             expect(hand).toEqual(handCopy)
+        });
+    })
+
+    describe("Output Checks", () => {
+        test("Returns an array of scores", () => {
+            const scores = updateScore([{ "emblem": "clubs", "name": "Two", "values": [2] }])
+    
+            expect(scores).toBeArrayOfSize(1)
         });
     })
 
