@@ -16,7 +16,7 @@ module.exports = updateScore = (hand) => {
     }
 
     const values = card.values
-    const score = values[0]
+    const scores = values
     
-    return score
+    return scores
 }
