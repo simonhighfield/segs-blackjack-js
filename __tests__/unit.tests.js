@@ -282,11 +282,21 @@ describe("updateScore", () => {
     })
 
     describe("Output Checks", () => {
-        test("Returns an array of scores", () => {
+        test("Returns scores as an array", () => {
             const scores = updateScore([{ "emblem": "clubs", "name": "Two", "values": [2] }])
     
-            expect(scores).toBeArrayOfSize(1)
+            expect(scores).toBeArray()
         });
+        test("Each score is a number", () => {
+            const scores = updateScore([{ "emblem": "clubs", "name": "Two", "values": [2] }])
+    
+            scores.forEach(score => {
+                expect(score).toBeNumber()
+                expect(score).not.toBeNaN()
+                expect(score).toBePositive()
+            });
+        });
+
     })
 
     describe("Numeracy", () => {
