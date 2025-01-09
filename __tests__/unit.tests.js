@@ -369,5 +369,17 @@ describe("getScoreFromHand", () => {
             
             expect(actualScores).toEqual(expectedScores)
         });
+        test("Returns only 1 correct score if an ace played high would exceed 21", () => {
+            const hand = [
+                { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
+                { "emblem": "spades", "name": "Four", "values": [4] },
+                { "emblem": "spades", "name": "Five", "values": [5] },
+                { "emblem": "spades", "name": "Six", "values": [6] },
+            ]
+            const actualScores = getScoreFromHand(hand)
+            const expectedScores = [16]
+            
+            expect(actualScores).toEqual(expectedScores)
+        });
     })
 })

@@ -15,8 +15,12 @@ module.exports = getScoreFromHand = (inputHand) => {
             const scoreIfAllAcesAreLow = getScore(hand);
     
             const scoreIfOneAceIsHigh = scoreIfAllAcesAreLow + 10
-    
-            return [scoreIfAllAcesAreLow, scoreIfOneAceIsHigh]                                                                                                                                                                                                                                          
+
+            if (scoreIfOneAceIsHigh < 21) {
+                return [scoreIfAllAcesAreLow, scoreIfOneAceIsHigh]
+            } else {
+                return [scoreIfAllAcesAreLow]
+            }                                                                                                                                                                                                     
         }   
     }
     catch (error) {
