@@ -14,9 +14,9 @@ module.exports = getScoreFromHand = (inputHand) => {
         else {
             const lowestScore = getScore(hand);
     
-            const alternateScores = getAltScoresByMakingEachAceHigh(aceCards, lowestScore) 
+            const alternateScore = lowestScore + 10
     
-            return [lowestScore, ...alternateScores]                                                                                                                                                                                                                                          
+            return [lowestScore, alternateScore]                                                                                                                                                                                                                                          
         }   
     }
     catch (error) {

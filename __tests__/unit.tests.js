@@ -345,5 +345,15 @@ describe("getScoreFromHand", () => {
             
             expect(actualScores).toEqual(expectedScores)
         });
+        test("Returns 2 correct scores from two ace cards (won't create scores > 21)", () => {
+            const hand = [
+                { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
+                { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
+            ]
+            const actualScores = getScoreFromHand(hand)
+            const expectedScores = [2, 12]
+            
+            expect(actualScores).toEqual(expectedScores)
+        });
     })
 })
