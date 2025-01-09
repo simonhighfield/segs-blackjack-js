@@ -345,13 +345,27 @@ describe("getScoreFromHand", () => {
             
             expect(actualScores).toEqual(expectedScores)
         });
-        test("Returns 2 correct scores from two ace cards (won't create scores > 21)", () => {
+        test("Returns 2 correct scores from two ace cards (one ace played high)", () => {
             const hand = [
                 { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
                 { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
             ]
             const actualScores = getScoreFromHand(hand)
             const expectedScores = [2, 12]
+            
+            expect(actualScores).toEqual(expectedScores)
+        });
+        test("Returns 2 correct scores from multiple ace and single-value cards (one ace played high)", () => {
+            const hand = [
+                { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
+                { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
+                { "emblem": "hearts", "name": "Ace", "values": [1, 11] },
+                { "emblem": "spades", "name": "Ace", "values": [1, 11] },
+                { "emblem": "spades", "name": "Two", "values": [2] },
+                { "emblem": "spades", "name": "Three", "values": [3] },
+            ]
+            const actualScores = getScoreFromHand(hand)
+            const expectedScores = [9, 19]
             
             expect(actualScores).toEqual(expectedScores)
         });
