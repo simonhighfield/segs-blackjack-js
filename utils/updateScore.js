@@ -23,15 +23,21 @@ module.exports = updateScore = (hand) => {
         return [score]
 
     } else if (aceCards) {
-        const scoreWhenAllAcesLow = getScore(handCopy);
+        const lowestScore = getScore(handCopy);
 
-        const scoresWhenEachAceHigh = aceCards.map((_, index) => scoreWhenAllAcesLow + ((index + 1) * 10)) 
+        const alternateScores = getAltScoresByMakingEachAceHigh(aceCards, lowestScore) 
 
-        return [scoreWhenAllAcesLow, ...scoresWhenEachAceHigh]                                                                                                                                                                                                                                          
+        return [lowestScore, ...alternateScores]                                                                                                                                                                                                                                          
     }   
 }
 
 
+function getAltScoresByMakingEachAceHigh(aceCards, lowestScore) {
+    return aceCards.map((_, index) => {
+        numberOfAcesMadeHigh = index + 1
+        
+        return lowestScore + (numberOfAcesMadeHigh * 10)});
+}
 
 function getScore(hand) {
     return hand.reduce((accumulatedScore, card) => accumulatedScore + card.values[0], 0);
