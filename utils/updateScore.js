@@ -15,21 +15,24 @@ module.exports = updateScore = (hand) => {
     });
     
     const handCopy = [...hand]
-    const aces = handCopy.filter((card) => card.name === "Ace")
+    const aceCards = handCopy.filter((card) => card.name === "Ace")
     
-    if (!aces) {
-        const score = handCopy.reduce((accumulatedScore, card) => accumulatedScore + card.values[0], 0)
+    if (!aceCards) {
+        const score = getScore(handCopy);
 
         return [score]
-    } else {
-        const allAcesLowScore = handCopy.reduce((accumulatedScore, card) => accumulatedScore + card.values[0], 0)
 
-        const scores = [allAcesLowScore]
-    
-        for (let i = 1; i <= aces.length; i++) {
-            scores.push(allAcesLowScore + (i * 10))
-        }
-        
-        return scores
+    } else if (aceCards) {
+        const scoreWhenAllAcesLow = getScore(handCopy);
+
+        const scoresWhenEachAceHigh = aceCards.map((_, index) => scoreWhenAllAcesLow + ((index + 1) * 10)) 
+
+        return [scoreWhenAllAcesLow, ...scoresWhenEachAceHigh]                                                                                                                                                                                                                                          
     }   
+}
+
+
+
+function getScore(hand) {
+    return hand.reduce((accumulatedScore, card) => accumulatedScore + card.values[0], 0);
 }
