@@ -391,5 +391,19 @@ describe("getScoreFromHand", () => {
             
             expect(actualScores).toEqual(expectedScores)
         });
+        test("Returns 1 correct scores if multiple ace and single-value cards exceed 21 (doesn't bother playing ace high)", () => {
+            const hand = [
+                { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
+                { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
+                { "emblem": "hearts", "name": "Ace", "values": [1, 11] },
+                { "emblem": "spades", "name": "Ace", "values": [1, 11] },
+                { "emblem": "hearts", "name": "Jack", "values": [10] },
+                { "emblem": "spades", "name": "Jack", "values": [10] },
+            ]
+            const actualScores = getScoreFromHand(hand)
+            const expectedScores = [24]
+            
+            expect(actualScores).toEqual(expectedScores)
+        });
     })
 })
