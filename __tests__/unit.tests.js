@@ -328,7 +328,7 @@ describe("updateScore", () => {
         
             expect(actualScores).toEqual(expectedScores)
         });
-        test.skip("Returns both scores from a hand of one ace card", () => {
+        test("Returns both scores from a hand of one ace card", () => {
             const hand = [{ "emblem": "clubs", "name": "Ace", "values": [1, 11] }]
             const actualScores = updateScore(hand)
             const expectedScores = hand[0].values

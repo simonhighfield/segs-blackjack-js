@@ -15,12 +15,21 @@ module.exports = updateScore = (hand) => {
     });
     
     const handCopy = [...hand]
+    
     let score = 0
-
     for (let i = 0; i < handCopy.length; i++) {
-        const cardValue = handCopy[i].values[0];
-        score += cardValue
+        const card = handCopy[i];
+        
+        score += card.values[0]
     }
 
-    return [score]
+    const aces = handCopy.filter((card) => card.name === "Ace")
+    
+    const scores = [score]
+    for (let i = 1; i <= aces.length; i++) {
+        scores.push(score + (i * 10))
+    }
+    
+
+    return scores
 }
