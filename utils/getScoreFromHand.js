@@ -18,7 +18,11 @@ module.exports = getScoreFromHand = (inputHand) => {
 
             if (scoreIfOneAceIsHigh < 21) {
                 return [scoreIfAllAcesAreLow, scoreIfOneAceIsHigh]
-            } else {
+
+            } else if (scoreIfOneAceIsHigh === 21) {            
+                return [scoreIfOneAceIsHigh]
+
+            } else if (scoreIfOneAceIsHigh > 21) {
                 return [scoreIfAllAcesAreLow]
             }                                                                                                                                                                                                     
         }   
