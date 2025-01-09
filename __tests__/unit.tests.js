@@ -331,7 +331,17 @@ describe("getScoreFromHand", () => {
         test("Returns both scores from a hand of one ace card", () => {
             const hand = [{ "emblem": "clubs", "name": "Ace", "values": [1, 11] }]
             const actualScores = getScoreFromHand(hand)
-            const expectedScores = hand[0].values
+            const expectedScores = [1, 11]
+            
+            expect(actualScores).toEqual(expectedScores)
+        });
+        test("Returns 2 correct scores from one single-value and one ace card", () => {
+            const hand = [
+                { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
+                { "emblem": "clubs", "name": "Two", "values": [2] }
+            ]
+            const actualScores = getScoreFromHand(hand)
+            const expectedScores = [3, 13]
             
             expect(actualScores).toEqual(expectedScores)
         });

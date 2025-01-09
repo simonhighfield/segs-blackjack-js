@@ -6,12 +6,12 @@ module.exports = getScoreFromHand = (inputHand) => {
         
         const aceCards = hand.filter((card) => card.name === "Ace")
         
-        if (!aceCards) {
+        if (aceCards.length === 0) {            
             const score = getScore(hand);
     
             return [score]
         } 
-        else if (aceCards) {
+        else {
             const lowestScore = getScore(hand);
     
             const alternateScores = getAltScoresByMakingEachAceHigh(aceCards, lowestScore) 
