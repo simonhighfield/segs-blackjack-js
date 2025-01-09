@@ -1,5 +1,4 @@
 module.exports = getScoreFromHand = (inputHand) => {
-
     try {
         errorCheckHand(inputHand);
         
