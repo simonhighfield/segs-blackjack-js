@@ -1,29 +1,29 @@
-module.exports = updateScore = (hand) => {
+module.exports = updateScore = (inputHand) => {
     
-    if (hand === undefined) {
+    if (inputHand === undefined) {
         throw new TypeError("'hand' must be provided")
-    } else if (!Array.isArray(hand)) {
+    } else if (!Array.isArray(inputHand)) {
         throw  new TypeError("'hand' should be an array")
-    } else if (hand.length === 0) {
+    } else if (inputHand.length === 0) {
         throw  new TypeError("'hand' should not be empty")
     }
 
-    hand.forEach(card => {
+    inputHand.forEach(card => {
         if (card.emblem === undefined || card.name === undefined || card.values === undefined) {
             throw  new TypeError("'hand' should contain valid card objects")
         }
     });
     
-    const handCopy = [...hand]
-    const aceCards = handCopy.filter((card) => card.name === "Ace")
+    const hand = [...inputHand]
+    const aceCards = hand.filter((card) => card.name === "Ace")
     
     if (!aceCards) {
-        const score = getScore(handCopy);
+        const score = getScore(hand);
 
         return [score]
 
     } else if (aceCards) {
-        const lowestScore = getScore(handCopy);
+        const lowestScore = getScore(hand);
 
         const alternateScores = getAltScoresByMakingEachAceHigh(aceCards, lowestScore) 
 
