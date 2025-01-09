@@ -12,11 +12,11 @@ module.exports = getScoreFromHand = (inputHand) => {
             return [score]
         } 
         else {
-            const lowestScore = getScore(hand);
+            const scoreIfAllAcesAreLow = getScore(hand);
     
-            const alternateScore = lowestScore + 10
+            const scoreIfOneAceIsHigh = scoreIfAllAcesAreLow + 10
     
-            return [lowestScore, alternateScore]                                                                                                                                                                                                                                          
+            return [scoreIfAllAcesAreLow, scoreIfOneAceIsHigh]                                                                                                                                                                                                                                          
         }   
     }
     catch (error) {
@@ -42,11 +42,11 @@ function errorCheckHand(inputHand) {
     });
 }
 
-function getAltScoresByMakingEachAceHigh(aceCards, lowestScore) {
+function getAltScoresByMakingEachAceHigh(aceCards, scoreIfAllAcesAreLow) {
     return aceCards.map((_, index) => {
         numberOfAcesMadeHigh = index + 1
         
-        return lowestScore + (numberOfAcesMadeHigh * 10)
+        return scoreIfAllAcesAreLow + (numberOfAcesMadeHigh * 10)
     });
 }
 
