@@ -233,8 +233,22 @@ describe("errorCheckArray", () => {
         }
         expect(errorCheckEmptyArray).toThrow("'input' should not be empty");
     });
+    test("Throws an error containing the variable arrayName", () => {        
+        function errorCheckMissingInput () {
+            errorCheckArray(undefined, 'deck')
+        }
+        expect(errorCheckMissingInput).toThrow("'deck' must be provided");
 
-    
+        function errorCheckWrongInputType () {
+            errorCheckArray('shouldBeArray', 'hand')
+        }
+        expect(errorCheckWrongInputType).toThrow("'hand' should be an array");
+
+        function errorCheckEmptyArray () {
+            errorCheckArray([], 'scores')
+        }
+        expect(errorCheckEmptyArray).toThrow("'scores' should not be empty");
+    });
 })
 
 
