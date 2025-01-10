@@ -35,19 +35,23 @@ module.exports = getScoresFromHand = (inputHand) => {
 
 
 function errorCheckHand(inputHand) {
-    if (inputHand === undefined) {
-        throw new TypeError("'hand' must be provided");
-    } else if (!Array.isArray(inputHand)) {
-        throw new TypeError("'hand' should be an array");
-    } else if (inputHand.length === 0) {
-        throw new TypeError("'hand' should not be empty");
-    }
+    errorCheckArray(inputHand, 'hand');
 
     inputHand.forEach(card => {
         if (card.emblem === undefined || card.name === undefined || card.values === undefined) {
             throw new TypeError("'hand' should contain valid card objects");
         }
     });
+}
+
+function errorCheckArray(array, arrayName) {
+    if (array === undefined) {
+        throw new TypeError(`'${arrayName}' must be provided`);
+    } else if (!Array.isArray(array)) {
+        throw new TypeError(`'${arrayName}' should be an array`);
+    } else if (array.length === 0) {
+        throw new TypeError(`'${arrayName}' should not be empty`);
+    }
 }
 
 function getAltScoresByMakingEachAceHigh(aceCards, scoreIfAllAcesAreLow) {
