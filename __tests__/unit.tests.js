@@ -505,6 +505,12 @@ describe("getHandValidityFromScores", () => {
             const validity = getHandValidityFromScores(validScores)
             expect(validity).toBeTrue()
         });
+        test("returns false for single scores > 21", () => {
+            const validScores = [22]
+
+            const validity = getHandValidityFromScores(validScores)
+            expect(validity).toBeFalse()
+        });
     })
 
 })

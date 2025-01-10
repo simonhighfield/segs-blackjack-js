@@ -4,7 +4,13 @@ module.exports = getHandValidityFromScores = (inputScores) => {
 
     errorCheckScores(inputScores);
 
-    return true
+    const scores = [...inputScores]
+
+    if (scores[0] <= 21) {
+        return true
+    } else {
+        return false
+    }
 }
 
 function errorCheckScores(inputScores) {
