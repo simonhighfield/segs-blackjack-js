@@ -1,4 +1,4 @@
-module.exports = getScoreFromHand = (inputHand) => {
+module.exports = getScoresFromHand = (inputHand) => {
     try {
         errorCheckHand(inputHand);
         
@@ -28,7 +28,7 @@ module.exports = getScoreFromHand = (inputHand) => {
         }   
     }
     catch (error) {
-        // console.error("error in getScoreFromHand: ", error.message);
+        // console.error("error in getScoresFromHand: ", error.message);
         throw error
     }
 }
