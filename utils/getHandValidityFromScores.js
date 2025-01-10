@@ -1,3 +1,5 @@
-module.exports = getHandValidityFromScores = () => {
+const errorCheckArray = require("./errorCheckArray")
 
+module.exports = getHandValidityFromScores = () => {
+    // errorCheckArray
 }

@@ -215,6 +215,13 @@ describe("dealCard", () => {
 })
 
 describe("errorCheckArray", () => {
+    test("Does not mutate the input array", () => {        
+        const inputArray = [1, 2, 3]
+        const inputCopy = [1, 2, 3]
+
+        errorCheckArray(inputArray)
+        expect(inputArray).toEqual(inputCopy);
+    });
     test("Throws an error if missing an input", () => {        
         function errorCheckMissingInput () {
             errorCheckArray()
@@ -451,8 +458,6 @@ describe("getScoresFromHand", () => {
 
 
 describe("getHandValidityFromScores", () => {
-
-    
     // onClick evaluateScore
         // returns the score closest to 21
         // if > 21 return null?1
