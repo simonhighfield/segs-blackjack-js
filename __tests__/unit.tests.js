@@ -458,7 +458,10 @@ describe("getScoresFromHand", () => {
 
 
 describe("getHandValidityFromScores", () => {
-    // onClick evaluateScore
-        // returns the score closest to 21
-        // if > 21 return null?1
+    test("Throws an error if scores are not numbers", () => {
+        function getHandValidityFromInvalidScores() {
+            getHandValidityFromScores([1, 'should be a number'])
+        }
+        expect(getHandValidityFromInvalidScores).toThrow("'scores' should be valid numbers");
+    });
 })
