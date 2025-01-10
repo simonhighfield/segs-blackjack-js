@@ -458,7 +458,7 @@ describe("getScoresFromHand", () => {
 
 
 describe("getHandValidityFromScores", () => {
-    describe("error checks", () => {
+    describe("Error Checks", () => {
         test("Throws an error if missing an input", () => {        
             function updateWithoutInput () {
                 getHandValidityFromScores()
@@ -479,7 +479,7 @@ describe("getHandValidityFromScores", () => {
         });
     })
 
-    describe("error checks", () => {
+    describe("Funcitonal Checks", () => {
         test("Does not mutate the input scores", () => {
             const inputScores = [7, 17]
             const scoresCopy = [7, 17]
@@ -489,5 +489,14 @@ describe("getHandValidityFromScores", () => {
         });
     })
 
-    
+    describe("Output Checks", () => {
+        test("returns validity as a boolean", () => {
+            const validScores = [7, 17]
+
+            const validity = getHandValidityFromScores(validScores)
+            expect(validity).toBeBoolean()
+        });
+    })
+
+
 })
