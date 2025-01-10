@@ -4,7 +4,6 @@ module.exports = getHandValidityFromScores = (inputScores) => {
 
     errorCheckScores(inputScores);
 
-    
 
 
 }

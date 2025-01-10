@@ -458,22 +458,36 @@ describe("getScoresFromHand", () => {
 
 
 describe("getHandValidityFromScores", () => {
-    test("Throws an error if missing an input", () => {        
-        function updateWithoutInput () {
-            getHandValidityFromScores()
-        }
-        expect(updateWithoutInput).toThrow("'scores' must be provided");
-    });
-    test("Throws an error if scores are not numbers", () => {
-        function getHandValidityFromStringScores() {
-            getHandValidityFromScores([5, 'should be a number'])
-        }
-        expect(getHandValidityFromStringScores).toThrow("'scores' should be numbers");
-    });
-    test("Throws an error if scores is less than 2 (two aces)", () => {
-        function getHandValidityFromInvalidScores() {
-            getHandValidityFromScores([2, -1])
-        }
-        expect(getHandValidityFromInvalidScores).toThrow("'scores' should be at least 2");
-    });
+    describe("error checks", () => {
+        test("Throws an error if missing an input", () => {        
+            function updateWithoutInput () {
+                getHandValidityFromScores()
+            }
+            expect(updateWithoutInput).toThrow("'scores' must be provided");
+        });
+        test("Throws an error if scores are not numbers", () => {
+            function getHandValidityFromStringScores() {
+                getHandValidityFromScores([5, 'should be a number'])
+            }
+            expect(getHandValidityFromStringScores).toThrow("'scores' should be numbers");
+        });
+        test("Throws an error if scores is less than 2 (two aces)", () => {
+            function getHandValidityFromInvalidScores() {
+                getHandValidityFromScores([2, -1])
+            }
+            expect(getHandValidityFromInvalidScores).toThrow("'scores' should be at least 2");
+        });
+    })
+
+    describe("error checks", () => {
+        test("Does not mutate the input scores", () => {
+            const inputScores = [7, 17]
+            const scoresCopy = [7, 17]
+
+            getHandValidityFromScores(inputScores)
+            expect(inputScores).toEqual(scoresCopy)
+        });
+    })
+
+    
 })
