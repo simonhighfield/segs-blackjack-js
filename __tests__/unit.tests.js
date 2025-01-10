@@ -216,23 +216,25 @@ describe("dealCard", () => {
 
 describe("errorCheckArray", () => {
     test("Throws an error if missing an input", () => {        
-        function updateWithoutInput () {
+        function errorCheckMissingInput () {
             errorCheckArray()
         }
-        expect(updateWithoutInput).toThrow("'input' must be provided");
+        expect(errorCheckMissingInput).toThrow("'input' must be provided");
     });
     test("Throws an error if 'input' is not an array", () => {        
-        function updatedWithWrongTypes () {
+        function errorCheckWrongInputType () {
             errorCheckArray('shouldBeArray')
         }
-        expect(updatedWithWrongTypes).toThrow("'input' should be an array");
+        expect(errorCheckWrongInputType).toThrow("'input' should be an array");
     });
     test("Throws an error if 'input' is an empty array", () => {        
-        function updateWithEmptyHand () {
+        function errorCheckEmptyArray () {
             errorCheckArray([])
         }
-        expect(updateWithEmptyHand).toThrow("'input' should not be empty");
-    });      
+        expect(errorCheckEmptyArray).toThrow("'input' should not be empty");
+    });
+
+    
 })
 
 
