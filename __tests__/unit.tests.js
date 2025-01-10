@@ -499,17 +499,23 @@ describe("getHandValidityFromScores", () => {
     })
 
     describe("Logic", () => {
-        test("returns true for single scores < 21", () => {
+        test("Returns true for single scores < 21", () => {
             const validScores = [7]
 
             const validity = getHandValidityFromScores(validScores)
             expect(validity).toBeTrue()
         });
-        test("returns false for single scores > 21", () => {
+        test("Returns false for single scores > 21", () => {
             const validScores = [22]
 
             const validity = getHandValidityFromScores(validScores)
             expect(validity).toBeFalse()
+        });
+        test("Returns true for two scores < 21", () => {
+            const validScores = [7, 17]
+
+            const validity = getHandValidityFromScores(validScores)
+            expect(validity).toBeTrue()
         });
     })
 

@@ -6,12 +6,17 @@ module.exports = getHandValidityFromScores = (inputScores) => {
 
     const scores = [...inputScores]
 
-    if (scores[0] <= 21) {
-        return true
-    } else {
-        return false
-    }
+    let anyValidScores = false
+
+    scores.forEach((score) => {
+        if (score <= 21) {
+            anyValidScores = true
+        } 
+    })
+
+    return anyValidScores
 }
+
 
 function errorCheckScores(inputScores) {
     errorCheckArray(inputScores, 'scores');
