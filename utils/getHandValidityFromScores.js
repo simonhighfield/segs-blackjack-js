@@ -2,6 +2,8 @@ const errorCheckArray = require("./errorCheckArray")
 
 module.exports = getHandValidityFromScores = (inputScores) => {
 
+    errorCheckArray(inputScores, 'scores')
+
     inputScores.forEach(score => {
         if (typeof score !== 'number') {            
             throw new TypeError("'scores' should be numbers");

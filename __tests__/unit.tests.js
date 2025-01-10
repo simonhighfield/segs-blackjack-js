@@ -458,6 +458,12 @@ describe("getScoresFromHand", () => {
 
 
 describe("getHandValidityFromScores", () => {
+    test("Throws an error if missing an input", () => {        
+        function updateWithoutInput () {
+            getHandValidityFromScores()
+        }
+        expect(updateWithoutInput).toThrow("'scores' must be provided");
+    });
     test("Throws an error if scores are not numbers", () => {
         function getHandValidityFromStringScores() {
             getHandValidityFromScores([5, 'should be a number'])
