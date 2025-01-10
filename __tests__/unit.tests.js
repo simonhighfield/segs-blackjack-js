@@ -517,6 +517,12 @@ describe("getHandValidityFromScores", () => {
             const validity = getHandValidityFromScores(validScores)
             expect(validity).toBeTrue()
         });
+        test("Returns true if only one of two scores < 21", () => {
+            const validScores = [17, 27]
+
+            const validity = getHandValidityFromScores(validScores)
+            expect(validity).toBeTrue()
+        });
     })
 
 })
