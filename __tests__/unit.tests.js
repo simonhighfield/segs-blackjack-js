@@ -221,6 +221,18 @@ describe("errorCheckArray", () => {
         }
         expect(updateWithoutInput).toThrow("'input' must be provided");
     });
+    test("Throws an error if 'input' is not an array", () => {        
+        function updatedWithWrongTypes () {
+            errorCheckArray('shouldBeArray')
+        }
+        expect(updatedWithWrongTypes).toThrow("'input' should be an array");
+    });
+    test("Throws an error if 'input' is an empty array", () => {        
+        function updateWithEmptyHand () {
+            errorCheckArray([])
+        }
+        expect(updateWithEmptyHand).toThrow("'input' should not be empty");
+    });      
 })
 
 
