@@ -1,4 +1,4 @@
-module.exports = errorCheckArray = (array, arrayName) => {
+module.exports = errorCheckArray = (array, arrayName = 'input') => {
     if (array === undefined) {
         throw new TypeError(`'${arrayName}' must be provided`);
     } else if (!Array.isArray(array)) {

@@ -1,5 +1,6 @@
 const { expectedEmblems, expectedNames, lookupValueByName, expectedDeck } = require("../data/testData");
 const dealCard = require("../utils/dealCard");
+const errorCheckArray = require("../utils/errorCheckArray");
 const generateDeck = require("../utils/generateDeck");
 const generateSuit = require("../utils/generateSuit");
 const getHandValidityFromScores = require("../utils/getHandValidityFromScores");
@@ -212,6 +213,17 @@ describe("dealCard", () => {
         expect(newHand).toIncludeAllMembers(expectedCardsDealt)
     });
 })
+
+describe("errorCheckArray", () => {
+    test("Throws an error if missing an input", () => {        
+        function updateWithoutInput () {
+            errorCheckArray()
+        }
+        expect(updateWithoutInput).toThrow("'input' must be provided");
+    });
+})
+
+
 
 describe("getScoresFromHand", () => {
     // let deck, hand;
