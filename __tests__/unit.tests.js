@@ -459,9 +459,15 @@ describe("getScoresFromHand", () => {
 
 describe("getHandValidityFromScores", () => {
     test("Throws an error if scores are not numbers", () => {
-        function getHandValidityFromInvalidScores() {
-            getHandValidityFromScores([1, 'should be a number'])
+        function getHandValidityFromStringScores() {
+            getHandValidityFromScores([5, 'should be a number'])
         }
-        expect(getHandValidityFromInvalidScores).toThrow("'scores' should be valid numbers");
+        expect(getHandValidityFromStringScores).toThrow("'scores' should be numbers");
+    });
+    test("Throws an error if scores is less than 2 (two aces)", () => {
+        function getHandValidityFromInvalidScores() {
+            getHandValidityFromScores([2, -1])
+        }
+        expect(getHandValidityFromInvalidScores).toThrow("'scores' should be at least 2");
     });
 })
