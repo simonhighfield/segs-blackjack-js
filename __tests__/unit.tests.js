@@ -3,6 +3,7 @@ const dealCard = require("../utils/dealCard");
 const errorCheckArray = require("../utils/errorCheckArray");
 const generateDeck = require("../utils/generateDeck");
 const generateSuit = require("../utils/generateSuit");
+const getBestScore = require("../utils/getBestScore");
 const getHandValidityFromScores = require("../utils/getHandValidityFromScores");
 const getScoresFromHand = require("../utils/getScoresFromHand");
 
@@ -524,5 +525,53 @@ describe("getHandValidityFromScores", () => {
             expect(validity).toBeTrue()
         });
     })
+})
 
+describe.only("getBestScore", () => {
+    describe("Error Checks", () => {
+        test("Throws an error if missing an input", () => {        
+            function getBestScoreWithoutInput () {
+                getBestScore()
+            }
+            expect(getBestScoreWithoutInput).toThrow("'scores' must be provided");
+        });
+        test("Throws an error if scores are not numbers", () => {
+            function getBestScoreFromString() {
+                getBestScore([5, 'should be a number'])
+            }
+            expect(getBestScoreFromString).toThrow("'scores' should be numbers");
+        });
+        test("Throws an error if scores is less than 2 (two aces)", () => {
+            function getBestScoreFromInvalidScores() {
+                getBestScore([2, -1])
+            }
+            expect(getBestScoreFromInvalidScores).toThrow("'scores' should be at least 2");
+        });
+    })
+
+    describe("Funcitonal Checks", () => {
+        test("Does not mutate the input scores", () => {
+            const inputScores = [7, 17]
+            const scoresCopy = [7, 17]
+
+            getBestScore(inputScores)
+            expect(inputScores).toEqual(scoresCopy)
+        });
+    })
+
+    describe("Output Checks", () => {
+        test("Returns best score as a number", () => {
+            const scores = [7, 17]
+
+            const bestScore = getBestScore(scores)
+            expect(bestScore).toBeNumber()
+            expect(bestScore).not.toBeNaN()
+        });
+        test("Score should be at least 2", () => {
+            const scores = [7, 17]
+
+            const bestScore = getBestScore(scores)
+            expect(bestScore).toBeGreaterThan(1)
+        });
+    })
 })
