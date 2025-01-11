@@ -743,5 +743,17 @@ describe("nextPlay", () => {
         expect(newDeck).toEqual(expectedNewDeck)
         expect(newHand).toEqual(expectedNewHand)
     })
-
 })
+
+
+
+describe("initialiseGame", () => {
+    // generateDeck to have been called
+    // dealCard to have been called with (player, deck, etc.)
+    // dealCard to have been called with (dealer, deck, etc.)
+    // dealCard to have been called with (player, deck, etc.)
+    // dealCard to have been called with (dealer, deck, etc.)q
+    // getScores from hand dealer 
+    // updateResults (dealer)
+    // getScores(player)
+});
