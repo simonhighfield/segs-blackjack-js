@@ -582,6 +582,12 @@ describe.only("getBestScore", () => {
             const bestScore = getBestScore(scores)
             expect(bestScore).toBe(7)
         });
+        test("Returns the highest score from a two-value hand", () => {
+            const scores = [7, 17]
+
+            const bestScore = getBestScore(scores)
+            expect(bestScore).toBe(17)
+        });
 
     })
 })
