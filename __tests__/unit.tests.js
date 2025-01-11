@@ -7,8 +7,7 @@ const generateSuit = require("../utils/generateSuit");
 const getBestScore = require("../utils/getBestScore");
 const getHandValidityFromScores = require("../utils/getHandValidityFromScores");
 const getScoresFromHand = require("../utils/getScoresFromHand");
-const submitScores = require("../utils/submitScores");
-const submitScore = require("../utils/submitScores");
+const updateResults = require("../utils/updateResults");
 
 describe("generateDeck() of cards", () => {
     describe("Deck is a valid array ", () => {
@@ -625,17 +624,18 @@ describe("errorCheckPlayerName", () => {
 })
 
 
-describe("submitScores", () => {
+describe("updateResults", () => {
     describe("Error Checks", () => {        
         test("Throws an error if 'playerName' is an empty string", () => {        
             function errorCheckEmptyPlayerName () {
-                submitScore('')
+                updateResults('')
             }
             expect(errorCheckEmptyPlayerName).toThrow("'playerName' should have length > 0");
         });
         // errorCheckScores
     })
 
+    const results = {dealer: 10}
     const playerName = 'player'
     const scores = [3, 13]
 
@@ -644,7 +644,7 @@ describe("submitScores", () => {
             const playerName = 'player'
             const scores = [3, 13]
 
-            const submittedScores = submitScores(playerName, scores)
+            const submittedScores = updateResults(results, playerName, scores)
 
             expect(submittedScores).toBeObject()
         });
@@ -652,12 +652,51 @@ describe("submitScores", () => {
             const playerName = 'player'
             const scores = [15]
 
-            const actualOutput = submitScores(playerName, scores)
+            const actualOutput = updateResults(results, playerName, scores)
             const expectedOutput = {player: 15} 
 
             expect(actualOutput).toMatchObject(expectedOutput)
         });
-        
+        test("Returns an object containing the best score when more than one score available (ace card present)", () => {
+            const playerName = 'player'
+            const scores = [3, 13]
+
+            const actualOutput = updateResults(results, playerName, scores)
+            const expectedOutput = {player: 13} 
+
+            expect(actualOutput).toMatchObject(expectedOutput)
+        });
 
     })
+})
+
+
+
+
+describe.only("errorCheckObjet", () => {
+    test("Does not mutate the input array", () => {        
+        const inputObject = {dealer: 10}
+        const inputCopy = {dealer: 10}
+
+        errorCheckObject(inputObject)
+        expect(inputObject).toEqual(inputCopy);
+    });
+    test("Throws an error if missing an input", () => {        
+        function errorCheckMissingInput () {
+            errorCheckObject()
+        }
+        expect(errorCheckMissingInput).toThrow("'input' must be provided");
+    });
+    test("Throws an error if 'input' is not an object", () => {        
+        function errorCheckWrongInputType () {
+            errorCheckObject('shouldBeObject')
+        }
+        expect(errorCheckWrongInputType).toThrow("'input' should be an object");
+    });
+    test("Throws an error containing the variable objectName", () => {        
+        function errorCheckMissingInput () {
+            errorCheckObject(undefined, 'results')
+        }
+        expect(errorCheckMissingInput).toThrow("'results' must be provided");
+    });
 })
