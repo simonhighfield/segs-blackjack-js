@@ -7,6 +7,7 @@ const generateSuit = require("../utils/generateSuit");
 const getBestScore = require("../utils/getBestScore");
 const getHandValidityFromScores = require("../utils/getHandValidityFromScores");
 const getScoresFromHand = require("../utils/getScoresFromHand");
+const nextPlay = require("../utils/nextPlay");
 const updateResults = require("../utils/updateResults");
 
 describe("generateDeck() of cards", () => {
@@ -624,7 +625,7 @@ describe("errorCheckPlayerName", () => {
 })
 
 
-describe.only("updateResults", () => {
+describe("updateResults", () => {
     const results = {dealer: 10}
     const playerName = 'player'
     const scores = [3, 13]
@@ -688,7 +689,7 @@ describe.only("updateResults", () => {
 
 
 
-describe("errorCheckObjet", () => {
+describe("errorCheckObject", () => {
     test("Does not mutate the input array", () => {        
         const inputObject = {dealer: 10}
         const inputCopy = {dealer: 10}
@@ -714,4 +715,33 @@ describe("errorCheckObjet", () => {
         }
         expect(errorCheckMissingInput).toThrow("'results' must be provided");
     });
+})
+
+
+
+describe("nextPlay", () => {
+    test("If input = 'hit', returns newDeck and newHand", () => {
+        const deck = [
+            { "emblem": "hearts", "name": "Ace", "values": [1, 11] },
+            { "emblem": "spades", "name": "Ace", "values": [1, 11] },
+        ]
+        const hand = [
+            { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
+            { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
+        ]
+        const {newDeck, newHand } = nextPlay('hit', deck, hand)
+
+        expectedNewDeck = [
+            { "emblem": "spades", "name": "Ace", "values": [1, 11] }
+        ]
+        expectedNewHand = [
+            { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
+            { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
+            { "emblem": "hearts", "name": "Ace", "values": [1, 11] },
+        ]
+
+        expect(newDeck).toEqual(expectedNewDeck)
+        expect(newHand).toEqual(expectedNewHand)
+    })
+
 })
