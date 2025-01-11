@@ -1,7 +1,12 @@
+const dealCard = require("./dealCard")
 const generateDeck = require("./generateDeck")
 
 module.exports = initialiseGame = () => {
 
-    generateDeck()
+    const deck = generateDeck()
+    const playerHand = []
+    const dealerHand = []
+
+    dealCard(deck, playerHand)
 
 }
