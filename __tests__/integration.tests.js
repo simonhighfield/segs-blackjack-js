@@ -32,7 +32,6 @@ describe("GenerateDeck Integration", () => {
     });
 });
 
-    // dealCard to have been called with (player, deck, etc.)
     // dealCard to have been called with (dealer, deck, etc.)
     // dealCard to have been called with (player, deck, etc.)
     // dealCard to have been called with (dealer, deck, etc.)q
@@ -62,10 +61,11 @@ describe("InitialiseGame Integration", () => {
             { "emblem": "clubs", "name": "Six", "values": [6] }
         ]
         mockGenerateDeck.mockReturnValue(testDeck);   
-
+        
         initialiseGame();
+        
+        const firstCallArguments = mockDealCard.mock.calls[0];        
 
-        expect(mockDealCard).toHaveBeenCalledTimes(1);
-        expect(mockDealCard).toHaveBeenCalledWith(testDeck, []);
+        expect(firstCallArguments).toEqual([testDeck, []])
     });
 });
