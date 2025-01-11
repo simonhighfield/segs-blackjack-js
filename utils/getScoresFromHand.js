@@ -1,4 +1,4 @@
-const { errorCheckHand } = require("./errorCheckHand");
+const errorCheckHand = require("./errorCheckHand");
 
 module.exports = getScoresFromHand = (inputHand) => {
     try {

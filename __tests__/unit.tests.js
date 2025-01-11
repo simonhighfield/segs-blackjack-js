@@ -7,6 +7,7 @@ const generateSuit = require("../utils/generateSuit");
 const getBestScore = require("../utils/getBestScore");
 const getHandValidityFromScores = require("../utils/getHandValidityFromScores");
 const getScoresFromHand = require("../utils/getScoresFromHand");
+const submitScore = require("../utils/submitScore");
 
 describe("generateDeck() of cards", () => {
     describe("Deck is a valid array ", () => {
@@ -614,16 +615,29 @@ describe("errorCheckPlayerName", () => {
         expect(errorCheckWrongInputType).toThrow("'playerName' should be a string");
     });
     test("Throws an error if 'playerName' is an empty string", () => {        
-        function errorCheckEmptyArray () {
+        function errorCheckEmptyPlayerName () {
             errorCheckPlayerName('')
         }
-        expect(errorCheckEmptyArray).toThrow("'playerName' should have length > 0");
+        expect(errorCheckEmptyPlayerName).toThrow("'playerName' should have length > 0");
     });
 
 })
 
 
 describe("submitScores", () => {
-
-
+    describe("Error Checks", () => {        
+        test("Throws an error if 'playerName' is an empty string", () => {        
+            function errorCheckEmptyPlayerName () {
+                submitScore('')
+            }
+            expect(errorCheckEmptyPlayerName).toThrow("'playerName' should have length > 0");
+        });
+        test("Throws an error if 'hand' is an empty array", () => {        
+            function errorCheckEmptyHand () {
+                submitScore('player', [])
+            }
+            expect(errorCheckEmptyHand).toThrow("'hand' should not be empty");
+        });
+        // errorCheckScores
+    })
 })

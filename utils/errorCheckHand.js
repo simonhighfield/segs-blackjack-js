@@ -1,7 +1,7 @@
 const errorCheckArray = require("./errorCheckArray");
 const { undefined } = require("./getScoresFromHand");
 
-function errorCheckHand(inputHand) {
+module.exports = errorCheckHand = (inputHand) => {
     errorCheckArray(inputHand, 'hand');
 
     inputHand.forEach(card => {
@@ -10,4 +10,4 @@ function errorCheckHand(inputHand) {
         }
     });
 }
-exports.errorCheckHand = errorCheckHand;
+// exports.errorCheckHand = errorCheckHand;
