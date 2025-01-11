@@ -624,20 +624,28 @@ describe("errorCheckPlayerName", () => {
 })
 
 
-describe("updateResults", () => {
+describe.only("updateResults", () => {
+    const results = {dealer: 10}
+    const playerName = 'player'
+    const scores = [3, 13]
+
     describe("Error Checks", () => {        
+        test("Throws an error if 'results' is not an object", () => {        
+            function errorCheckInvalidResults () {
+                updateResults('should be object', playerName)
+            }
+            expect(errorCheckInvalidResults).toThrow("'results' should be an object");
+        });
         test("Throws an error if 'playerName' is an empty string", () => {        
             function errorCheckEmptyPlayerName () {
-                updateResults('')
+                updateResults(results, '')
             }
             expect(errorCheckEmptyPlayerName).toThrow("'playerName' should have length > 0");
         });
         // errorCheckScores
     })
 
-    const results = {dealer: 10}
-    const playerName = 'player'
-    const scores = [3, 13]
+
 
     describe("Output Checks", () => {
         test("Returns an object", () => {
@@ -673,7 +681,7 @@ describe("updateResults", () => {
 
 
 
-describe.only("errorCheckObjet", () => {
+describe("errorCheckObjet", () => {
     test("Does not mutate the input array", () => {        
         const inputObject = {dealer: 10}
         const inputCopy = {dealer: 10}

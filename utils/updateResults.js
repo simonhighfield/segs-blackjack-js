@@ -6,9 +6,9 @@ const errorCheckObject = require("./errorCheckObject")
 
 module.exports = updateResults = (results, playerName, scores) => {
 
-    errorCheckObject(results)
+    errorCheckObject(results, 'results')
     errorCheckPlayerName(playerName)
-    errorCheckScores(scores)
+    errorCheckScores(scores, 'scores')
 
     const output = {}
     output[playerName] = getBestScore(scores)
