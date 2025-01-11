@@ -6,7 +6,7 @@ module.exports = getBestScore = (inputScores) => {
 
     const scores = [...inputScores]
 
-    return 3
+    return inputScores[0]
 }
 
 

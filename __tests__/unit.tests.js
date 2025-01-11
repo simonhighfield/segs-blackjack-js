@@ -574,4 +574,14 @@ describe.only("getBestScore", () => {
             expect(bestScore).toBeGreaterThan(1)
         });
     })
+
+    describe("Gets the best score", () => {
+        test("Returns the score from a single-value hand", () => {
+            const scores = [7]
+
+            const bestScore = getBestScore(scores)
+            expect(bestScore).toBe(7)
+        });
+
+    })
 })
