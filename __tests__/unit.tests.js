@@ -1,6 +1,7 @@
 const { expectedEmblems, expectedNames, lookupValueByName, expectedDeck } = require("../data/testData");
 const dealCard = require("../utils/dealCard");
 const errorCheckArray = require("../utils/errorCheckArray");
+const errorCheckPlayerName = require("../utils/errorCheckPlayerName");
 const generateDeck = require("../utils/generateDeck");
 const generateSuit = require("../utils/generateSuit");
 const getBestScore = require("../utils/getBestScore");
@@ -590,6 +591,35 @@ describe("getBestScore", () => {
         });
 
     })
+})
+
+describe("errorCheckPlayerName", () => {
+    test("Does not mutate the input string", () => {        
+        const inputString = 'player'
+        const inputCopy = 'player'
+
+        errorCheckPlayerName(inputString)
+        expect(inputString).toEqual(inputCopy);
+    });
+    test("Throws an error if missing an input", () => {        
+        function errorCheckMissingInput () {
+            errorCheckPlayerName()
+        }
+        expect(errorCheckMissingInput).toThrow("'playerName' must be provided");
+    });
+    test("Throws an error if 'playerName' is not an string", () => {        
+        function errorCheckWrongInputType () {
+            errorCheckPlayerName(1)
+        }
+        expect(errorCheckWrongInputType).toThrow("'playerName' should be a string");
+    });
+    test("Throws an error if 'playerName' is an empty string", () => {        
+        function errorCheckEmptyArray () {
+            errorCheckPlayerName('')
+        }
+        expect(errorCheckEmptyArray).toThrow("'playerName' should have length > 0");
+    });
+
 })
 
 
