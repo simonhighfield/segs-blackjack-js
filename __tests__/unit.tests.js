@@ -645,29 +645,36 @@ describe.only("updateResults", () => {
         // errorCheckScores
     })
 
-
+    describe("Pure Function Checks", () => {
+        test("Does not mutate the input results", () => {        
+            const resultsCopy = {dealer: 10}
+    
+            updateResults(results, playerName, scores)
+            expect(results).toEqual(resultsCopy);
+        });
+        test("Does not mutate the input scores", () => {        
+            const scoresCopy = [3, 13]
+    
+            updateResults(results, playerName, scores)
+            expect(scores).toEqual(scoresCopy);
+        });
+    })
 
     describe("Output Checks", () => {
         test("Returns an object", () => {
-            const playerName = 'player'
-            const scores = [3, 13]
-
             const submittedScores = updateResults(results, playerName, scores)
 
             expect(submittedScores).toBeObject()
         });
         test("Returns an object containing a single input score", () => {
-            const playerName = 'player'
-            const scores = [15]
+            const singleScore = [15]
 
-            const actualOutput = updateResults(results, playerName, scores)
+            const actualOutput = updateResults(results, playerName, singleScore)
             const expectedOutput = {player: 15} 
 
             expect(actualOutput).toMatchObject(expectedOutput)
         });
         test("Returns an object containing the best score when more than one score available (ace card present)", () => {
-            const playerName = 'player'
-            const scores = [3, 13]
 
             const actualOutput = updateResults(results, playerName, scores)
             const expectedOutput = {player: 13} 
