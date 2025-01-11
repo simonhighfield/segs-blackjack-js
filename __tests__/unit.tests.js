@@ -527,7 +527,7 @@ describe("getHandValidityFromScores", () => {
     })
 })
 
-describe.only("getBestScore", () => {
+describe("getBestScore", () => {
     describe("Error Checks", () => {
         test("Throws an error if missing an input", () => {        
             function getBestScoreWithoutInput () {
@@ -590,4 +590,10 @@ describe.only("getBestScore", () => {
         });
 
     })
+})
+
+
+describe("submitScores", () => {
+
+
 })

@@ -1,4 +1,4 @@
-const errorCheckArray = require("./errorCheckArray");
+const { errorCheckHand } = require("./errorCheckHand");
 
 module.exports = getScoresFromHand = (inputHand) => {
     try {
@@ -35,16 +35,6 @@ module.exports = getScoresFromHand = (inputHand) => {
     }
 }
 
-
-function errorCheckHand(inputHand) {
-    errorCheckArray(inputHand, 'hand');
-    
-    inputHand.forEach(card => {
-        if (card.emblem === undefined || card.name === undefined || card.values === undefined) {
-            throw new TypeError("'hand' should contain valid card objects");
-        }
-    });
-}
 
 function getAltScoresByMakingEachAceHigh(aceCards, scoreIfAllAcesAreLow) {
     return aceCards.map((_, index) => {
