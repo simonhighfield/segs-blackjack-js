@@ -2,10 +2,13 @@ const errorCheckPlayerName = require("./errorCheckPlayerName")
 const errorCheckHand = require("./errorCheckHand")
 const errorCheckScores = require("./errorCheckScores")
 
-module.exports = submitScores = (playerName, scores) => {
+module.exports = updatePlayerResults = (playerName, scores) => {
 
     errorCheckPlayerName(playerName)
     errorCheckScores(scores)
 
-    return {}
+    const output = {}
+    output[playerName] = scores[0]
+
+    return output
 }

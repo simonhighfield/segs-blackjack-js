@@ -638,18 +638,26 @@ describe("submitScores", () => {
 
     const playerName = 'player'
     const scores = [3, 13]
-    const hand = [
-        { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
-        { "emblem": "clubs", "name": "Two", "values": [2] }
-    ]
 
     describe("Output Checks", () => {
         test("Returns an object", () => {
-            const submittedScores = submitScores(playerName, hand, scores)
+            const playerName = 'player'
+            const scores = [3, 13]
+
+            const submittedScores = submitScores(playerName, scores)
 
             expect(submittedScores).toBeObject()
         });
+        test("Returns an object containing a single input score", () => {
+            const playerName = 'player'
+            const scores = [15]
 
+            const actualOutput = submitScores(playerName, scores)
+            const expectedOutput = {player: 15} 
+
+            expect(actualOutput).toMatchObject(expectedOutput)
+        });
+        
 
     })
 })
