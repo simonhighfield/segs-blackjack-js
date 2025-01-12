@@ -1,4 +1,5 @@
 const { expectedEmblems, expectedNames, expectedDeck, expectedValues } = require("../data/testData");
+const getHandValidityFromScores = require("../utils/getHandValidityFromScores");
 const getScoresFromHand = require("../utils/getScoresFromHand");
 const initialiseGame = require("../utils/initialiseGame");
 const nextPlay = require("../utils/nextPlay");
@@ -110,5 +111,27 @@ describe("Scenario Tests for BBC SEGS application", () => {
             expect(updatedResultsLookup).not.toEqual(initialResultsLookup)
             expect(updatedResultsLookup).toEqual(expectedResultsLookup)
         })
+    });
+
+
+    describe("When score is 21 or less, the hand is valid", () => {
+        test("if one possible score is < 21, isHandValid evaluates to true", () => {
+            const scores = [10]
+            const isHandValid = getHandValidityFromScores(scores)
+
+            expect(isHandValid).toBeTrue();
+        });
+        test("if two possible scores are < 21, isHandValid evaluates to true", () => {
+            const scores = [10, 20]
+            const isHandValid = getHandValidityFromScores(scores)
+
+            expect(isHandValid).toBeTrue();
+        });
+        test("if one of two possible scores is === 21, isHandValid evaluates to true", () => {
+            const scores = [11, 21]
+            const isHandValid = getHandValidityFromScores(scores)
+
+            expect(isHandValid).toBeTrue();
+        });
     });
 });
