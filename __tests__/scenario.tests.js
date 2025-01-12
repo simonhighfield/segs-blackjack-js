@@ -26,7 +26,6 @@ describe("Scenario Tests for BBC SEGS application", () => {
     });
 
     describe("When I choose to 'hit' I receive another card and my score is updated", () => {
-
         const resultsLookup = {
             dealer: 10
         }
@@ -38,14 +37,10 @@ describe("Scenario Tests for BBC SEGS application", () => {
             { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
             { "emblem": "diamonds", "name": "Two", "values": [2] },
         ]
-        const initialPlayerScores = getScoresFromHand(initialPlayerHand)
-
+        const initialPlayerScores = getScoresFromHand(initialPlayerHand) 
 
         const { newHand, newDeck } = nextPlay('hit', initialDeck, initialPlayerHand, resultsLookup, 'player', initialPlayerScores)
-        const newPlayerScores = getScoresFromHand(newHand)
         
-
-
         test("The next card from deck is added to hand ", () => {
             const expectedNewHand = [
                 { "emblem": "clubs", "name": "Queen", "values": [10] },
@@ -53,13 +48,19 @@ describe("Scenario Tests for BBC SEGS application", () => {
                 { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
             ]
             const expectedNewDeck = [
-                { "emblem": "diamonds", "name": "Two", "values": [2] },
+                { "emblem": "diamonds", "name": "Two", "values": [2] }
             ]
             
             expect(newHand).toEqual(expectedNewHand)
             expect(newDeck).toEqual(expectedNewDeck)
         })
-
-        
+        test("The player's score is updated", () => {
+            const newPlayerScores = getScoresFromHand(newHand) 
+            
+            const expectedNewScores = [21]
+            
+            expect(newPlayerScores).not.toEqual(initialPlayerScores)
+            expect(newPlayerScores).toEqual(expectedNewScores)
+        })
     });
 });
