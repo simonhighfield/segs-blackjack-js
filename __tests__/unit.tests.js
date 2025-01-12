@@ -266,20 +266,6 @@ describe("errorCheckArray", () => {
 
 
 describe("getScoresFromHand", () => {
-    // let deck, hand;
-    // let score = 0
-    // beforeEach(() => {
-    //     deck = generateDeck();
-    //     hand = []
-        
-    //     let { newHand, newDeck } = dealCard(deck, hand)
-    //     hand = newHand;
-    //     deck = newDeck;
-        
-    //     ({ newDeck, newHand } = dealCard(deck, hand))
-    //     hand = newHand;
-    //     deck = newDeck;
-    // });
 
     describe("Hand Error checks", () => {
         test("Throws an error if missing an input", () => {        
