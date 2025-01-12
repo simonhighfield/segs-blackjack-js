@@ -162,4 +162,58 @@ describe("Scenario Tests for BBC SEGS application", () => {
             expect(isHandValid).toBeFalse();
         });
     });
+
+
+
+    describe("Given a king and an ace", () => {
+        test("best score correctly evaluates to 21", () => {
+            const hand = [
+                { "emblem": "clubs", "name": "King", "values": [10] },
+                { "emblem": "diamonds", "name": "Ace", "values": [1, 11] }
+            ]
+            const scores = getScoresFromHand(hand)
+            const bestScore = getBestScore(scores)
+    
+            const expectedBestScore = 21
+    
+            expect(bestScore).toBe(expectedBestScore)
+   
+        });
+    });
+
+
+    describe("Given a king, a queen, and an ace", () => {
+        test("best score correctly evaluates to 21", () => {
+            const hand = [
+                { "emblem": "clubs", "name": "King", "values": [10] },
+                { "emblem": "clubs", "name": "Queen", "values": [10] },
+                { "emblem": "diamonds", "name": "Ace", "values": [1, 11] }
+            ]
+            const scores = getScoresFromHand(hand)
+            const bestScore = getBestScore(scores)
+            
+            const expectedBestScore = 21
+    
+            expect(bestScore).toBe(expectedBestScore)
+   
+        });
+    });
+
+
+    describe("Given a nine, and two aces", () => {
+        test("best score correctly evaluates to 21", () => {
+            const hand = [
+                { "emblem": "clubs", "name": "Nine", "values": [9] },
+                { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
+                { "emblem": "hearts", "name": "Ace", "values": [1, 11] }
+            ]
+            const scores = getScoresFromHand(hand)
+            const bestScore = getBestScore(scores)
+            
+            const expectedBestScore = 21
+    
+            expect(bestScore).toBe(expectedBestScore)
+   
+        });
+    });
 });
