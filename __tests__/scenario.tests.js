@@ -32,30 +32,30 @@ describe("Scenario Tests for BBC SEGS application", () => {
         const resultsLookup = {
             dealer: 10
         }
-        const initialPlayerHand = [
-            { "emblem": "clubs", "name": "Queen", "values": [10] },
-            { "emblem": "clubs", "name": "King", "values": [10] }
-        ]
         const initialDeck = [
             { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
             { "emblem": "diamonds", "name": "Two", "values": [2] },
         ]
+        const initialPlayerHand = [
+            { "emblem": "clubs", "name": "Queen", "values": [10] },
+            { "emblem": "clubs", "name": "King", "values": [10] }
+        ]
         const initialPlayerScores = getScoresFromHand(initialPlayerHand) 
 
-        const { newHand, newDeck } = nextPlay('hit', initialDeck, initialPlayerHand, resultsLookup, 'player', initialPlayerScores)
+        const { newDeck, newHand } = nextPlay('hit', initialDeck, initialPlayerHand, resultsLookup, 'player', initialPlayerScores)
         
         test("The next card from deck is added to hand ", () => {
+            const expectedNewDeck = [
+                { "emblem": "diamonds", "name": "Two", "values": [2] }
+            ]
             const expectedNewHand = [
                 { "emblem": "clubs", "name": "Queen", "values": [10] },
                 { "emblem": "clubs", "name": "King", "values": [10] },
                 { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
             ]
-            const expectedNewDeck = [
-                { "emblem": "diamonds", "name": "Two", "values": [2] }
-            ]
             
-            expect(newHand).toEqual(expectedNewHand)
             expect(newDeck).toEqual(expectedNewDeck)
+            expect(newHand).toEqual(expectedNewHand)
         })
         test("The player's score is updated", () => {
             const newPlayerScores = getScoresFromHand(newHand) 
@@ -72,31 +72,31 @@ describe("Scenario Tests for BBC SEGS application", () => {
         const initialResultsLookup = {
             dealer: 10
         }
-        const initialPlayerHand = [
-            { "emblem": "clubs", "name": "Queen", "values": [10] },
-            { "emblem": "clubs", "name": "King", "values": [10] }
-        ]
         const initialDeck = [
             { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
             { "emblem": "diamonds", "name": "Two", "values": [2] },
+        ]
+        const initialPlayerHand = [
+            { "emblem": "clubs", "name": "Queen", "values": [10] },
+            { "emblem": "clubs", "name": "King", "values": [10] }
         ]
         const initialPlayerScores = getScoresFromHand(initialPlayerHand) 
 
         test("No Cards are moved from the deck to the hand", () => {
             nextPlay('stand', initialDeck, initialPlayerHand, initialResultsLookup, 'player', initialPlayerScores)
 
-            const expectedPlayerHand = [
-                { "emblem": "clubs", "name": "Queen", "values": [10] },
-                { "emblem": "clubs", "name": "King", "values": [10] }
-            ]
             const expectedDeck = [
                 { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
                 { "emblem": "diamonds", "name": "Two", "values": [2] },
             ]
+            const expectedPlayerHand = [
+                { "emblem": "clubs", "name": "Queen", "values": [10] },
+                { "emblem": "clubs", "name": "King", "values": [10] }
+            ]
             const expectedPlayerScores = [20]
 
             expect(initialDeck).toEqual(expectedDeck)
-            expect(initialDeck).toEqual(expectedDeck)
+            expect(initialPlayerHand).toEqual(expectedPlayerHand)
             expect(initialPlayerScores).toEqual(expectedPlayerScores)
         })
 
