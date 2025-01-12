@@ -3,10 +3,18 @@ const generateDeck = require("./generateDeck")
 
 module.exports = initialiseGame = () => {
 
-    const deck = generateDeck()
-    const playerHand = []
-    const dealerHand = []
+    let deck = generateDeck()
+    let playerHand = []
+    let dealerHand = []
 
-    dealCard(deck, playerHand)
+    let { newDeck, newHand } = dealCard(deck, playerHand); 
+    playerHand = [...newHand];
+
+    ( { newDeck, newHand } = dealCard(newDeck, dealerHand));
+    dealerHand = [...newHand];
+
+    deck = [...newDeck]
+
+    return {dealerHand, playerHand, deck}
 
 }

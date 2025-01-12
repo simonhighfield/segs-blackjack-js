@@ -41,31 +41,47 @@ describe("GenerateDeck Integration", () => {
 
 describe("InitialiseGame Integration", () => {    
 
+    const testDeck = [
+        { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
+        { "emblem": "clubs", "name": "Two", "values": [2] },
+        { "emblem": "clubs", "name": "Three", "values": [3] },
+        { "emblem": "clubs", "name": "Four", "values": [4] },
+        { "emblem": "clubs", "name": "Five", "values": [5] },
+        { "emblem": "clubs", "name": "Six", "values": [6] }
+    ]
     beforeEach(() => {
         mockGenerateDeck.mockReset();
         mockDealCard.mockReset()
+
+        mockGenerateDeck.mockReturnValue(testDeck); 
+
+        mockDealCard.mockImplementation((deck, hand) => {
+            const card = deck[0];
+            return {
+                newDeck: deck.slice(1),
+                newHand: [...hand, card],
+            };
+        });
     });
 
-    test("generateDeck is called during initialiseGame", () => {
+    test("generateDeck is called during initialiseGame", () => {   
         initialiseGame();
 
         expect(mockGenerateDeck).toHaveBeenCalledTimes(1);
     });
     test("For a 1 player game, dealCard is called 1 time for the player", () => {
-        const testDeck = [
-            { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
-            { "emblem": "clubs", "name": "Two", "values": [2] },
-            { "emblem": "clubs", "name": "Three", "values": [3] },
-            { "emblem": "clubs", "name": "Four", "values": [4] },
-            { "emblem": "clubs", "name": "Five", "values": [5] },
-            { "emblem": "clubs", "name": "Six", "values": [6] }
-        ]
-        mockGenerateDeck.mockReturnValue(testDeck);   
-        
         initialiseGame();
         
         const firstCallArguments = mockDealCard.mock.calls[0];        
-
+        
         expect(firstCallArguments).toEqual([testDeck, []])
+    });
+    test("For a 1 player game, the second card is dealt to the dealer", () => {        
+        const { dealerHand, deck} = initialiseGame();
+        
+        const expectedSecondCardDealt = { "emblem": "clubs", "name": "Two", "values": [2] }
+
+        expect(dealerHand).toContainEqual(expectedSecondCardDealt)
+        expect(deck).not.toContainEqual(expectedSecondCardDealt)
     });
 });

@@ -748,7 +748,13 @@ describe("nextPlay", () => {
 
 
 describe("initialiseGame", () => {
-    // generateDeck to have been called
+    test("Deals the first card in deck to the player", () => {        
+        const inputObject = {dealer: 10}
+        const inputCopy = {dealer: 10}
+
+        errorCheckObject(inputObject)
+        expect(inputObject).toEqual(inputCopy);
+    });
     // dealCard to have been called with (player, deck, etc.)
     // dealCard to have been called with (dealer, deck, etc.)
     // dealCard to have been called with (player, deck, etc.)
