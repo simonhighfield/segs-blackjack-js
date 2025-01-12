@@ -1,5 +1,7 @@
 const dealCard = require("./dealCard")
 const generateDeck = require("./generateDeck")
+const getBestScore = require("./getBestScore")
+const getScoresFromHand = require("./getScoresFromHand")
 
 module.exports = initialiseGame = () => {
 
@@ -8,11 +10,13 @@ module.exports = initialiseGame = () => {
     const {playerHand, dealerHand, newDeck}  = dealCards(deck)
     deck = [...newDeck]
 
-    // get
+    const dealerPossibleScores = getScoresFromHand(dealerHand)
 
+    const dealerBestScore = getBestScore(dealerPossibleScores)
 
+    const resultsLookup = {'dealer': dealerBestScore}
 
-    return {dealerHand, playerHand, deck}
+    return {dealerHand, playerHand, deck, resultsLookup}
 
 
 

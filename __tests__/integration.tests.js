@@ -97,12 +97,11 @@ describe("InitialiseGame Integration", () => {
         expect(dealerHand).toContainEqual(expectedFourthCardDealt)
         expect(deck).not.toContainEqual(expectedFourthCardDealt)
     });
-    test("Returns the results containg the dealers score", () => {        
-        const { dealerHand, deck} = initialiseGame();
+    test.skip("Returns the results containg the dealers score from their two cards", () => {        
+        const { resultsLookup } = initialiseGame();
         
-        const expectedFourthCardDealt = { "emblem": "clubs", "name": "Four", "values": [4] }
+        const expectedResultsLookup = {'dealer': 6}
 
-        expect(dealerHand).toContainEqual(expectedFourthCardDealt)
-        expect(deck).not.toContainEqual(expectedFourthCardDealt)
+        expect(resultsLookup).toEqual(expectedResultsLookup)
     });
 });

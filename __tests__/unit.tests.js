@@ -7,6 +7,7 @@ const generateSuit = require("../utils/generateSuit");
 const getBestScore = require("../utils/getBestScore");
 const getHandValidityFromScores = require("../utils/getHandValidityFromScores");
 const getScoresFromHand = require("../utils/getScoresFromHand");
+const initialiseGame = require("../utils/initialiseGame");
 const nextPlay = require("../utils/nextPlay");
 const updateResultsLookup = require("../utils/updateResultsLookup");
 
@@ -757,18 +758,36 @@ describe("nextPlay", () => {
 
 
 describe("initialiseGame", () => {
-    test("Deals the first card in deck to the player", () => {        
-        const inputObject = {dealer: 10}
-        const inputCopy = {dealer: 10}
 
-        errorCheckObject(inputObject)
-        expect(inputObject).toEqual(inputCopy);
+    test("For a 1 player game, the second card is dealt to the dealer and removed from the deck", () => {        
+        const { dealerHand, deck} = initialiseGame();
+        
+        const expectedSecondCardDealt = { "emblem": "clubs", "name": "Two", "values": [2] }
+
+        expect(dealerHand).toContainEqual(expectedSecondCardDealt)
+        expect(deck).not.toContainEqual(expectedSecondCardDealt)
     });
-    // dealCard to have been called with (player, deck, etc.)
-    // dealCard to have been called with (dealer, deck, etc.)
-    // dealCard to have been called with (player, deck, etc.)
-    // dealCard to have been called with (dealer, deck, etc.)q
-    // getScores from hand dealer 
-    // updateResultsLookup (dealer)
-    // getScores(player)
+    test("For a 1 player game, the third card is dealt to the player and removed from deck", () => {        
+        const { playerHand, deck} = initialiseGame();
+        
+        const expectedThirdCardDealt = { "emblem": "clubs", "name": "Three", "values": [3] }
+
+        expect(playerHand).toContainEqual(expectedThirdCardDealt)
+        expect(deck).not.toContainEqual(expectedThirdCardDealt)
+    });
+    test("For a 1 player game, the fourth card is dealt to the dealer and removed from deck", () => {        
+        const { dealerHand, deck} = initialiseGame();
+        
+        const expectedFourthCardDealt = { "emblem": "clubs", "name": "Four", "values": [4] }
+
+        expect(dealerHand).toContainEqual(expectedFourthCardDealt)
+        expect(deck).not.toContainEqual(expectedFourthCardDealt)
+    });
+    test("Returns the results containg the dealers score from their two cards", () => {        
+        const { resultsLookup } = initialiseGame();
+        
+        const expectedResultsLookup = {'dealer': 6}
+
+        expect(resultsLookup).toEqual(expectedResultsLookup)
+    });
 });
