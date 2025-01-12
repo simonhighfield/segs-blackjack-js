@@ -9,7 +9,7 @@ jest.mock("../utils/dealCard", () => jest.fn());
 jest.mock("../utils/updateResults", () => jest.fn());
 const nextPlay = require("../utils/nextPlay");
 const mockDealCard = require("../utils/dealCard");
-const mockUpdateResults = require("../utils/updateResults");
+const mockUpdateResults = require("../utils/updateResultsLookup");
 
 const initialiseGame = require("../utils/initialiseGame");
 
@@ -90,6 +90,14 @@ describe("InitialiseGame Integration", () => {
         expect(deck).not.toContainEqual(expectedThirdCardDealt)
     });
     test("For a 1 player game, the fourth card is dealt to the dealer and removed from deck", () => {        
+        const { dealerHand, deck} = initialiseGame();
+        
+        const expectedFourthCardDealt = { "emblem": "clubs", "name": "Four", "values": [4] }
+
+        expect(dealerHand).toContainEqual(expectedFourthCardDealt)
+        expect(deck).not.toContainEqual(expectedFourthCardDealt)
+    });
+    test("Returns the results containg the dealers score", () => {        
         const { dealerHand, deck} = initialiseGame();
         
         const expectedFourthCardDealt = { "emblem": "clubs", "name": "Four", "values": [4] }

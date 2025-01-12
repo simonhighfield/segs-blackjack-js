@@ -8,7 +8,7 @@ module.exports = initialiseGame = () => {
     const {playerHand, dealerHand, newDeck}  = dealCards(deck)
     deck = [...newDeck]
 
-
+    // get
 
 
 

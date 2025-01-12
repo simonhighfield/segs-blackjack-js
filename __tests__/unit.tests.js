@@ -8,7 +8,7 @@ const getBestScore = require("../utils/getBestScore");
 const getHandValidityFromScores = require("../utils/getHandValidityFromScores");
 const getScoresFromHand = require("../utils/getScoresFromHand");
 const nextPlay = require("../utils/nextPlay");
-const updateResults = require("../utils/updateResults");
+const updateResultsLookup = require("../utils/updateResultsLookup");
 
 describe("generateDeck() of cards", () => {
     describe("Deck is a valid array ", () => {
@@ -625,21 +625,21 @@ describe("errorCheckPlayerName", () => {
 })
 
 
-describe("updateResults", () => {
-    const results = {dealer: 10}
+describe("updateResultsLookup", () => {
+    const resultsLookup = {dealer: 10}
     const playerName = 'player'
     const scores = [3, 13]
 
     describe("Error Checks", () => {        
         test("Throws an error if 'results' is not an object", () => {        
             function errorCheckInvalidResults () {
-                updateResults('should be object', playerName)
+                updateResultsLookup('should be object', playerName)
             }
-            expect(errorCheckInvalidResults).toThrow("'results' should be an object");
+            expect(errorCheckInvalidResults).toThrow("'resultsLookup' should be an object");
         });
         test("Throws an error if 'playerName' is an empty string", () => {        
             function errorCheckEmptyPlayerName () {
-                updateResults(results, '')
+                updateResultsLookup(resultsLookup, '')
             }
             expect(errorCheckEmptyPlayerName).toThrow("'playerName' should have length > 0");
         });
@@ -650,39 +650,48 @@ describe("updateResults", () => {
         test("Does not mutate the input results", () => {        
             const resultsCopy = {dealer: 10}
     
-            updateResults(results, playerName, scores)
-            expect(results).toEqual(resultsCopy);
+            updateResultsLookup(resultsLookup, playerName, scores)
+            expect(resultsLookup).toEqual(resultsCopy);
         });
         test("Does not mutate the input scores", () => {        
             const scoresCopy = [3, 13]
     
-            updateResults(results, playerName, scores)
+            updateResultsLookup(resultsLookup, playerName, scores)
             expect(scores).toEqual(scoresCopy);
         });
     })
 
     describe("Output Checks", () => {
         test("Returns an object", () => {
-            const submittedScores = updateResults(results, playerName, scores)
+            const submittedScores = updateResultsLookup(resultsLookup, playerName, scores)
 
             expect(submittedScores).toBeObject()
         });
         test("Returns an object containing a single input score", () => {
             const singleScore = [15]
 
-            const actualOutput = updateResults(results, playerName, singleScore)
+            const actualOutput = updateResultsLookup(resultsLookup, playerName, singleScore)
             const expectedOutput = {player: 15} 
 
             expect(actualOutput).toMatchObject(expectedOutput)
         });
         test("Returns an object containing the best score when more than one score available (ace card present)", () => {
 
-            const actualOutput = updateResults(results, playerName, scores)
+            const actualOutput = updateResultsLookup(resultsLookup, playerName, scores)
             const expectedOutput = {player: 13} 
 
             expect(actualOutput).toMatchObject(expectedOutput)
         });
+        test("New scores are added to existing ones", () => {
+            const actualOutput = updateResultsLookup(resultsLookup, playerName, scores)
+            
+            const expectedOutput = {
+                dealer: 10,
+                player: 13
+            } 
 
+            expect(actualOutput).toMatchObject(expectedOutput)
+        });
     })
 })
 
@@ -760,6 +769,6 @@ describe("initialiseGame", () => {
     // dealCard to have been called with (player, deck, etc.)
     // dealCard to have been called with (dealer, deck, etc.)q
     // getScores from hand dealer 
-    // updateResults (dealer)
+    // updateResultsLookup (dealer)
     // getScores(player)
 });

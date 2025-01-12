@@ -1,5 +1,5 @@
 const dealCard = require("./dealCard")
-const updateResults = require("./updateResults")
+const updateResults = require("./updateResultsLookup")
 
 module.exports = nextPlay = (input, deck, hand, results, playerName, scores) => {
 
