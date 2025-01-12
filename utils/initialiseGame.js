@@ -19,7 +19,7 @@ module.exports = initialiseGame = () => {
     return {dealerHand, playerHand, deck, resultsLookup}
 
 
-
+    
     function dealCards(deck) {
         let playerHand = []
         let dealerHand = []

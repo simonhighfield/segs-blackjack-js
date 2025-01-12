@@ -790,4 +790,5 @@ describe("initialiseGame", () => {
 
         expect(resultsLookup).toEqual(expectedResultsLookup)
     });
+    
 });
