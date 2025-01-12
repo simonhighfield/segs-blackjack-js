@@ -76,12 +76,20 @@ describe("InitialiseGame Integration", () => {
         
         expect(firstCallArguments).toEqual([testDeck, []])
     });
-    test("For a 1 player game, the second card is dealt to the dealer", () => {        
+    test("For a 1 player game, the second card is dealt to the dealer and removed from the deck", () => {        
         const { dealerHand, deck} = initialiseGame();
         
         const expectedSecondCardDealt = { "emblem": "clubs", "name": "Two", "values": [2] }
 
         expect(dealerHand).toContainEqual(expectedSecondCardDealt)
         expect(deck).not.toContainEqual(expectedSecondCardDealt)
+    });
+    test("For a 1 player game, the third card is dealt to the player and removed from deck", () => {        
+        const { playerHand, deck} = initialiseGame();
+        
+        const expectedThirdCardDealt = { "emblem": "clubs", "name": "Three", "values": [3] }
+
+        expect(playerHand).toContainEqual(expectedThirdCardDealt)
+        expect(deck).not.toContainEqual(expectedThirdCardDealt)
     });
 });
