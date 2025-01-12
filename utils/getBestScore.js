@@ -4,7 +4,9 @@ module.exports = getBestScore = (inputScores) => {
 
     errorCheckScores(inputScores);
 
-    const bestScore = Math.max(...inputScores)
-
+    const scores = [...inputScores]
+    
+    const bestScore = Math.max(...scores)
+    
     return bestScore
 }

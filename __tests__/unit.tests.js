@@ -551,6 +551,12 @@ describe("getBestScore", () => {
             }
             expect(getBestScoreFromInvalidScores).toThrow("'scores' should be at least 2");
         });
+        test("Throws an error if all scores are > 21", () => {
+            function getBestScoreFromInvalidScores() {
+                getBestScore([22, 32])
+            }
+            expect(getBestScoreFromInvalidScores).toThrow("'scores' should contain at least one score < 21");
+        });
     })
 
     describe("Funcitonal Checks", () => {
