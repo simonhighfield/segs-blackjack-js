@@ -9,6 +9,6 @@ module.exports = nextPlay = (input, deck, hand, results, playerName, scores) => 
     } 
     else if  (input === 'stand') {
         
-        updateResults(results, playerName, scores)
+        return updateResults(results, playerName, scores)
     }
 }

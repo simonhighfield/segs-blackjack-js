@@ -1,10 +1,11 @@
 const { expectedEmblems, expectedNames, expectedDeck, expectedValues } = require("../data/testData");
-const errorCheckScores = require("../utils/errorCheckScores");
 const getScoresFromHand = require("../utils/getScoresFromHand");
 const initialiseGame = require("../utils/initialiseGame");
 const nextPlay = require("../utils/nextPlay");
 
 describe("Scenario Tests for BBC SEGS application", () => {
+
+
     describe("When dealt my opening hand, I have two cards", () => {
         const { playerHand } = initialiseGame()
 
@@ -24,6 +25,7 @@ describe("Scenario Tests for BBC SEGS application", () => {
             });
         })
     });
+
 
     describe("When I choose to 'hit' I receive another card and my score is updated", () => {
         const resultsLookup = {
@@ -61,6 +63,52 @@ describe("Scenario Tests for BBC SEGS application", () => {
             
             expect(newPlayerScores).not.toEqual(initialPlayerScores)
             expect(newPlayerScores).toEqual(expectedNewScores)
+        })
+    });
+
+
+    describe("When I choose to 'stand', I receive no further cards, and my score is evaluated", () => {
+        const initialResultsLookup = {
+            dealer: 10
+        }
+        const initialPlayerHand = [
+            { "emblem": "clubs", "name": "Queen", "values": [10] },
+            { "emblem": "clubs", "name": "King", "values": [10] }
+        ]
+        const initialDeck = [
+            { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
+            { "emblem": "diamonds", "name": "Two", "values": [2] },
+        ]
+        const initialPlayerScores = getScoresFromHand(initialPlayerHand) 
+
+        test("No Cards are moved from the deck to the hand", () => {
+            nextPlay('stand', initialDeck, initialPlayerHand, initialResultsLookup, 'player', initialPlayerScores)
+
+            const expectedPlayerHand = [
+                { "emblem": "clubs", "name": "Queen", "values": [10] },
+                { "emblem": "clubs", "name": "King", "values": [10] }
+            ]
+            const expectedDeck = [
+                { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
+                { "emblem": "diamonds", "name": "Two", "values": [2] },
+            ]
+            const expectedPlayerScores = [20]
+
+            expect(initialDeck).toEqual(expectedDeck)
+            expect(initialDeck).toEqual(expectedDeck)
+            expect(initialPlayerScores).toEqual(expectedPlayerScores)
+        })
+
+        test("resultsLookup object is updated", () => {
+            const updatedResultsLookup = nextPlay('stand', initialDeck, initialPlayerHand, initialResultsLookup, 'player', initialPlayerScores)
+
+            const expectedResultsLookup = {
+                dealer: 10,
+                player: 20
+            }
+
+            expect(updatedResultsLookup).not.toEqual(initialResultsLookup)
+            expect(updatedResultsLookup).toEqual(expectedResultsLookup)
         })
     });
 });
