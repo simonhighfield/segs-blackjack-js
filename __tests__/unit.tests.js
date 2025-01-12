@@ -598,6 +598,17 @@ describe("getBestScore", () => {
             const bestScore = getBestScore(scores)
             expect(bestScore).toBe(17)
         });
+        test("Discards scores > 21, and returns the score < 21", () => {
+            const scores1 = [21, 31]
+
+            const bestScore1 = getBestScore(scores1)
+            expect(bestScore1).toBe(21)
+
+            const scores2 = [20, 30]
+
+            const bestScore2 = getBestScore(scores2)
+            expect(bestScore2).toBe(20)
+        });
 
     })
 })
