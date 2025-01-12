@@ -133,5 +133,33 @@ describe("Scenario Tests for BBC SEGS application", () => {
 
             expect(isHandValid).toBeTrue();
         });
+        test("if one of two possible scores is =< 21, and the other is > 21, isHandValid evaluates to true", () => {
+            const scores = [21, 31]
+            const isHandValid = getHandValidityFromScores(scores)
+
+            expect(isHandValid).toBeTrue();
+        });
+    });
+
+
+    describe("When score is 22 or more, the hand is invalid", () => {
+        test("if one possible score is === 22, isHandValid evaluates to false", () => {
+            const scores = [22]
+            const isHandValid = getHandValidityFromScores(scores)
+
+            expect(isHandValid).toBeFalse();
+        });
+        test("if one possible score is > 22, isHandValid evaluates to false", () => {
+            const scores = [23]
+            const isHandValid = getHandValidityFromScores(scores)
+
+            expect(isHandValid).toBeFalse();
+        });
+        test("if two possible scores are > 22, isHandValid evaluates to false", () => {
+            const scores = [23, 33]
+            const isHandValid = getHandValidityFromScores(scores)
+
+            expect(isHandValid).toBeFalse();
+        });
     });
 });
