@@ -32,9 +32,6 @@ describe("GenerateDeck Integration", () => {
     });
 });
 
-    // dealCard to have been called with (dealer, deck, etc.)
-    // dealCard to have been called with (player, deck, etc.)
-    // dealCard to have been called with (dealer, deck, etc.)q
     // getScores from hand dealer 
     // updateResults (dealer)
     // getScores(player)
