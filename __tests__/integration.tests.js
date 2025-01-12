@@ -92,4 +92,12 @@ describe("InitialiseGame Integration", () => {
         expect(playerHand).toContainEqual(expectedThirdCardDealt)
         expect(deck).not.toContainEqual(expectedThirdCardDealt)
     });
+    test("For a 1 player game, the fourth card is dealt to the dealer and removed from deck", () => {        
+        const { dealerHand, deck} = initialiseGame();
+        
+        const expectedFourthCardDealt = { "emblem": "clubs", "name": "Four", "values": [4] }
+
+        expect(dealerHand).toContainEqual(expectedFourthCardDealt)
+        expect(deck).not.toContainEqual(expectedFourthCardDealt)
+    });
 });

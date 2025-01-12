@@ -16,6 +16,9 @@ module.exports = initialiseGame = () => {
     ( { newDeck, newHand } = dealCard(newDeck, playerHand));
     playerHand = [...newHand];
 
+    ( { newDeck, newHand } = dealCard(newDeck, dealerHand));
+    dealerHand = [...newHand];
+
     deck = [...newDeck]
 
     return {dealerHand, playerHand, deck}
