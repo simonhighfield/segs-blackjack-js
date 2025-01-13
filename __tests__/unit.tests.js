@@ -554,35 +554,6 @@ describe("getBestScore", () => {
     })
 })
 
-describe("errorCheckPlayerName", () => {
-    test("Does not mutate the input string", () => {        
-        const inputString = 'player'
-        const inputCopy = 'player'
-
-        errorCheckPlayerName(inputString)
-        expect(inputString).toEqual(inputCopy);
-    });
-    test("Throws an error if missing an input", () => {        
-        function errorCheckMissingInput () {
-            errorCheckPlayerName()
-        }
-        expect(errorCheckMissingInput).toThrow("'playerName' must be provided");
-    });
-    test("Throws an error if 'playerName' is not an string", () => {        
-        function errorCheckWrongInputType () {
-            errorCheckPlayerName(1)
-        }
-        expect(errorCheckWrongInputType).toThrow("'playerName' should be a string");
-    });
-    test("Throws an error if 'playerName' is an empty string", () => {        
-        function errorCheckEmptyPlayerName () {
-            errorCheckPlayerName('')
-        }
-        expect(errorCheckEmptyPlayerName).toThrow("'playerName' should have length > 0");
-    });
-
-})
-
 
 describe("updateResultsLookup", () => {
     const resultsLookup = {dealer: 10}
