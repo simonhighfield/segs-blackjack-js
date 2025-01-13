@@ -1,6 +1,6 @@
-const errorCheckArray = require("../utils/errorChecks/errorCheckArray");
-const errorCheckObject = require("../utils/errorChecks/errorCheckObject");
-const errorCheckPlayerName = require("../utils/errorChecks/errorCheckPlayerName");
+const errorCheckArray = require("../../utils/errorChecks/errorCheckArray");
+const errorCheckObject = require("../../utils/errorChecks/errorCheckObject");
+const errorCheckPlayerName = require("../../utils/errorChecks/errorCheckPlayerName");
 
 describe("errorCheckArray", () => {
     test("Does not mutate the input array", () => {        
