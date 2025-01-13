@@ -1,4 +1,5 @@
 const errorCheckArray = require("../utils/errorChecks/errorCheckArray");
+const errorCheckObject = require("../utils/errorChecks/errorCheckObject");
 
 describe("errorCheckArray", () => {
     test("Does not mutate the input array", () => {        
@@ -41,5 +42,33 @@ describe("errorCheckArray", () => {
             errorCheckArray([], 'scores')
         }
         expect(errorCheckEmptyArray).toThrow("'scores' should not be empty");
+    });
+})
+
+describe("errorCheckObject", () => {
+    test("Does not mutate the input array", () => {        
+        const inputObject = {dealer: 10}
+        const inputCopy = {dealer: 10}
+
+        errorCheckObject(inputObject)
+        expect(inputObject).toEqual(inputCopy);
+    });
+    test("Throws an error if missing an input", () => {        
+        function errorCheckMissingInput () {
+            errorCheckObject()
+        }
+        expect(errorCheckMissingInput).toThrow("'input' must be provided");
+    });
+    test("Throws an error if 'input' is not an object", () => {        
+        function errorCheckWrongInputType () {
+            errorCheckObject('shouldBeObject')
+        }
+        expect(errorCheckWrongInputType).toThrow("'input' should be an object");
+    });
+    test("Throws an error containing the variable objectName", () => {        
+        function errorCheckMissingInput () {
+            errorCheckObject(undefined, 'results')
+        }
+        expect(errorCheckMissingInput).toThrow("'results' must be provided");
     });
 })
