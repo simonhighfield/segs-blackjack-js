@@ -6,7 +6,7 @@ const originalGenerateDeck = jest.requireActual("../utils/generateDeck");
 const mockGenerateDeck = require("../utils/generateDeck");
 
 jest.mock("../utils/dealCard", () => jest.fn());
-jest.mock("../utils/updateResults", () => jest.fn());
+jest.mock("../utils/updateResultsLookup", () => jest.fn());
 const nextPlay = require("../utils/nextPlay");
 const mockDealCard = require("../utils/dealCard");
 const mockUpdateResults = require("../utils/updateResultsLookup");

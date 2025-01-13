@@ -10,8 +10,10 @@
     "u": "jest unit.tests.js",
     "int": "jest integration.tests.js",
     "i": "jest integration.tests.js",
-    "scenerio": "jest scenario.tests.js",
-    "s": "jest scenario.tests.js"
+    "scenario": "jest scenario.tests.js",
+    "s": "jest scenario.tests.js",
+    "error": "jest errorChecks.tests.js",
+    "e": "jest errorChecks.tests.js"
   },
   "jest": {
     "setupFilesAfterEnv": ["./testSetup.js"]

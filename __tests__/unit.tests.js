@@ -1,6 +1,5 @@
 const { expectedEmblems, expectedNames, lookupValueByName, expectedDeck } = require("../data/testData");
 const dealCard = require("../utils/dealCard");
-const errorCheckArray = require("../utils/errorCheckArray");
 const errorCheckPlayerName = require("../utils/errorCheckPlayerName");
 const generateDeck = require("../utils/generateDeck");
 const generateSuit = require("../utils/generateSuit");
@@ -216,50 +215,6 @@ describe("dealCard", () => {
     
         expect(newHand.length).toBe(2)
         expect(newHand).toIncludeAllMembers(expectedCardsDealt)
-    });
-})
-
-describe("errorCheckArray", () => {
-    test("Does not mutate the input array", () => {        
-        const inputArray = [1, 2, 3]
-        const inputCopy = [1, 2, 3]
-
-        errorCheckArray(inputArray)
-        expect(inputArray).toEqual(inputCopy);
-    });
-    test("Throws an error if missing an input", () => {        
-        function errorCheckMissingInput () {
-            errorCheckArray()
-        }
-        expect(errorCheckMissingInput).toThrow("'input' must be provided");
-    });
-    test("Throws an error if 'input' is not an array", () => {        
-        function errorCheckWrongInputType () {
-            errorCheckArray('shouldBeArray')
-        }
-        expect(errorCheckWrongInputType).toThrow("'input' should be an array");
-    });
-    test("Throws an error if 'input' is an empty array", () => {        
-        function errorCheckEmptyArray () {
-            errorCheckArray([])
-        }
-        expect(errorCheckEmptyArray).toThrow("'input' should not be empty");
-    });
-    test("Throws an error containing the variable arrayName", () => {        
-        function errorCheckMissingInput () {
-            errorCheckArray(undefined, 'deck')
-        }
-        expect(errorCheckMissingInput).toThrow("'deck' must be provided");
-
-        function errorCheckWrongInputType () {
-            errorCheckArray('shouldBeArray', 'hand')
-        }
-        expect(errorCheckWrongInputType).toThrow("'hand' should be an array");
-
-        function errorCheckEmptyArray () {
-            errorCheckArray([], 'scores')
-        }
-        expect(errorCheckEmptyArray).toThrow("'scores' should not be empty");
     });
 })
 

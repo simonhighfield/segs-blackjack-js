@@ -1,4 +1,4 @@
-const errorCheckArray = require("./errorCheckArray");
+const errorCheckArray = require("./errorChecks/errorCheckArray");
 const { undefined } = require("./getScoresFromHand");
 
 module.exports = errorCheckHand = (inputHand) => {
