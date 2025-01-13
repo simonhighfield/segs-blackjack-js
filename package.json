@@ -6,14 +6,15 @@
   "scripts": {
     "test": "jest",
     "t": "npm run test",
-    "unit": "jest unit.tests.js",
-    "u": "jest unit.tests.js",
-    "int": "jest integration.tests.js",
-    "i": "jest integration.tests.js",
-    "scenario": "jest scenario.tests.js",
-    "s": "jest scenario.tests.js",
+    "init": "jest gameInitialisation.tests.js",
+    "i": "jest gameInitialisation.tests.js",
+    "game": "jest gamePlay.tests.js",
+    "g": "jest gamePlay.tests.js",
     "error": "jest errorChecks.tests.js",
-    "e": "jest errorChecks.tests.js"
+    "e": "jest errorChecks.tests.js",
+    "int": "jest integration.tests.js",
+    "scenario": "jest scenario.tests.js",
+    "s": "jest scenario.tests.js"
   },
   "jest": {
     "setupFilesAfterEnv": ["./testSetup.js"]
