@@ -1,5 +1,5 @@
 const fs = require('node:fs');
-const generateDeck = require("../utils/generateDeck");
+const generateDeck = require("../gameInitialisation/generateDeck");
 
 const deck = generateDeck()
 const deckJSON = JSON.stringify(deck)
