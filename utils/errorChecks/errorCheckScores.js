@@ -1,4 +1,4 @@
-const errorCheckArray = require("./errorChecks/errorCheckArray")
+const errorCheckArray = require("./errorCheckArray")
 
 module.exports = errorCheckScores = (inputScores) => {
     errorCheckArray(inputScores, 'scores');

@@ -1,7 +1,7 @@
-const dealCard = require("./dealCard")
 const generateDeck = require("./generateDeck")
-const getBestScore = require("./getBestScore")
-const getScoresFromHand = require("./getScoresFromHand")
+const dealCard = require("../gamePlay/dealCard")
+const getScoresFromHand = require("../gamePlay/getScoresFromHand")
+const getBestScore = require("../gamePlay/getBestScore")
 
 module.exports = initialiseGame = () => {
 

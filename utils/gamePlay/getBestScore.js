@@ -1,4 +1,4 @@
-const errorCheckScores = require("./errorCheckScores");
+const errorCheckScores = require("../errorChecks/errorCheckScores");
 
 module.exports = getBestScore = (inputScores) => {
 

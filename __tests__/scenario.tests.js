@@ -1,8 +1,8 @@
 const { expectedEmblems, expectedNames, expectedDeck, expectedValues } = require("../data/testData");
-const getHandValidityFromScores = require("../utils/getHandValidityFromScores");
-const getScoresFromHand = require("../utils/getScoresFromHand");
-const initialiseGame = require("../utils/initialiseGame");
-const nextPlay = require("../utils/nextPlay");
+const initialiseGame = require("../utils/gameInitialisation/initialiseGame");
+const getHandValidityFromScores = require("../utils/gamePlay/getHandValidityFromScores");
+const getScoresFromHand = require("../utils/gamePlay/getScoresFromHand");
+const nextPlay = require("../utils/gamePlay/nextPlay");
 
 describe("Scenario Tests for BBC SEGS application", () => {
 

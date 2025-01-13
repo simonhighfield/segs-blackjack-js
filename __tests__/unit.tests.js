@@ -1,14 +1,14 @@
 const { expectedEmblems, expectedNames, lookupValueByName, expectedDeck } = require("../data/testData");
-const dealCard = require("../utils/dealCard");
-const errorCheckPlayerName = require("../utils/errorCheckPlayerName");
-const generateDeck = require("../utils/generateDeck");
-const generateSuit = require("../utils/generateSuit");
-const getBestScore = require("../utils/getBestScore");
-const getHandValidityFromScores = require("../utils/getHandValidityFromScores");
-const getScoresFromHand = require("../utils/getScoresFromHand");
-const initialiseGame = require("../utils/initialiseGame");
-const nextPlay = require("../utils/nextPlay");
-const updateResultsLookup = require("../utils/updateResultsLookup");
+const errorCheckPlayerName = require("../utils/errorChecks/errorCheckPlayerName");
+const generateDeck = require("../utils/gameInitialisation/generateDeck");
+const generateSuit = require("../utils/gameInitialisation/generateSuit");
+const initialiseGame = require("../utils/gameInitialisation/initialiseGame");
+const dealCard = require("../utils/gamePlay/dealCard");
+const getBestScore = require("../utils/gamePlay/getBestScore");
+const getHandValidityFromScores = require("../utils/gamePlay/getHandValidityFromScores");
+const getScoresFromHand = require("../utils/gamePlay/getScoresFromHand");
+const nextPlay = require("../utils/gamePlay/nextPlay");
+const updateResultsLookup = require("../utils/gamePlay/updateResultsLookup");
 
 describe("generateDeck() of cards", () => {
     describe("Deck is a valid array ", () => {

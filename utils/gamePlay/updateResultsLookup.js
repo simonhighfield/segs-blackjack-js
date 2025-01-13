@@ -1,8 +1,7 @@
-const errorCheckPlayerName = require("./errorCheckPlayerName")
-const errorCheckHand = require("./errorCheckHand")
-const errorCheckScores = require("./errorCheckScores")
+const errorCheckObject = require("../errorChecks/errorCheckObject")
+const errorCheckPlayerName = require("../errorChecks/errorCheckPlayerName")
+const errorCheckScores = require("../errorChecks/errorCheckScores")
 const getBestScore = require("./getBestScore")
-const errorCheckObject = require("./errorCheckObject")
 
 module.exports = updateResultsLookup = (resultsLookup, playerName, scores) => {
 

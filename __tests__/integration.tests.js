@@ -1,17 +1,17 @@
-jest.mock("../utils/generateSuit", () => jest.fn());
-const mockGenerateSuit = require("../utils/generateSuit");
+jest.mock("../utils/gameInitialisation/generateSuit", () => jest.fn());
+const mockGenerateSuit = require("../utils/gameInitialisation/generateSuit");
 
-jest.mock("../utils/generateDeck", () => jest.fn());
-const originalGenerateDeck = jest.requireActual("../utils/generateDeck");
-const mockGenerateDeck = require("../utils/generateDeck");
+jest.mock("../utils/gameInitialisation/generateDeck", () => jest.fn());
+const originalGenerateDeck = jest.requireActual("../utils/gameInitialisation/generateDeck");
+const mockGenerateDeck = require("../utils/gameInitialisation/generateDeck");
 
-jest.mock("../utils/dealCard", () => jest.fn());
-jest.mock("../utils/updateResultsLookup", () => jest.fn());
-const nextPlay = require("../utils/nextPlay");
-const mockDealCard = require("../utils/dealCard");
-const mockUpdateResults = require("../utils/updateResultsLookup");
+jest.mock("../utils/gamePlay/dealCard", () => jest.fn());
+jest.mock("../utils/gamePlay/updateResultsLookup", () => jest.fn());
+const nextPlay = require("../utils/gamePlay/nextPlay");
+const mockDealCard = require("../utils/gamePlay/dealCard");
+const mockUpdateResults = require("../utils/gamePlay/updateResultsLookup");
 
-const initialiseGame = require("../utils/initialiseGame");
+const initialiseGame = require("../utils/gameInitialisation/initialiseGame");
 
 
 describe("GenerateDeck Integration", () => {
