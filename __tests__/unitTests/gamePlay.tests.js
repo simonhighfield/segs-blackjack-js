@@ -468,13 +468,13 @@ describe("\n nextPlay", () => {
                 { "emblem": "hearts", "name": "Ace", "values": [1, 11] },
                 { "emblem": "spades", "name": "Ace", "values": [1, 11] },
             ]
-            const hand = [
-                { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
-                { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
-            ]
             const deckCopy = [
                 { "emblem": "hearts", "name": "Ace", "values": [1, 11] },
                 { "emblem": "spades", "name": "Ace", "values": [1, 11] },
+            ]
+            const hand = [
+                { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
+                { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
             ]
             const handCopy = [
                 { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
@@ -496,10 +496,24 @@ describe("\n nextPlay", () => {
             const playersScores = [5, 15]
             const expectedResultsLookup = {dealer: 10, player: 15}
     
-            
             const updatedResultsLookup = nextPlay('stand', undefined, undefined, resultsLookup, playersName, playersScores)
     
             expect(updatedResultsLookup).toEqual(expectedResultsLookup)
+        })
+
+        test("Does not reassign or mutate the inputs", () => {
+            const resultsLookup = {dealer: 10}
+            const resultsLookupCopy = {dealer: 10}
+            const playersName = 'player'
+            const playersNameCopy = 'player'
+            const playersScores = [5, 15]
+            const playersScoresCopy = [5, 15]
+    
+            const updatedResultsLookup = nextPlay('stand', undefined, undefined, resultsLookup, playersName, playersScores)
+    
+            expect(resultsLookup).toEqual(resultsLookupCopy)
+            expect(playersName).toEqual(playersNameCopy)
+            expect(playersScores).toEqual(playersScoresCopy)
         })
     })
 })
