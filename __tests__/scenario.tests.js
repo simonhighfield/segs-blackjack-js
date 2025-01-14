@@ -1,7 +1,7 @@
 const { expectedEmblems, expectedNames, expectedDeck, expectedValues } = require("../data/testData");
 const initialiseGame = require("../utils/gameInitialisation/initialiseGame");
 const getHandValidityFromScores = require("../utils/gamePlay/getHandValidityFromScores");
-const getScoresFromHand = require("../utils/gamePlay/getScoresFromHand");
+const getPossibleScoresFromHand = require("../utils/gamePlay/getPossibleScoresFromHand");
 const nextPlay = require("../utils/gamePlay/nextPlay");
 
 describe("Scenario Tests for BBC SEGS application", () => {
@@ -40,7 +40,7 @@ describe("Scenario Tests for BBC SEGS application", () => {
             { "emblem": "clubs", "name": "Queen", "values": [10] },
             { "emblem": "clubs", "name": "King", "values": [10] }
         ]
-        const initialPlayerScores = getScoresFromHand(initialPlayerHand) 
+        const initialPlayerScores = getPossibleScoresFromHand(initialPlayerHand) 
 
         const { newDeck, newHand } = nextPlay('hit', initialDeck, initialPlayerHand, resultsLookup, 'player', initialPlayerScores)
         
@@ -58,7 +58,7 @@ describe("Scenario Tests for BBC SEGS application", () => {
             expect(newHand).toEqual(expectedNewHand)
         })
         test("The player's score is updated", () => {
-            const newPlayerScores = getScoresFromHand(newHand) 
+            const newPlayerScores = getPossibleScoresFromHand(newHand) 
             
             const expectedNewScores = [21]
             
@@ -80,7 +80,7 @@ describe("Scenario Tests for BBC SEGS application", () => {
             { "emblem": "clubs", "name": "Queen", "values": [10] },
             { "emblem": "clubs", "name": "King", "values": [10] }
         ]
-        const initialPlayerScores = getScoresFromHand(initialPlayerHand) 
+        const initialPlayerScores = getPossibleScoresFromHand(initialPlayerHand) 
 
         test("No Cards are moved from the deck to the hand", () => {
             nextPlay('stand', initialDeck, initialPlayerHand, initialResultsLookup, 'player', initialPlayerScores)
@@ -171,7 +171,7 @@ describe("Scenario Tests for BBC SEGS application", () => {
                 { "emblem": "clubs", "name": "King", "values": [10] },
                 { "emblem": "diamonds", "name": "Ace", "values": [1, 11] }
             ]
-            const scores = getScoresFromHand(hand)
+            const scores = getPossibleScoresFromHand(hand)
             const bestScore = getBestScore(scores)
     
             const expectedBestScore = 21
@@ -189,7 +189,7 @@ describe("Scenario Tests for BBC SEGS application", () => {
                 { "emblem": "clubs", "name": "Queen", "values": [10] },
                 { "emblem": "diamonds", "name": "Ace", "values": [1, 11] }
             ]
-            const scores = getScoresFromHand(hand)
+            const scores = getPossibleScoresFromHand(hand)
             const bestScore = getBestScore(scores)
             
             const expectedBestScore = 21
@@ -207,7 +207,7 @@ describe("Scenario Tests for BBC SEGS application", () => {
                 { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
                 { "emblem": "hearts", "name": "Ace", "values": [1, 11] }
             ]
-            const scores = getScoresFromHand(hand)
+            const scores = getPossibleScoresFromHand(hand)
             const bestScore = getBestScore(scores)
             
             const expectedBestScore = 21

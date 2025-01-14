@@ -1,6 +1,6 @@
 const errorCheckHand = require("../errorChecks/errorCheckHand");
 
-module.exports = getScoresFromHand = (inputHand) => {
+module.exports = getPossibleScoresFromHand = (inputHand) => {
     try {
         errorCheckHand(inputHand);
         
@@ -27,7 +27,7 @@ module.exports = getScoresFromHand = (inputHand) => {
         }   
     }
     catch (error) {
-        // console.error("error in getScoresFromHand: ", error.message);
+        // console.error("error in getPossibleScoresFromHand: ", error.message);
         throw error
     }
     

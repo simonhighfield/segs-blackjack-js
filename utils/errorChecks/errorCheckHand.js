@@ -1,5 +1,5 @@
 const errorCheckArray = require("./errorCheckArray");
-const { undefined } = require("../gamePlay/getScoresFromHand");
+const { undefined } = require("../gamePlay/getPossibleScoresFromHand");
 
 module.exports = errorCheckHand = (inputHand) => {
     errorCheckArray(inputHand, 'hand');
