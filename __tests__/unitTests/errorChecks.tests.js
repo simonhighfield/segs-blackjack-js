@@ -1,4 +1,5 @@
 const errorCheckArray = require("../../utils/errorChecks/errorCheckArray");
+const errorCheckScores = require("../../utils/errorChecks/errorCheckScores");
 const errorCheckObject = require("../../utils/errorChecks/errorCheckObject");
 const errorCheckPlayerName = require("../../utils/errorChecks/errorCheckPlayerName");
 
@@ -49,6 +50,30 @@ describe("errorCheckArray", () => {
         expect(errorCheckEmptyArray).toThrow("'scores' should not be empty");
     });
 })
+
+describe("errorCheckScores", () => {
+    test("Throws an error if missing an input", () => {        
+        function errorCheckFromNoInput () {
+            errorCheckScores()
+        }
+        expect(errorCheckFromNoInput).toThrow("'scores' must be provided");
+    });
+
+    test("Throws an error if scores are not numbers", () => {
+        function errorCheckFromStringScores() {
+            errorCheckScores([5, 'should be a number'])
+        }
+        expect(errorCheckFromStringScores).toThrow("'scores' should be numbers");
+    });
+
+    test("Throws an error if scores is less than 2 (two aces)", () => {
+        function errorCheckFromInvalidScores() {
+            errorCheckScores([2, -1])
+        }
+        expect(errorCheckFromInvalidScores).toThrow("'scores' should be at least 2");
+    });
+})
+
 
 
 describe("errorCheckObject", () => {
@@ -113,3 +138,4 @@ describe("errorCheckPlayerName", () => {
         expect(errorCheckEmptyPlayerName).toThrow("'playerName' should have length > 0");
     });
 })
+
