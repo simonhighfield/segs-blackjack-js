@@ -285,36 +285,6 @@ describe("getHandValidityFromScores", () => {
 
 
 describe("getBestScore", () => {
-    describe("Error Checks", () => {
-        test("Throws an error if missing an input", () => {        
-            function getBestScoreWithoutInput () {
-                getBestScore()
-            }
-            expect(getBestScoreWithoutInput).toThrow("'scores' must be provided");
-        });
-
-        test("Throws an error if scores are not numbers", () => {
-            function getBestScoreFromString() {
-                getBestScore([5, 'should be a number'])
-            }
-            expect(getBestScoreFromString).toThrow("'scores' should be numbers");
-        });
-
-        test("Throws an error if scores is less than 2 (two aces)", () => {
-            function getBestScoreFromInvalidScores() {
-                getBestScore([2, -1])
-            }
-            expect(getBestScoreFromInvalidScores).toThrow("'scores' should be at least 2");
-        });
-
-        test("Throws an error if all scores are > 21", () => {
-            function getBestScoreFromInvalidScores() {
-                getBestScore([22, 32])
-            }
-            expect(getBestScoreFromInvalidScores).toThrow("'scores' should contain at least one score < 21");
-        });
-    })
-
     describe("Funcitonal Checks", () => {
         test("Does not mutate the input scores", () => {
             const inputScores = [7, 17]

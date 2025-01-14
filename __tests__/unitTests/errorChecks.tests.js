@@ -14,17 +14,17 @@ describe("errorCheckArray", () => {
     });
 
     test("Throws an error if missing an input", () => {        
-        function errorCheckNoInput () {
+        function errorCheckNoInputArray () {
             errorCheckArray()
         }
-        expect(errorCheckNoInput).toThrow("'input' must be provided");
+        expect(errorCheckNoInputArray).toThrow("'input' must be provided");
     });
 
     test("Throws an error if 'input' is not an array", () => {        
-        function errorCheckWrongInputType () {
+        function errorCheckNotTypeArray () {
             errorCheckArray('shouldBeArray')
         }
-        expect(errorCheckWrongInputType).toThrow("'input' should be an array");
+        expect(errorCheckNotTypeArray).toThrow("'input' should be an array");
     });
 
     test("Throws an error if 'input' is an empty array", () => {        
@@ -35,15 +35,15 @@ describe("errorCheckArray", () => {
     });
 
     test("Throws an error containing the variable arrayName", () => {        
-        function errorCheckMissingInput () {
+        function errorCheckNoInputArray () {
             errorCheckArray(undefined, 'deck')
         }
-        expect(errorCheckMissingInput).toThrow("'deck' must be provided");
+        expect(errorCheckNoInputArray).toThrow("'deck' must be provided");
 
-        function errorCheckWrongInputType () {
+        function errorCheckNotTypeArray () {
             errorCheckArray('shouldBeArray', 'hand')
         }
-        expect(errorCheckWrongInputType).toThrow("'hand' should be an array");
+        expect(errorCheckNotTypeArray).toThrow("'hand' should be an array");
 
         function errorCheckEmptyArray () {
             errorCheckArray([], 'scores')
@@ -54,7 +54,6 @@ describe("errorCheckArray", () => {
 
 describe("errorCheckHand", () => {
     describe("Error checks the input hand", () => {
-
         test("Throws an error if missing an input", () => {        
             function errorCheckNoInputHand () {
                 errorCheckHand()
@@ -63,10 +62,10 @@ describe("errorCheckHand", () => {
         });
 
         test("Throws an error if 'hand' is not an array", () => {        
-            function errorCheckWrongHandType () {
+            function errorCheckWrongTypeHand () {
                 errorCheckHand('shouldBeArray')
             }
-            expect(errorCheckWrongHandType).toThrow("'hand' should be an array");
+            expect(errorCheckWrongTypeHand).toThrow("'hand' should be an array");
         });
 
         test("Throws an error if 'hand' is an empty array", () => {        
@@ -79,10 +78,10 @@ describe("errorCheckHand", () => {
 
     describe("Error checks each card of hand", () => {
         test("Throws an error if cards are empty", () => {
-            function errorCheckHandOfEmptyCards() {
+            function errorCheckEmptyCards() {
                 errorCheckHand([{}]);
             }
-            expect(errorCheckHandOfEmptyCards).toThrow("'hand' should contain valid card objects");
+            expect(errorCheckEmptyCards).toThrow("'hand' should contain valid card objects");
         });
 
         test("Throws an error if cards do not contain 'emblem'", () => {
@@ -110,28 +109,33 @@ describe("errorCheckHand", () => {
 
 describe("errorCheckScores", () => {
     test("Throws an error if missing an input", () => {        
-        function errorCheckFromNoInput () {
+        function errorCheckNoInputScore () {
             errorCheckScores()
         }
-        expect(errorCheckFromNoInput).toThrow("'scores' must be provided");
+        expect(errorCheckNoInputScore).toThrow("'scores' must be provided");
     });
 
     test("Throws an error if scores are not numbers", () => {
-        function errorCheckFromStringScores() {
+        function errorCheckWrongTypeScores() {
             errorCheckScores([5, 'should be a number'])
         }
-        expect(errorCheckFromStringScores).toThrow("'scores' should be numbers");
+        expect(errorCheckWrongTypeScores).toThrow("'scores' should be numbers");
     });
 
     test("Throws an error if scores is less than 2 (two aces)", () => {
-        function errorCheckFromInvalidScores() {
+        function errorCheckInvalidScores() {
             errorCheckScores([2, -1])
         }
-        expect(errorCheckFromInvalidScores).toThrow("'scores' should be at least 2");
+        expect(errorCheckInvalidScores).toThrow("'scores' should be at least 2");
+    });
+
+    test("Throws an error if all scores are > 21", () => {
+        function errorCheckInvalidScores() {
+            errorCheckScores([22, 32])
+        }
+        expect(errorCheckInvalidScores).toThrow("'scores' should contain at least one score < 21");
     });
 })
-
-
 
 describe("errorCheckObject", () => {
     test("Does not mutate the input array", () => {        
@@ -139,6 +143,7 @@ describe("errorCheckObject", () => {
         const inputCopy = {dealer: 10}
 
         errorCheckObject(inputObject)
+
         expect(inputObject).toEqual(inputCopy);
     });
 
@@ -171,28 +176,29 @@ describe("errorCheckPlayerName", () => {
         const inputCopy = 'player'
 
         errorCheckPlayerName(inputString)
+
         expect(inputString).toEqual(inputCopy);
     });
 
     test("Throws an error if missing an input", () => {        
-        function errorCheckMissingInput () {
+        function errorCheckNoInputName () {
             errorCheckPlayerName()
         }
-        expect(errorCheckMissingInput).toThrow("'playerName' must be provided");
+        expect(errorCheckNoInputName).toThrow("'playerName' must be provided");
     });
 
     test("Throws an error if 'playerName' is not an string", () => {        
-        function errorCheckWrongInputType () {
+        function errorCheckWrongTypeName () {
             errorCheckPlayerName(1)
         }
-        expect(errorCheckWrongInputType).toThrow("'playerName' should be a string");
+        expect(errorCheckWrongTypeName).toThrow("'playerName' should be a string");
     });
     
     test("Throws an error if 'playerName' is an empty string", () => {        
-        function errorCheckEmptyPlayerName () {
+        function errorCheckEmptyName () {
             errorCheckPlayerName('')
         }
-        expect(errorCheckEmptyPlayerName).toThrow("'playerName' should have length > 0");
+        expect(errorCheckEmptyName).toThrow("'playerName' should have length > 0");
     });
 })
 
