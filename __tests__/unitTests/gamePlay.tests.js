@@ -435,7 +435,10 @@ describe("\n updateResultsLookup", () => {
 
 
 describe("\n nextPlay", () => {
-    test("If input = 'hit', returns newDeck and newHand", () => {
+    // mutation
+    //  error check only input
+
+    test("If input = 'hit', a card is dealt and function returns newDeck and newHand", () => {
         const deck = [
             { "emblem": "hearts", "name": "Ace", "values": [1, 11] },
             { "emblem": "spades", "name": "Ace", "values": [1, 11] },
@@ -458,5 +461,17 @@ describe("\n nextPlay", () => {
         
         expect(newDeck).toEqual(expectedNewDeck)
         expect(newHand).toEqual(expectedNewHand)
+    })
+
+    test("If input = 'stand', the resultsLookup is updated and returned", () => {
+        const resultsLookup = {dealer: 10}
+        const playersName = 'player'
+        const playersScores = [5, 15]
+        const expectedResultsLookup = {dealer: 10, player: 15}
+
+        
+        const updatedResultsLookup = nextPlay('stand', undefined, undefined, resultsLookup, playersName, playersScores)
+
+        expect(updatedResultsLookup).toEqual(expectedResultsLookup)
     })
 })
