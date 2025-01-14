@@ -1,4 +1,5 @@
 const errorCheckArray = require("../../utils/errorChecks/errorCheckArray");
+const errorCheckHand = require("../../utils/errorChecks/errorCheckHand");
 const errorCheckScores = require("../../utils/errorChecks/errorCheckScores");
 const errorCheckObject = require("../../utils/errorChecks/errorCheckObject");
 const errorCheckPlayerName = require("../../utils/errorChecks/errorCheckPlayerName");
@@ -13,10 +14,10 @@ describe("errorCheckArray", () => {
     });
 
     test("Throws an error if missing an input", () => {        
-        function errorCheckMissingInput () {
+        function errorCheckNoInput () {
             errorCheckArray()
         }
-        expect(errorCheckMissingInput).toThrow("'input' must be provided");
+        expect(errorCheckNoInput).toThrow("'input' must be provided");
     });
 
     test("Throws an error if 'input' is not an array", () => {        
@@ -48,6 +49,62 @@ describe("errorCheckArray", () => {
             errorCheckArray([], 'scores')
         }
         expect(errorCheckEmptyArray).toThrow("'scores' should not be empty");
+    });
+})
+
+describe("errorCheckHand", () => {
+    describe("Error checks the input hand", () => {
+
+        test("Throws an error if missing an input", () => {        
+            function errorCheckNoInputHand () {
+                errorCheckHand()
+            }
+            expect(errorCheckNoInputHand).toThrow("'hand' must be provided");
+        });
+
+        test("Throws an error if 'hand' is not an array", () => {        
+            function errorCheckWrongHandType () {
+                errorCheckHand('shouldBeArray')
+            }
+            expect(errorCheckWrongHandType).toThrow("'hand' should be an array");
+        });
+
+        test("Throws an error if 'hand' is an empty array", () => {        
+            function errorCheckEmptyHand () {
+                errorCheckHand([])
+            }
+            expect(errorCheckEmptyHand).toThrow("'hand' should not be empty");
+        });        
+    })
+
+    describe("Error checks each card of hand", () => {
+        test("Throws an error if cards are empty", () => {
+            function errorCheckHandOfEmptyCards() {
+                errorCheckHand([{}]);
+            }
+            expect(errorCheckHandOfEmptyCards).toThrow("'hand' should contain valid card objects");
+        });
+
+        test("Throws an error if cards do not contain 'emblem'", () => {
+            function errorCheckNoEmblemCard() {
+                errorCheckHand([{ invalidEmblem: "clubs", name: "Two", values: [2] }]);
+            }
+            expect(errorCheckNoEmblemCard).toThrow("'hand' should contain valid card objects");
+        });
+
+        test("Throws an error if cards do not contain 'name'", () => {
+            function errorCheckNoNameCard() {
+                errorCheckHand([{ emblem: "clubs", invalidName: "Two", values: [2] }]);
+            }
+            expect(errorCheckNoNameCard).toThrow("'hand' should contain valid card objects");
+        });
+
+        test("Throws an error if cards do not contain 'values'", () => {
+            function errorCheckNoValues() {
+                errorCheckHand([{ emblem: "clubs", name: "Two", invalidValues: [2] }]);
+            }
+            expect(errorCheckNoValues).toThrow("'hand' should contain valid card objects");
+        });
     });
 })
 

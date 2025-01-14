@@ -86,51 +86,7 @@ describe("dealCard", () => {
 
 
 describe("getPossibleScoresFromHand", () => {
-    describe("Error checks the input hand", () => {
-        test("Throws an error if missing an input", () => {        
-            function getScoresFromNoInput () {
-                getPossibleScoresFromHand()
-            }
-            expect(getScoresFromNoInput).toThrow("'hand' must be provided");
-        });
-
-        test("Throws an error if 'hand' is not an array", () => {        
-            function getScoresFromWrongInputType () {
-                getPossibleScoresFromHand('shouldBeArray')
-            }
-            expect(getScoresFromWrongInputType).toThrow("'hand' should be an array");
-        });
-
-        test("Throws an error if 'hand' is an empty array", () => {        
-            function getScoresFromEmptyHand () {
-                getPossibleScoresFromHand([])
-            }
-            expect(getScoresFromEmptyHand).toThrow("'hand' should not be empty");
-        });        
-    })
-
-    describe("Error checks each card of hand", () => {
-        test("Throws an error if cards are empty", () => {
-            function getScoresFromEmptyCard() {
-                getPossibleScoresFromHand([{}]);
-            }
-            expect(getScoresFromEmptyCard).toThrow("'hand' should contain valid card objects");
-        });
-
-        test("Throws an error if cards do not contain 'emblem'", () => {
-            function getScoresFromCardWithoutEmblem() {
-                getPossibleScoresFromHand([{ invalidEmblem: "clubs", name: "Two", values: [2] }]);
-            }
-            expect(getScoresFromCardWithoutEmblem).toThrow("'hand' should contain valid card objects");
-        });
-
-        test("Throws an error if cards do not contain 'name'", () => {
-            function getScorsFromCardWithoutName() {
-                getPossibleScoresFromHand([{ emblem: "clubs", invalidName: "Two", values: [2] }]);
-            }
-            expect(getScorsFromCardWithoutName).toThrow("'hand' should contain valid card objects");
-        });
-
+    describe("Error checks using errorCheckHand", () => {
         test("Throws an error if cards do not contain 'values'", () => {
             function getScoresFromCardWithoutValues() {
                 getPossibleScoresFromHand([{ emblem: "clubs", name: "Two", invalidValues: [2] }]);
