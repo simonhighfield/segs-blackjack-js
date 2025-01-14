@@ -435,8 +435,7 @@ describe("\n updateResultsLookup", () => {
 
 
 describe("\n nextPlay", () => {
-    // mutation
-    //  errorCheckInput only
+
     describe("if input === 'hit'", () => {
         test("Deals a card and returns newDeck and newHand", () => {
             const deck = [

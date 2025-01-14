@@ -2,7 +2,7 @@ const errorCheckArray = require("../../utils/errorChecks/errorCheckArray");
 const errorCheckHand = require("../../utils/errorChecks/errorCheckHand");
 const errorCheckScores = require("../../utils/errorChecks/errorCheckScores");
 const errorCheckObject = require("../../utils/errorChecks/errorCheckObject");
-const errorCheckPlayerName = require("../../utils/errorChecks/errorCheckPlayerName");
+const errorCheckString = require("../../utils/errorChecks/errorCheckString");
 
 describe("errorCheckArray", () => {
     test("Does not mutate the input array", () => {        
@@ -170,35 +170,35 @@ describe("\n errorCheckObject", () => {
 })
 
 
-describe("\n errorCheckPlayerName", () => {
+describe("\n errorCheckString", () => {
     test("Does not reassign the value of the input string", () => {        
         const inputString = 'player'
         const inputCopy = 'player'
 
-        errorCheckPlayerName(inputString)
+        errorCheckString(inputString)
 
         expect(inputString).toEqual(inputCopy);
     });
 
     test("Throws an error if missing an input", () => {        
         function errorCheckNoInputName () {
-            errorCheckPlayerName()
+            errorCheckString()
         }
-        expect(errorCheckNoInputName).toThrow("'playerName' must be provided");
+        expect(errorCheckNoInputName).toThrow("'input' must be provided");
     });
 
-    test("Throws an error if 'playerName' is not an string", () => {        
+    test("Throws an error if 'input' is not an string", () => {        
         function errorCheckWrongTypeName () {
-            errorCheckPlayerName(1)
+            errorCheckString(1)
         }
-        expect(errorCheckWrongTypeName).toThrow("'playerName' should be a string");
+        expect(errorCheckWrongTypeName).toThrow("'input' should be a string");
     });
     
-    test("Throws an error if 'playerName' is an empty string", () => {        
+    test("Throws an error if 'input' is an empty string", () => {        
         function errorCheckEmptyName () {
-            errorCheckPlayerName('')
+            errorCheckString('')
         }
-        expect(errorCheckEmptyName).toThrow("'playerName' should have length > 0");
+        expect(errorCheckEmptyName).toThrow("'input' should have length > 0");
     });
 })
 
