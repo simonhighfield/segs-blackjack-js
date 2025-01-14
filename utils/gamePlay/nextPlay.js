@@ -1,14 +1,24 @@
+const errorCheckDecision = require("../errorChecks/errorCheckDecision")
+const errorCheckString = require("../errorChecks/errorCheckString")
 const dealCard = require("./dealCard")
 const updateResultsLookup = require("./updateResultsLookup")
 
-module.exports = nextPlay = (input, deck, hand, results, playerName, scores) => {
+module.exports = nextPlay = (decision, deck, hand, results, playerName, scores) => {
+    try {
+        // errorCheckString(decision, 'decision')
+        // errorCheckDecision(decision)
 
-    if (input === 'hit') {
-
-        return dealCard(deck, hand)
-    } 
-    else if  (input === 'stand') {
-        
-        return updateResultsLookup(results, playerName, scores)
+        if (decision === 'hit') {
+    
+            return dealCard(deck, hand)
+        } 
+        else if  (decision === 'stand') {
+            
+            return updateResultsLookup(results, playerName, scores)
+        }
+    }
+    catch (error) {
+        // console.error("error in nextPlay: ", error.message);
+        throw error
     }
 }
