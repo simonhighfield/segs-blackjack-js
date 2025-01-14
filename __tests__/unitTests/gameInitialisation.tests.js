@@ -3,7 +3,7 @@ const generateDeck = require("../../utils/gameInitialisation/generateDeck");
 const generateSuit = require("../../utils/gameInitialisation/generateSuit");
 const initialiseGame = require("../../utils/gameInitialisation/initialiseGame");
 
-describe("generateDeck() of cards", () => {
+describe("generateDeck", () => {
     describe("Deck is a valid array ", () => {
         test("A deck is an array, with a length > 0", () => {
             const deck = generateDeck();
@@ -92,7 +92,7 @@ describe("generateDeck() of cards", () => {
         })
     })
 
-    describe("generateSuit()", () => {
+    describe("\n generateSuit", () => {
         describe("Suit Properties", () => {
             let suit = []
             const emblem = 'hearts'
@@ -128,7 +128,7 @@ describe("generateDeck() of cards", () => {
         })
     })
 
-    describe("generateDeck", () => {
+    describe("\n generateDeck", () => {
         describe("Deck Properties", () => {
             let deck = []
             beforeAll(() => {
@@ -149,7 +149,7 @@ describe("generateDeck() of cards", () => {
 });
 
 
-describe("initialiseGame", () => {
+describe("\n initialiseGame", () => {
     test("For a 1 player game, the second card is dealt to the dealer and removed from the deck", () => {        
         const { dealerHand, deck} = initialiseGame();
         

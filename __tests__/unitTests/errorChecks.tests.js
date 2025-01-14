@@ -52,7 +52,7 @@ describe("errorCheckArray", () => {
     });
 })
 
-describe("errorCheckHand", () => {
+describe("\n errorCheckHand", () => {
     describe("Error checks the input hand", () => {
         test("Throws an error if missing an input", () => {        
             function errorCheckNoInputHand () {
@@ -107,7 +107,7 @@ describe("errorCheckHand", () => {
     });
 })
 
-describe("errorCheckScores", () => {
+describe("\n errorCheckScores", () => {
     test("Throws an error if missing an input", () => {        
         function errorCheckNoInputScore () {
             errorCheckScores()
@@ -137,7 +137,7 @@ describe("errorCheckScores", () => {
     });
 })
 
-describe("errorCheckObject", () => {
+describe("\n errorCheckObject", () => {
     test("Does not mutate the input array", () => {        
         const inputObject = {dealer: 10}
         const inputCopy = {dealer: 10}
@@ -170,7 +170,7 @@ describe("errorCheckObject", () => {
 })
 
 
-describe("errorCheckPlayerName", () => {
+describe("\n errorCheckPlayerName", () => {
     test("Does not reassign the value of the input string", () => {        
         const inputString = 'player'
         const inputCopy = 'player'
