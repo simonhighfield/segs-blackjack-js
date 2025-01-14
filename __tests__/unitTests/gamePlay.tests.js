@@ -85,7 +85,7 @@ describe("dealCard", () => {
 
 
 
-describe("getPossibleScoresFromHand", () => {    
+describe("\n getPossibleScoresFromHand", () => {    
     describe("Is a pure function", () => {
         test("Does not mutate the input hand", () => {
             const hand = [
@@ -225,7 +225,7 @@ describe("getPossibleScoresFromHand", () => {
 
 
 
-describe("getHandValidityFromScores", () => {
+describe("\n getHandValidityFromScores", () => {
     describe("Is a pure function", () => {
         test("Does not mutate the input scores", () => {
             const inputScores = [7, 17]
@@ -284,7 +284,7 @@ describe("getHandValidityFromScores", () => {
 
 
 
-describe("getBestScore", () => {
+describe("\n getBestScore", () => {
     describe("Is a pure function", () => {
         test("Does not mutate the input scores", () => {
             const inputScores = [7, 17]
@@ -296,7 +296,7 @@ describe("getBestScore", () => {
         });
     })
 
-    describe("Returns a valid number", () => {
+    describe("Returns the score as a valid number", () => {
         test("Returns best score as a number", () => {
             const scores = [7, 17]
 
@@ -349,12 +349,12 @@ describe("getBestScore", () => {
 
 
 
-describe("updateResultsLookup", () => {
+describe("\n updateResultsLookup", () => {
     const resultsLookup = {dealer: 10}
     const playerName = 'player'
     const scores = [3, 13]
 
-    describe("Error Checks", () => {        
+    describe("Invokes error check functions", () => {        
         test("Throws an error if 'results' is not an object", () => {        
             function errorCheckInvalidResults () {
                 updateResultsLookup('should be object', playerName)
@@ -371,11 +371,12 @@ describe("updateResultsLookup", () => {
         // errorCheckScores
     })
 
-    describe("Pure Function Checks", () => {
+    describe("Is a pure function", () => {
         test("Does not mutate the input results", () => {        
             const resultsCopy = {dealer: 10}
     
             updateResultsLookup(resultsLookup, playerName, scores)
+
             expect(resultsLookup).toEqual(resultsCopy);
         });
 
@@ -383,41 +384,46 @@ describe("updateResultsLookup", () => {
             const scoresCopy = [3, 13]
     
             updateResultsLookup(resultsLookup, playerName, scores)
+
             expect(scores).toEqual(scoresCopy);
         });
+        // returns a new object, not a reference
     })
 
-    describe("Output Checks", () => {
-        test("Returns an object", () => {
+    describe("Returns a valid object", () => {
+        test("Returns the lookup as an object", () => {
             const submittedScores = updateResultsLookup(resultsLookup, playerName, scores)
 
             expect(submittedScores).toBeObject()
         });
+        // Contains a key of player name
+    })
 
+    describe("Updates the results lookup with the player's name and score", () => {
         test("Returns an object containing a single input score", () => {
             const singleScore = [15]
+            const expectedOutput = {player: 15} 
 
             const actualOutput = updateResultsLookup(resultsLookup, playerName, singleScore)
-            const expectedOutput = {player: 15} 
 
             expect(actualOutput).toMatchObject(expectedOutput)
         });
 
         test("Returns an object containing the best score when more than one score available (ace card present)", () => {
+            const expectedOutput = {player: 13} 
 
             const actualOutput = updateResultsLookup(resultsLookup, playerName, scores)
-            const expectedOutput = {player: 13} 
 
             expect(actualOutput).toMatchObject(expectedOutput)
         });
 
         test("New scores are added to existing ones", () => {
-            const actualOutput = updateResultsLookup(resultsLookup, playerName, scores)
-            
             const expectedOutput = {
                 dealer: 10,
                 player: 13
             } 
+            
+            const actualOutput = updateResultsLookup(resultsLookup, playerName, scores)
 
             expect(actualOutput).toMatchObject(expectedOutput)
         });
@@ -426,7 +432,7 @@ describe("updateResultsLookup", () => {
 
 
 
-describe("nextPlay", () => {
+describe("\n nextPlay", () => {
     test("If input = 'hit', returns newDeck and newHand", () => {
         const deck = [
             { "emblem": "hearts", "name": "Ace", "values": [1, 11] },
@@ -436,8 +442,7 @@ describe("nextPlay", () => {
             { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
             { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
         ]
-        const {newDeck, newHand } = nextPlay('hit', deck, hand)
-
+        
         expectedNewDeck = [
             { "emblem": "spades", "name": "Ace", "values": [1, 11] }
         ]
@@ -446,7 +451,9 @@ describe("nextPlay", () => {
             { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
             { "emblem": "hearts", "name": "Ace", "values": [1, 11] },
         ]
-
+        
+        const {newDeck, newHand } = nextPlay('hit', deck, hand)
+        
         expect(newDeck).toEqual(expectedNewDeck)
         expect(newHand).toEqual(expectedNewHand)
     })
