@@ -379,15 +379,6 @@ describe("\n updateResultsLookup", () => {
 
             expect(resultsLookup).toEqual(resultsCopy);
         });
-
-        test("Does not mutate the input scores", () => {        
-            const scoresCopy = [3, 13]
-    
-            updateResultsLookup(resultsLookup, playerName, scores)
-
-            expect(scores).toEqual(scoresCopy);
-        });
-        // returns a new object, not a reference
     })
 
     describe("Returns a valid object", () => {
@@ -396,7 +387,13 @@ describe("\n updateResultsLookup", () => {
 
             expect(submittedScores).toBeObject()
         });
-        // Contains a key of player name
+        
+        test("Returns a new object rather than a reference to the input", () => {        
+            
+            const returnedLookup = updateResultsLookup(resultsLookup, playerName, scores)
+
+            expect(returnedLookup).not.toBe(resultsLookup)
+        });
     })
 
     describe("Updates the results lookup with the player's name and score", () => {
