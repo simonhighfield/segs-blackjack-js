@@ -285,21 +285,23 @@ describe("getHandValidityFromScores", () => {
 
 
 describe("getBestScore", () => {
-    describe("Funcitonal Checks", () => {
+    describe("Is a pure function", () => {
         test("Does not mutate the input scores", () => {
             const inputScores = [7, 17]
             const scoresCopy = [7, 17]
 
             getBestScore(inputScores)
+
             expect(inputScores).toEqual(scoresCopy)
         });
     })
 
-    describe("Output Checks", () => {
+    describe("Returns a valid number", () => {
         test("Returns best score as a number", () => {
             const scores = [7, 17]
 
             const bestScore = getBestScore(scores)
+
             expect(bestScore).toBeNumber()
             expect(bestScore).not.toBeNaN()
         });
@@ -308,15 +310,17 @@ describe("getBestScore", () => {
             const scores = [7, 17]
 
             const bestScore = getBestScore(scores)
+
             expect(bestScore).toBeGreaterThan(1)
         });
     })
 
-    describe("Gets the best score", () => {
+    describe("Gets the best score <= 21 ", () => {
         test("Returns the score from a single-value hand", () => {
             const scores = [7]
 
             const bestScore = getBestScore(scores)
+
             expect(bestScore).toBe(7)
         });
 
@@ -331,14 +335,15 @@ describe("getBestScore", () => {
             const scores1 = [21, 31]
 
             const bestScore1 = getBestScore(scores1)
+
             expect(bestScore1).toBe(21)
 
             const scores2 = [20, 30]
 
             const bestScore2 = getBestScore(scores2)
+
             expect(bestScore2).toBe(20)
         });
-
     })
 })
 
