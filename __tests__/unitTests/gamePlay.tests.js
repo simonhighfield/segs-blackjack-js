@@ -388,8 +388,13 @@ describe("\n updateResultsLookup", () => {
             expect(submittedScores).toBeObject()
         });
         
+        test("Returns an object that is not empty", () => {        
+            const returnedLookup = updateResultsLookup(resultsLookup, playerName, scores)
+
+            expect(returnedLookup).not.toBeEmptyObject()
+        });
+        
         test("Returns a new object rather than a reference to the input", () => {        
-            
             const returnedLookup = updateResultsLookup(resultsLookup, playerName, scores)
 
             expect(returnedLookup).not.toBe(resultsLookup)
