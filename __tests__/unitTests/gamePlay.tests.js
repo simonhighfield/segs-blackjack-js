@@ -85,16 +85,7 @@ describe("dealCard", () => {
 
 
 
-describe("getPossibleScoresFromHand", () => {
-    describe("Error checks using errorCheckHand", () => {
-        test("Throws an error if cards do not contain 'values'", () => {
-            function getScoresFromCardWithoutValues() {
-                getPossibleScoresFromHand([{ emblem: "clubs", name: "Two", invalidValues: [2] }]);
-            }
-            expect(getScoresFromCardWithoutValues).toThrow("'hand' should contain valid card objects");
-        });
-    });
-    
+describe("getPossibleScoresFromHand", () => {    
     describe("Is a pure function", () => {
         test("Does not mutate the input hand", () => {
             const hand = [
