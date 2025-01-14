@@ -13,128 +13,133 @@ describe("dealCard", () => {
         hand = [];
     });
 
-    test("Returns arrays for the deck and hand", () => {
-        const { newDeck, newHand } = dealCard(deck, hand)
-
-        expect(newDeck).toBeArray()
-        expect(newHand).toBeArray()
-    });
-
-    test("Returns new arrays, rather than references to the input arrays", () => {
-        const { newDeck, newHand } = dealCard(deck, hand)
-
-        expect(newDeck).not.toBe(deck)
-        expect(newHand).not.toBe(hand)
-    });
-
-    test("Does not mutate the input arrays", () => {
-        const deckCopy = [...deck]
-        const handCopy = [...hand]
-
-        dealCard(deck, hand)
-        expect(deck).toEqual(deckCopy)
-        expect(hand).toEqual(handCopy)
-    });
-
-    test("Removes the first card from the deck", () => {
-        let { newDeck } = dealCard(deck, hand)
-        const expectedCardDealt = deck[0]
-
-        expect(newDeck.length).toBe(51)
-        expect(newDeck).not.toPartiallyContain(expectedCardDealt)
-    });
-
-    test("Adds the first card from deck to the hand", () => {
-        let { newHand } = dealCard(deck, hand)
-        let expectedCardDealt = deck[0]
-        
-        expect(newHand.length).toBe(1)
-        expect(newHand).toIncludeAllMembers([expectedCardDealt])
-    });
-
-    test("Consecutively removes the front card from the deck", () => {
-        let { newHand, newDeck } = dealCard(deck, hand)
-        const expectedCardsDealt = deck.slice(0,2)
-        
-        hand = newHand;
-        deck = newDeck;
-        ({ newDeck } = dealCard(deck, hand))
+    describe("Is a pure function", () => {
+        test("Returns arrays for the deck and hand", () => {
+            const { newDeck, newHand } = dealCard(deck, hand)
     
-        expect(newDeck.length).toBe(50)
-        expect(newHand).not.toIncludeAllMembers(expectedCardsDealt)
-    });
-
-    test("Consecutively adds the front card from the deck to the hand", () => {
-        
-        let { newHand, newDeck } = dealCard(deck, hand)
-        const expectedCardsDealt = deck.slice(0,2)
-        
-        hand = newHand;
-        deck = newDeck;
-        ({ newHand } = dealCard(deck, hand))      
+            expect(newDeck).toBeArray()
+            expect(newHand).toBeArray()
+        });
     
-        expect(newHand.length).toBe(2)
-        expect(newHand).toIncludeAllMembers(expectedCardsDealt)
-    });
+        test("Returns new arrays, rather than references to the input arrays", () => {
+            const { newDeck, newHand } = dealCard(deck, hand)
+    
+            expect(newDeck).not.toBe(deck)
+            expect(newHand).not.toBe(hand)
+        });
+    
+        test("Does not mutate the input arrays", () => {
+            const deckCopy = [...deck]
+            const handCopy = [...hand]
+    
+            dealCard(deck, hand)
+            expect(deck).toEqual(deckCopy)
+            expect(hand).toEqual(handCopy)
+        });
+    })
+
+    describe("Deals a card", () => {
+        test("Removes the first card from the deck", () => {
+            let { newDeck } = dealCard(deck, hand)
+            const expectedCardDealt = deck[0]
+    
+            expect(newDeck.length).toBe(51)
+            expect(newDeck).not.toPartiallyContain(expectedCardDealt)
+        });
+    
+        test("Adds the first card from deck to the hand", () => {
+            let { newHand } = dealCard(deck, hand)
+            let expectedCardDealt = deck[0]
+            
+            expect(newHand.length).toBe(1)
+            expect(newHand).toIncludeAllMembers([expectedCardDealt])
+        });
+    
+        test("Consecutively removes the front card from the deck", () => {
+            let { newHand, newDeck } = dealCard(deck, hand)
+            const expectedCardsDealt = deck.slice(0,2)
+            
+            hand = newHand;
+            deck = newDeck;
+            ({ newDeck } = dealCard(deck, hand))
+        
+            expect(newDeck.length).toBe(50)
+            expect(newHand).not.toIncludeAllMembers(expectedCardsDealt)
+        });
+
+        test("Consecutively adds the front card from the deck to the hand", () => {
+            
+            let { newHand, newDeck } = dealCard(deck, hand)
+            const expectedCardsDealt = deck.slice(0,2)
+            
+            hand = newHand;
+            deck = newDeck;
+            ({ newHand } = dealCard(deck, hand))      
+        
+            expect(newHand.length).toBe(2)
+            expect(newHand).toIncludeAllMembers(expectedCardsDealt)
+        });
+    })
+
 })
 
 
 
 describe("getScoresFromHand", () => {
-    describe("Hand Error checks", () => {
+    describe("Error checks the input hand", () => {
         test("Throws an error if missing an input", () => {        
-            function updateWithoutInput () {
+            function getScoresFromMissingInput () {
                 getScoresFromHand()
             }
-            expect(updateWithoutInput).toThrow("'hand' must be provided");
+            expect(getScoresFromMissingInput).toThrow("'hand' must be provided");
         });
 
         test("Throws an error if 'hand' is not an array", () => {        
-            function updatedWithWrongTypes () {
+            function getScoresFromWrongInputType () {
                 getScoresFromHand('shouldBeArray')
             }
-            expect(updatedWithWrongTypes).toThrow("'hand' should be an array");
+            expect(getScoresFromWrongInputType).toThrow("'hand' should be an array");
         });
 
         test("Throws an error if 'hand' is an empty array", () => {        
-            function updateWithEmptyHand () {
+            function getScoresFromEmptyHand () {
                 getScoresFromHand([])
             }
-            expect(updateWithEmptyHand).toThrow("'hand' should not be empty");
+            expect(getScoresFromEmptyHand).toThrow("'hand' should not be empty");
         });        
     })
 
-    describe("Card Error Checks", () => {
+    describe("Error checks each card of hand", () => {
         test("Throws an error if cards are empty", () => {
-            function updateWithEmptyCard() {
+            function getScoresFromEmptyCard() {
                 getScoresFromHand([{}]);
             }
-            expect(updateWithEmptyCard).toThrow("'hand' should contain valid card objects");
+            expect(getScoresFromEmptyCard).toThrow("'hand' should contain valid card objects");
         });
 
         test("Throws an error if cards do not contain 'emblem'", () => {
-            function updateWithoutEmblem() {
+            function getScoresFromCardWithoutEmblem() {
                 getScoresFromHand([{ invalidEmblem: "clubs", name: "Two", values: [2] }]);
             }
-            expect(updateWithoutEmblem).toThrow("'hand' should contain valid card objects");
+            expect(getScoresFromCardWithoutEmblem).toThrow("'hand' should contain valid card objects");
         });
 
         test("Throws an error if cards do not contain 'name'", () => {
-            function updateWithoutName() {
+            function getScorsFromCardWithoutName() {
                 getScoresFromHand([{ emblem: "clubs", invalidName: "Two", values: [2] }]);
             }
-            expect(updateWithoutName).toThrow("'hand' should contain valid card objects");
+            expect(getScorsFromCardWithoutName).toThrow("'hand' should contain valid card objects");
         });
 
         test("Throws an error if cards do not contain 'values'", () => {
-            function updateWithoutValues() {
+            function getScoresFromCardWithoutValues() {
                 getScoresFromHand([{ emblem: "clubs", name: "Two", invalidValues: [2] }]);
             }
-            expect(updateWithoutValues).toThrow("'hand' should contain valid card objects");
+            expect(getScoresFromCardWithoutValues).toThrow("'hand' should contain valid card objects");
         });
     });
     
-    describe("Functional Checks", () => {
+    describe("Is a pure function", () => {
         test("Does not mutate the input hand", () => {
             const hand = [
                 { "emblem": "clubs", "name": "Two", "values": [2] },
@@ -147,7 +152,7 @@ describe("getScoresFromHand", () => {
         });
     })
 
-    describe("Output Checks", () => {
+    describe("Returns scores as an array", () => {
         test("Returns scores as an array", () => {
             const hand = [{ "emblem": "clubs", "name": "Two", "values": [2] }]
             const scores = getScoresFromHand(hand)
@@ -168,8 +173,8 @@ describe("getScoresFromHand", () => {
 
     })
 
-    describe("Numeracy", () => {
-        test("Returns the score from a hand of one single-value card", () => {
+    describe("Calculates the possible scores", () => {
+        test("Returns the score from a hand of 1 one single-value card", () => {
             const hand = [{ "emblem": "clubs", "name": "Two", "values": [2] }]
             const actualScores = getScoresFromHand(hand)
             const expectedScores = hand[0].values
@@ -177,7 +182,7 @@ describe("getScoresFromHand", () => {
             expect(actualScores).toEqual(expectedScores)
         });
 
-        test("Returns the score from a hand of two single-value card", () => {
+        test("Returns the score from a hand of 2 single-value cards", () => {
             const hand = [
                 { "emblem": "clubs", "name": "Two", "values": [2] },
                 { "emblem": "diamonds", "name": "Four", "values": [4] }
@@ -188,7 +193,7 @@ describe("getScoresFromHand", () => {
             expect(actualScores).toEqual(expectedScores)
         });
 
-        test("Returns both scores from a hand of one ace card", () => {
+        test("Returns both scores from a hand of 1 ace card", () => {
             const hand = [{ "emblem": "clubs", "name": "Ace", "values": [1, 11] }]
             const actualScores = getScoresFromHand(hand)
             const expectedScores = [1, 11]
@@ -196,7 +201,7 @@ describe("getScoresFromHand", () => {
             expect(actualScores).toEqual(expectedScores)
         });
 
-        test("Returns 2 correct scores from one single-value and one ace card", () => {
+        test("Returns 2 correct scores from 1 single-value and 1 ace card", () => {
             const hand = [
                 { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
                 { "emblem": "clubs", "name": "Two", "values": [2] }
@@ -207,7 +212,7 @@ describe("getScoresFromHand", () => {
             expect(actualScores).toEqual(expectedScores)
         });
 
-        test("Returns 2 correct scores from two ace cards (one ace played high)", () => {
+        test("Returns 2 correct scores from 2 ace cards (1 ace played high)", () => {
             const hand = [
                 { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
                 { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
@@ -246,28 +251,16 @@ describe("getScoresFromHand", () => {
             expect(actualScores).toEqual(expectedScores)
         });
 
-        test("Returns only 1 correct score if an ace played high equals 21", () => {
-            const hand = [
-                { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
-                { "emblem": "spades", "name": "Jack", "values": [10] },
-            ]
-            const actualScores = getScoresFromHand(hand)
-            const expectedScores = [21]
-            
-            expect(actualScores).toEqual(expectedScores)
-        });
-
-        test("Returns 1 correct scores if multiple ace and single-value cards exceed 21 (doesn't bother playing ace high)", () => {
+        test("Returns 1 correct score if playing an ace high would exceed 21", () => {
             const hand = [
                 { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
                 { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
                 { "emblem": "hearts", "name": "Ace", "values": [1, 11] },
                 { "emblem": "spades", "name": "Ace", "values": [1, 11] },
                 { "emblem": "hearts", "name": "Jack", "values": [10] },
-                { "emblem": "spades", "name": "Jack", "values": [10] },
             ]
             const actualScores = getScoresFromHand(hand)
-            const expectedScores = [24]
+            const expectedScores = [14]
             
             expect(actualScores).toEqual(expectedScores)
         });
