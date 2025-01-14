@@ -438,7 +438,7 @@ describe("\n nextPlay", () => {
     // mutation
     //  errorCheckInput only
     describe("if input === 'hit'", () => {
-        test("a card is dealt and function returns newDeck and newHand", () => {
+        test("Deals a card and returns newDeck and newHand", () => {
             const deck = [
                 { "emblem": "hearts", "name": "Ace", "values": [1, 11] },
                 { "emblem": "spades", "name": "Ace", "values": [1, 11] },
@@ -462,6 +462,31 @@ describe("\n nextPlay", () => {
             expect(newDeck).toEqual(expectedNewDeck)
             expect(newHand).toEqual(expectedNewHand)
         })
+
+        test("Does not mutate the input arrays", () => {
+            const deck = [
+                { "emblem": "hearts", "name": "Ace", "values": [1, 11] },
+                { "emblem": "spades", "name": "Ace", "values": [1, 11] },
+            ]
+            const hand = [
+                { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
+                { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
+            ]
+            const deckCopy = [
+                { "emblem": "hearts", "name": "Ace", "values": [1, 11] },
+                { "emblem": "spades", "name": "Ace", "values": [1, 11] },
+            ]
+            const handCopy = [
+                { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
+                { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
+            ]
+
+            nextPlay('hit', deck, hand)
+
+            expect(deck).toEqual(deckCopy)
+            expect(hand).toEqual(handCopy)
+        })
+
     })
 
     describe("if input === 'stand'", () => {
