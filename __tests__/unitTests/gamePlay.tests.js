@@ -351,22 +351,22 @@ describe("\n getBestScore", () => {
 
 describe("\n updateResultsLookup", () => {
     const resultsLookup = {dealer: 10}
-    const playerName = 'player'
+    const playersName = 'player'
     const scores = [3, 13]
 
     describe("Invokes error check functions", () => {        
         test("Throws an error if 'resultsLookup' is not an object", () => {        
             function errorCheckInvalidResults () {
-                updateResultsLookup('should be object', playerName)
+                updateResultsLookup('should be object', playersName)
             }
             expect(errorCheckInvalidResults).toThrow("'resultsLookup' should be an object");
         });
 
-        test("Throws an error if 'playerName' is an empty string", () => {        
-            function errorCheckEmptyPlayerName () {
+        test("Throws an error if 'playersName' is an empty string", () => {        
+            function errorCheckEmptyplayersName () {
                 updateResultsLookup(resultsLookup, '')
             }
-            expect(errorCheckEmptyPlayerName).toThrow("'playerName' should have length > 0");
+            expect(errorCheckEmptyplayersName).toThrow("'playersName' should have length > 0");
         });
         // errorCheckScores
     })
@@ -375,7 +375,7 @@ describe("\n updateResultsLookup", () => {
         test("Does not mutate the input results", () => {        
             const resultsCopy = {dealer: 10}
     
-            updateResultsLookup(resultsLookup, playerName, scores)
+            updateResultsLookup(resultsLookup, playersName, scores)
 
             expect(resultsLookup).toEqual(resultsCopy);
         });
@@ -383,19 +383,19 @@ describe("\n updateResultsLookup", () => {
 
     describe("Returns a valid object", () => {
         test("Returns an object", () => {
-            const submittedScores = updateResultsLookup(resultsLookup, playerName, scores)
+            const submittedScores = updateResultsLookup(resultsLookup, playersName, scores)
 
             expect(submittedScores).toBeObject()
         });
         
         test("Returns an object that is not empty", () => {        
-            const returnedLookup = updateResultsLookup(resultsLookup, playerName, scores)
+            const returnedLookup = updateResultsLookup(resultsLookup, playersName, scores)
 
             expect(returnedLookup).not.toBeEmptyObject()
         });
         
         test("Returns a new object rather than a reference to the input", () => {        
-            const returnedLookup = updateResultsLookup(resultsLookup, playerName, scores)
+            const returnedLookup = updateResultsLookup(resultsLookup, playersName, scores)
 
             expect(returnedLookup).not.toBe(resultsLookup)
         });
@@ -406,7 +406,7 @@ describe("\n updateResultsLookup", () => {
             const singleScore = [15]
             const expectedOutput = {player: 15} 
 
-            const actualOutput = updateResultsLookup(resultsLookup, playerName, singleScore)
+            const actualOutput = updateResultsLookup(resultsLookup, playersName, singleScore)
 
             expect(actualOutput).toMatchObject(expectedOutput)
         });
@@ -414,7 +414,7 @@ describe("\n updateResultsLookup", () => {
         test("Returns include the player's name and their best possible score as a key-value pair, when input with 2 possible scores (ace cards present)", () => {
             const expectedOutput = {player: 13} 
 
-            const actualOutput = updateResultsLookup(resultsLookup, playerName, scores)
+            const actualOutput = updateResultsLookup(resultsLookup, playersName, scores)
 
             expect(actualOutput).toMatchObject(expectedOutput)
         });
@@ -425,7 +425,7 @@ describe("\n updateResultsLookup", () => {
                 player: 13
             } 
             
-            const actualOutput = updateResultsLookup(resultsLookup, playerName, scores)
+            const actualOutput = updateResultsLookup(resultsLookup, playersName, scores)
 
             expect(actualOutput).toMatchObject(expectedOutput)
         });
