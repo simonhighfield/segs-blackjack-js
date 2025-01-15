@@ -128,13 +128,6 @@ describe("\n errorCheckScores", () => {
         }
         expect(errorCheckInvalidScores).toThrow("'scores' should be at least 2");
     });
-
-    test("Throws an error if all scores are > 21", () => {
-        function errorCheckInvalidScores() {
-            errorCheckScores([22, 32])
-        }
-        expect(errorCheckInvalidScores).toThrow("'scores' should contain at least one score < 21");
-    });
 })
 
 describe("\n errorCheckObject", () => {

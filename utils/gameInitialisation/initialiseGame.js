@@ -7,7 +7,7 @@ module.exports = initialiseGame = () => {
 
     let deck = generateDeck()
 
-    const {playersHand, dealersHand, newDeck}  = dealCards(deck)
+    const {playersHand, dealersHand, newDeck}  = dealTwoCardsEach(deck)
     deck = [...newDeck]
 
     const dealersPossibleScores = getPossibleScoresFromHand(dealersHand)
@@ -20,7 +20,7 @@ module.exports = initialiseGame = () => {
 
 
     
-    function dealCards(deck) {
+    function dealTwoCardsEach(deck) {
         let playersHand = []
         let dealersHand = []
 

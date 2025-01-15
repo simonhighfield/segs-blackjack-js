@@ -1,10 +1,8 @@
-const errorCheckArray = require("../errorChecks/errorCheckArray")
+const errorCheckScores = require("../errorChecks/errorCheckScores");
 
-module.exports = getHandValidityFromScores = (inputScores) => {
+module.exports = getHandValidityFromScores = (scores) => {
 
-    errorCheckScores(inputScores);
-
-    const scores = [...inputScores]
+    errorCheckScores(scores);
 
     let anyValidScores = false
 
@@ -15,18 +13,4 @@ module.exports = getHandValidityFromScores = (inputScores) => {
     })
 
     return anyValidScores
-}
-
-
-function errorCheckScores(inputScores) {
-    errorCheckArray(inputScores, 'scores');
-
-    inputScores.forEach(score => {
-        if (typeof score !== 'number') {
-            throw new TypeError("'scores' should be numbers");
-        }
-        else if (score < 2) {
-            throw new TypeError("'scores' should be at least 2");
-        }
-    });
 }
