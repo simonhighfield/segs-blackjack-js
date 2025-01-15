@@ -1,7 +1,7 @@
-const errorCheckHand = require("../errorChecks/errorCheckHand");
+const errorCheckCardArray = require("../errorChecks/errorCheckCardArray");
 
 module.exports = getPossibleScoresFromHand = (hand) => {
-    errorCheckHand(hand);
+    errorCheckCardArray(hand, 'hand');
             
     const aceCards = hand.filter((card) => card.name === "Ace")
     

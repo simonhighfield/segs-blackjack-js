@@ -1,9 +1,9 @@
 const errorCheckArray = require("../errorChecks/errorCheckArray")
-const errorCheckHand = require("../errorChecks/errorCheckHand")
+const errorCheckCardArray = require("../errorChecks/errorCheckCardArray")
 
 module.exports = dealCard = (deck, hand) => {
-    errorCheckHand(hand)
-    errorCheckArray(deck)
+    errorCheckCardArray(deck, 'deck')
+    errorCheckCardArray(hand, 'hand')
 
     const newDeck = [...deck]
     const newHand = [...hand]
