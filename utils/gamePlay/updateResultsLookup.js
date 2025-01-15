@@ -9,8 +9,11 @@ module.exports = updateResultsLookup = (resultsLookup, playerName, scores) => {
     errorCheckString(playerName, 'playerName')
     errorCheckScores(scores, 'scores')
 
-    const output = {...resultsLookup}
-    output[playerName] = getBestScore(scores)
+    const updatedResults = {...resultsLookup}
 
-    return output
+    const playersBestScore = getBestScore(scores)
+
+    updatedResults[playerName] = playersBestScore
+
+    return updatedResults
 }

@@ -247,7 +247,7 @@ describe("\n getHandValidityFromScores", () => {
         });
     })
 
-    describe("Gets the hand validity by checking all scores <= 21", () => {
+    describe("Gets the hand validity by checking if any of the possible scores are <= 21", () => {
         test("Returns true for 1 score < 21", () => {
             const validScores = [7]
 
@@ -355,7 +355,7 @@ describe("\n updateResultsLookup", () => {
     const scores = [3, 13]
 
     describe("Invokes error check functions", () => {        
-        test("Throws an error if 'results' is not an object", () => {        
+        test("Throws an error if 'resultsLookup' is not an object", () => {        
             function errorCheckInvalidResults () {
                 updateResultsLookup('should be object', playerName)
             }
@@ -382,7 +382,7 @@ describe("\n updateResultsLookup", () => {
     })
 
     describe("Returns a valid object", () => {
-        test("Returns the lookup as an object", () => {
+        test("Returns an object", () => {
             const submittedScores = updateResultsLookup(resultsLookup, playerName, scores)
 
             expect(submittedScores).toBeObject()
@@ -402,7 +402,7 @@ describe("\n updateResultsLookup", () => {
     })
 
     describe("Updates the results lookup with the player's name and score", () => {
-        test("Returns an object containing a single input score", () => {
+        test("Returns include the player's name and score as a key-value pair, when input 1 possible score (no ace cards present)", () => {
             const singleScore = [15]
             const expectedOutput = {player: 15} 
 
@@ -411,7 +411,7 @@ describe("\n updateResultsLookup", () => {
             expect(actualOutput).toMatchObject(expectedOutput)
         });
 
-        test("Returns an object containing the best score when more than one score available (ace card present)", () => {
+        test("Returns include the player's name and their best possible score as a key-value pair, when input with 2 possible scores (ace cards present)", () => {
             const expectedOutput = {player: 13} 
 
             const actualOutput = updateResultsLookup(resultsLookup, playerName, scores)
@@ -419,7 +419,7 @@ describe("\n updateResultsLookup", () => {
             expect(actualOutput).toMatchObject(expectedOutput)
         });
 
-        test("New scores are added to existing ones", () => {
+        test("Retains scores that were already in the lookup ", () => {
             const expectedOutput = {
                 dealer: 10,
                 player: 13
