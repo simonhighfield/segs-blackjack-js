@@ -1,12 +1,9 @@
 const errorCheckScores = require("../errorChecks/errorCheckScores");
 
-module.exports = getBestScore = (inputPossibleScores) => {
+module.exports = getBestScore = (possibleScores) => {
+    errorCheckScores(possibleScores);
 
-    errorCheckScores(inputPossibleScores);
-
-    // const possibleScores = [...inputPossibleScores]
-
-    const validScores = inputPossibleScores.filter((score) => score <= 21)
+    const validScores = possibleScores.filter((score) => score <= 21)
 
     const bestScore = Math.max(...validScores)
     
