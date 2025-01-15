@@ -3,6 +3,7 @@ const errorCheckHand = require("../../utils/errorChecks/errorCheckHand");
 const errorCheckScores = require("../../utils/errorChecks/errorCheckScores");
 const errorCheckObject = require("../../utils/errorChecks/errorCheckObject");
 const errorCheckString = require("../../utils/errorChecks/errorCheckString");
+const errorCheckDecision = require("../../utils/errorChecks/errorCheckDecision");
 
 describe("errorCheckArray", () => {
     test("Does not mutate the input array", () => {        
@@ -192,6 +193,37 @@ describe("\n errorCheckString", () => {
             errorCheckString('')
         }
         expect(errorCheckEmptyName).toThrow("'input' should have length > 0");
+    });
+})
+
+
+describe("\n errorCheckDecision", () => {
+    test("Does not reassign the value of the input string", () => {        
+        const inputString = 'hit'
+        const inputCopy = 'hit'
+
+        errorCheckDecision(inputString)
+
+        expect(inputString).toEqual(inputCopy);
+    });
+    
+    test("Throws an error if 'decision' is neither 'hit' nor 'stand'", () => {        
+        function errorCheckInvalidDecision () {
+            errorCheckDecision('something')
+        }
+        expect(errorCheckInvalidDecision).toThrow("'decision' should be either 'hit' or 'stand'");
+    });
+
+    test("Throws no error if 'decision' is 'hit' nor 'stand'", () => {        
+        function errorCheckHitDecision () {
+            errorCheckDecision('hit')
+        }
+        expect(errorCheckHitDecision).not.toThrow();
+
+        function errorCheckStandDecision () {
+            errorCheckDecision('stand')
+        }
+        expect(errorCheckStandDecision).not.toThrow();
     });
 })
 

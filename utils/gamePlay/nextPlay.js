@@ -1,12 +1,10 @@
 const errorCheckDecision = require("../errorChecks/errorCheckDecision")
-const errorCheckString = require("../errorChecks/errorCheckString")
 const dealCard = require("./dealCard")
 const updateResultsLookup = require("./updateResultsLookup")
 
 module.exports = nextPlay = (decision, deck, hand, results, playersName, scores) => {
     try {
-        // errorCheckString(decision, 'decision')
-        // errorCheckDecision(decision)
+        errorCheckDecision(decision)
 
         if (decision === 'hit') {
     
