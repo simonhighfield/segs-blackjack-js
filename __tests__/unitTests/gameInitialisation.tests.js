@@ -151,29 +151,29 @@ describe("generateDeck", () => {
 
 describe("\n initialiseGame", () => {
     test("For a 1 player game, the second card is dealt to the dealer and removed from the deck", () => {        
-        const { dealerHand, deck} = initialiseGame();
+        const { dealersHand, deck} = initialiseGame();
         
         const expectedSecondCardDealt = { "emblem": "clubs", "name": "Two", "values": [2] }
 
-        expect(dealerHand).toContainEqual(expectedSecondCardDealt)
+        expect(dealersHand).toContainEqual(expectedSecondCardDealt)
         expect(deck).not.toContainEqual(expectedSecondCardDealt)
     });
 
     test("For a 1 player game, the third card is dealt to the player and removed from deck", () => {        
-        const { playerHand, deck} = initialiseGame();
+        const { playersHand, deck} = initialiseGame();
         
         const expectedThirdCardDealt = { "emblem": "clubs", "name": "Three", "values": [3] }
 
-        expect(playerHand).toContainEqual(expectedThirdCardDealt)
+        expect(playersHand).toContainEqual(expectedThirdCardDealt)
         expect(deck).not.toContainEqual(expectedThirdCardDealt)
     });
 
     test("For a 1 player game, the fourth card is dealt to the dealer and removed from deck", () => {        
-        const { dealerHand, deck} = initialiseGame();
+        const { dealersHand, deck} = initialiseGame();
         
         const expectedFourthCardDealt = { "emblem": "clubs", "name": "Four", "values": [4] }
 
-        expect(dealerHand).toContainEqual(expectedFourthCardDealt)
+        expect(dealersHand).toContainEqual(expectedFourthCardDealt)
         expect(deck).not.toContainEqual(expectedFourthCardDealt)
     });
 

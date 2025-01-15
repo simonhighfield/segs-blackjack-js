@@ -7,35 +7,35 @@ module.exports = initialiseGame = () => {
 
     let deck = generateDeck()
 
-    const {playerHand, dealerHand, newDeck}  = dealCards(deck)
+    const {playersHand, dealersHand, newDeck}  = dealCards(deck)
     deck = [...newDeck]
 
-    const dealerPossibleScores = getPossibleScoresFromHand(dealerHand)
+    const dealersPossibleScores = getPossibleScoresFromHand(dealersHand)
 
-    const dealerBestScore = getBestScore(dealerPossibleScores)
+    const dealersBestScore = getBestScore(dealersPossibleScores)
 
-    const resultsLookup = {'dealer': dealerBestScore}
+    const resultsLookup = {'dealer': dealersBestScore}
 
-    return {dealerHand, playerHand, deck, resultsLookup}
+    return {dealersHand, playersHand, deck, resultsLookup}
 
 
     
     function dealCards(deck) {
-        let playerHand = []
-        let dealerHand = []
+        let playersHand = []
+        let dealersHand = []
 
-        let { newDeck, newHand } = dealCard(deck, playerHand); 
-        playerHand = [...newHand];
+        let { newDeck, newHand } = dealCard(deck, playersHand); 
+        playersHand = [...newHand];
     
-        ( { newDeck, newHand } = dealCard(newDeck, dealerHand));
-        dealerHand = [...newHand];
+        ( { newDeck, newHand } = dealCard(newDeck, dealersHand));
+        dealersHand = [...newHand];
     
-        ( { newDeck, newHand } = dealCard(newDeck, playerHand));
-        playerHand = [...newHand];
+        ( { newDeck, newHand } = dealCard(newDeck, playersHand));
+        playersHand = [...newHand];
     
-        ( { newDeck, newHand } = dealCard(newDeck, dealerHand));
-        dealerHand = [...newHand];
+        ( { newDeck, newHand } = dealCard(newDeck, dealersHand));
+        dealersHand = [...newHand];
 
-        return {playerHand, dealerHand, newDeck}
+        return {playersHand, dealersHand, newDeck}
     }
 }
