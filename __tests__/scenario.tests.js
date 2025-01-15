@@ -40,9 +40,9 @@ describe("Scenario Tests for BBC SEGS application", () => {
             { "emblem": "clubs", "name": "Queen", "values": [10] },
             { "emblem": "clubs", "name": "King", "values": [10] }
         ]
-        const initialPlayerScores = getPossibleScoresFromHand(initialPlayerHand) 
+        const playersInitialScores = getPossibleScoresFromHand(initialPlayerHand) 
 
-        const { newDeck, newHand } = nextPlay('hit', initialDeck, initialPlayerHand, resultsLookup, 'player', initialPlayerScores)
+        const { newDeck, newHand } = nextPlay('hit', initialDeck, initialPlayerHand, resultsLookup, 'player', playersInitialScores)
         
         test("The next card from deck is added to hand ", () => {
             const expectedNewDeck = [
@@ -58,12 +58,12 @@ describe("Scenario Tests for BBC SEGS application", () => {
             expect(newHand).toEqual(expectedNewHand)
         })
         test("The player's score is updated", () => {
-            const newPlayerScores = getPossibleScoresFromHand(newHand) 
+            const playersNewScores = getPossibleScoresFromHand(newHand) 
             
             const expectedNewScores = [21]
             
-            expect(newPlayerScores).not.toEqual(initialPlayerScores)
-            expect(newPlayerScores).toEqual(expectedNewScores)
+            expect(playersNewScores).not.toEqual(playersInitialScores)
+            expect(playersNewScores).toEqual(expectedNewScores)
         })
     });
 
@@ -80,7 +80,7 @@ describe("Scenario Tests for BBC SEGS application", () => {
             { "emblem": "clubs", "name": "Queen", "values": [10] },
             { "emblem": "clubs", "name": "King", "values": [10] }
         ]
-        const initialPlayerScores = getPossibleScoresFromHand(initialPlayerHand) 
+        const playersInitialScores = getPossibleScoresFromHand(initialPlayerHand) 
 
         test("No Cards are moved from the deck to the hand", () => {          
             const expectedDeck = [
@@ -91,14 +91,14 @@ describe("Scenario Tests for BBC SEGS application", () => {
                 { "emblem": "clubs", "name": "Queen", "values": [10] },
                 { "emblem": "clubs", "name": "King", "values": [10] }
             ]
-            const expectedPlayerScores = [20]
+            const expectedplayersScores = [20]
             
             expect(initialDeck).toEqual(expectedDeck)
             expect(initialPlayerHand).toEqual(expectedPlayerHand)
-            expect(initialPlayerScores).toEqual(expectedPlayerScores)
+            expect(playersInitialScores).toEqual(expectedplayersScores)
         })
 
-        nextPlay('stand', initialDeck, initialPlayerHand, initialResultsLookup, 'player', initialPlayerScores)
+        nextPlay('stand', initialDeck, initialPlayerHand, initialResultsLookup, 'player', playersInitialScores)
 
         test("resultsLookup object is updated", () => {
             const expectedResultsLookup = {
@@ -106,7 +106,7 @@ describe("Scenario Tests for BBC SEGS application", () => {
                 player: 20
             }
 
-            const updatedResultsLookup = nextPlay('stand', initialDeck, initialPlayerHand, initialResultsLookup, 'player', initialPlayerScores)
+            const updatedResultsLookup = nextPlay('stand', initialDeck, initialPlayerHand, initialResultsLookup, 'player', playersInitialScores)
 
 
             expect(updatedResultsLookup).not.toEqual(initialResultsLookup)
