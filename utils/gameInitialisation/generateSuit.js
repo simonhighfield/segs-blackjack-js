@@ -1,5 +1,5 @@
 const { cardNames } = require("../../data/cardData")
-const getCardValue = require("../gamePlay/getCardValue")
+const getCardValue = require("./getCardValue")
 
 module.exports = generateSuit = (emblem) => {
     const suit = []
