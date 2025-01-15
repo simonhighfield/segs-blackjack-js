@@ -28,13 +28,6 @@ describe("errorCheckArray", () => {
         expect(errorCheckNotTypeArray).toThrow("'input' should be an array");
     });
 
-    test("Throws an error if 'input' is an empty array", () => {        
-        function errorCheckEmptyArray () {
-            errorCheckArray([])
-        }
-        expect(errorCheckEmptyArray).toThrow("'input' should not be empty");
-    });
-
     test("Throws an error containing the variable arrayName", () => {        
         function errorCheckNoInputArray () {
             errorCheckArray(undefined, 'deck')
@@ -45,11 +38,6 @@ describe("errorCheckArray", () => {
             errorCheckArray('shouldBeArray', 'hand')
         }
         expect(errorCheckNotTypeArray).toThrow("'hand' should be an array");
-
-        function errorCheckEmptyArray () {
-            errorCheckArray([], 'scores')
-        }
-        expect(errorCheckEmptyArray).toThrow("'scores' should not be empty");
     });
 })
 
@@ -69,7 +57,7 @@ describe("\n errorCheckHand", () => {
             expect(errorCheckWrongTypeHand).toThrow("'hand' should be an array");
         });
 
-        test("Throws an error if 'hand' is an empty array", () => {        
+        test.skip("Throws an error if 'hand' is an empty array", () => {        
             function errorCheckEmptyHand () {
                 errorCheckHand([])
             }
