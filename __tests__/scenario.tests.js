@@ -82,9 +82,7 @@ describe("Scenario Tests for BBC SEGS application", () => {
         ]
         const initialPlayerScores = getPossibleScoresFromHand(initialPlayerHand) 
 
-        test("No Cards are moved from the deck to the hand", () => {
-            nextPlay('stand', initialDeck, initialPlayerHand, initialResultsLookup, 'player', initialPlayerScores)
-
+        test("No Cards are moved from the deck to the hand", () => {          
             const expectedDeck = [
                 { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
                 { "emblem": "diamonds", "name": "Two", "values": [2] },
@@ -94,19 +92,22 @@ describe("Scenario Tests for BBC SEGS application", () => {
                 { "emblem": "clubs", "name": "King", "values": [10] }
             ]
             const expectedPlayerScores = [20]
-
+            
             expect(initialDeck).toEqual(expectedDeck)
             expect(initialPlayerHand).toEqual(expectedPlayerHand)
             expect(initialPlayerScores).toEqual(expectedPlayerScores)
         })
 
-        test("resultsLookup object is updated", () => {
-            const updatedResultsLookup = nextPlay('stand', initialDeck, initialPlayerHand, initialResultsLookup, 'player', initialPlayerScores)
+        nextPlay('stand', initialDeck, initialPlayerHand, initialResultsLookup, 'player', initialPlayerScores)
 
+        test("resultsLookup object is updated", () => {
             const expectedResultsLookup = {
                 dealer: 10,
                 player: 20
             }
+
+            const updatedResultsLookup = nextPlay('stand', initialDeck, initialPlayerHand, initialResultsLookup, 'player', initialPlayerScores)
+
 
             expect(updatedResultsLookup).not.toEqual(initialResultsLookup)
             expect(updatedResultsLookup).toEqual(expectedResultsLookup)
@@ -117,24 +118,28 @@ describe("Scenario Tests for BBC SEGS application", () => {
     describe("When score is 21 or less, the hand is valid", () => {
         test("if one possible score is < 21, isHandValid evaluates to true", () => {
             const scores = [10]
+            
             const isHandValid = getHandValidityFromScores(scores)
 
             expect(isHandValid).toBeTrue();
         });
         test("if two possible scores are < 21, isHandValid evaluates to true", () => {
             const scores = [10, 20]
+            
             const isHandValid = getHandValidityFromScores(scores)
 
             expect(isHandValid).toBeTrue();
         });
         test("if one of two possible scores is === 21, isHandValid evaluates to true", () => {
             const scores = [11, 21]
+            
             const isHandValid = getHandValidityFromScores(scores)
 
             expect(isHandValid).toBeTrue();
         });
         test("if one of two possible scores is =< 21, and the other is > 21, isHandValid evaluates to true", () => {
             const scores = [21, 31]
+            
             const isHandValid = getHandValidityFromScores(scores)
 
             expect(isHandValid).toBeTrue();
@@ -145,18 +150,21 @@ describe("Scenario Tests for BBC SEGS application", () => {
     describe("When score is 22 or more, the hand is invalid", () => {
         test("if one possible score is === 22, isHandValid evaluates to false", () => {
             const scores = [22]
+            
             const isHandValid = getHandValidityFromScores(scores)
 
             expect(isHandValid).toBeFalse();
         });
         test("if one possible score is > 22, isHandValid evaluates to false", () => {
             const scores = [23]
+            
             const isHandValid = getHandValidityFromScores(scores)
 
             expect(isHandValid).toBeFalse();
         });
         test("if two possible scores are > 22, isHandValid evaluates to false", () => {
             const scores = [23, 33]
+            
             const isHandValid = getHandValidityFromScores(scores)
 
             expect(isHandValid).toBeFalse();
@@ -171,10 +179,10 @@ describe("Scenario Tests for BBC SEGS application", () => {
                 { "emblem": "clubs", "name": "King", "values": [10] },
                 { "emblem": "diamonds", "name": "Ace", "values": [1, 11] }
             ]
+            const expectedBestScore = 21
+            
             const scores = getPossibleScoresFromHand(hand)
             const bestScore = getBestScore(scores)
-    
-            const expectedBestScore = 21
     
             expect(bestScore).toBe(expectedBestScore)
    
@@ -189,13 +197,12 @@ describe("Scenario Tests for BBC SEGS application", () => {
                 { "emblem": "clubs", "name": "Queen", "values": [10] },
                 { "emblem": "diamonds", "name": "Ace", "values": [1, 11] }
             ]
+            const expectedBestScore = 21
+            
             const scores = getPossibleScoresFromHand(hand)
             const bestScore = getBestScore(scores)
-            
-            const expectedBestScore = 21
     
             expect(bestScore).toBe(expectedBestScore)
-   
         });
     });
 
@@ -207,13 +214,12 @@ describe("Scenario Tests for BBC SEGS application", () => {
                 { "emblem": "diamonds", "name": "Ace", "values": [1, 11] },
                 { "emblem": "hearts", "name": "Ace", "values": [1, 11] }
             ]
+            const expectedBestScore = 21
+            
             const scores = getPossibleScoresFromHand(hand)
             const bestScore = getBestScore(scores)
             
-            const expectedBestScore = 21
-    
             expect(bestScore).toBe(expectedBestScore)
-   
         });
     });
 });

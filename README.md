@@ -1,16 +1,12 @@
 # Blackjack!
 
-This repository provides the functions to play a game of Blackjack, and is my submission for the BBC Software Engineering Graduate Scheme.
+This repository provides the functions to play a game of Blackjack.
 
- 
+Currently, functions are provided for a single player to begin a game: generating a deck of cards, dealing thee player and a dealer an initial hand, and storing those results. 
 
-The project current provides functions for a single player to begin a game: generating a deck of cards, dealing them and a dealer an initial hand, and storing those results. Also provided are game play functions that receive a player's input - whether they want to 'hit' and receive another card, or 'stand' and submit their score.
+Also provided are game play functions that receive a player's input - whether they want to 'hit' and receive another card, or 'stand' and submit their score.
 
- 
-
-Future work will provide functions to evaluate the winner, and to shuffle the deck of cards.
-
- 
+Future work will provide functions toto shuffle the deck of cards, to evaluate the winner, and a user interface.
 
 This code has been developed with the intention of it being applied in a react project, to visually present the game to the user and receive the user input.
 

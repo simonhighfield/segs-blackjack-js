@@ -508,7 +508,7 @@ describe("\n nextPlay", () => {
             const playersScores = [5, 15]
             const playersScoresCopy = [5, 15]
     
-            const updatedResultsLookup = nextPlay('stand', undefined, undefined, resultsLookup, playersName, playersScores)
+            nextPlay('stand', undefined, undefined, resultsLookup, playersName, playersScores)
     
             expect(resultsLookup).toEqual(resultsLookupCopy)
             expect(playersName).toEqual(playersNameCopy)
