@@ -3,20 +3,14 @@ const dealCard = require("./dealCard")
 const updateResultsLookup = require("./updateResultsLookup")
 
 module.exports = nextPlay = (decision, deck, hand, results, playersName, scores) => {
-    try {
-        errorCheckDecision(decision)
+    errorCheckDecision(decision)
 
-        if (decision === 'hit') {
-    
-            return dealCard(deck, hand)
-        } 
-        else if  (decision === 'stand') {
-            
-            return updateResultsLookup(results, playersName, scores)
-        }
-    }
-    catch (error) {
-        // console.error("error in nextPlay: ", error.message);
-        throw error
+    if (decision === 'hit') {
+
+        return dealCard(deck, hand)
+    } 
+    else if  (decision === 'stand') {
+        
+        return updateResultsLookup(results, playersName, scores)
     }
 }
