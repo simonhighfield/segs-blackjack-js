@@ -4,7 +4,6 @@ const errorCheckScores = require("../errorChecks/errorCheckScores")
 const getBestScore = require("./getBestScore")
 
 module.exports = updateResultsLookup = (resultsLookup, playersName, scores) => {
-
     errorCheckObject(resultsLookup, 'resultsLookup')
     errorCheckString(playersName, 'playersName')
     errorCheckScores(scores, 'scores')

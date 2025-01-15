@@ -1,7 +1,6 @@
 const errorCheckScores = require("../errorChecks/errorCheckScores");
 
 module.exports = getHandValidityFromScores = (scores) => {
-
     errorCheckScores(scores);
 
     let anyValidScores = false

@@ -1,11 +1,9 @@
 const errorCheckHand = require("../errorChecks/errorCheckHand");
 
-module.exports = getPossibleScoresFromHand = (inputHand) => {
+module.exports = getPossibleScoresFromHand = (hand) => {
     try {
-        errorCheckHand(inputHand);
-        
-        const hand = [...inputHand]
-        
+        errorCheckHand(hand);
+                
         const aceCards = hand.filter((card) => card.name === "Ace")
         
         if (aceCards.length === 0) {            
