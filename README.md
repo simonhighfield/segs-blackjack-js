@@ -62,7 +62,7 @@ This front-end will visually present the game to the user, and allow for user in
 
     - **scenarios.tests.js** has tests that prove this code satisfies the scenarios for the BBC SEGS technical assesment;
 
-- The **data folder** contains data used for both production and test code. Arrays of card emblems, names, and values are stored here so the only need modifying in one place.
+- The **data folder** contains data used for both production and test code. Arrays of card emblems, names, and values are stored centrally here for easy maintenance.
 
 - **test.setup.js** allows the use of the jest-extended node package, by requiring all the jest-extended matchers used.
 

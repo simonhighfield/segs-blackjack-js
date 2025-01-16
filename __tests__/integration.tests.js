@@ -14,7 +14,7 @@ const mockUpdateResults = require("../utils/gamePlay/updateResultsLookup");
 const initialiseGame = require("../utils/gameInitialisation/initialiseGame");
 
 
-describe("GenerateDeck Integration", () => {
+describe("generateDeck Integration", () => {
     test("generateSuit has been called for each emblem", () => {
         mockGenerateSuit.mockReturnValue([]);   
         mockGenerateDeck.mockImplementation(() => originalGenerateDeck());
@@ -34,7 +34,7 @@ describe("GenerateDeck Integration", () => {
 
 
 
-describe("\n InitialiseGame Integration (1 player game)", () => {    
+describe("\n initialiseGame Integration (1 player game)", () => {    
     const testDeck = [
         { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
         { "emblem": "clubs", "name": "Two", "values": [2] },
