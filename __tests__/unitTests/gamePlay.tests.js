@@ -368,7 +368,6 @@ describe("\n updateResultsLookup", () => {
             }
             expect(errorCheckEmptyplayersName).toThrow("'playersName' should have length > 0");
         });
-        // errorCheckScores
     })
 
     describe("Is a pure function", () => {

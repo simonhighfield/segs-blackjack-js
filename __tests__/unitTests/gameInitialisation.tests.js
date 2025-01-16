@@ -123,6 +123,7 @@ describe("generateSuit", () => {
 })
 
 
+
 describe("\n generateDeck", () => {
     let deck = []
     beforeAll(() => {
@@ -180,8 +181,8 @@ describe("\n generateDeck", () => {
 
     
 });
-// returns an objecting keys (delaersHand, deck, playersHand)
-// each key is an array 
+
+
 
 describe("\n initialiseGame", () => {
 

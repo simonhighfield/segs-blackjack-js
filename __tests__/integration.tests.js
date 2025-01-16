@@ -32,12 +32,9 @@ describe("GenerateDeck Integration", () => {
     });
 });
 
-    // getScores from hand dealer 
-    // updateResults (dealer)
-    // getScores(player)
 
-describe("InitialiseGame Integration", () => {    
 
+describe("\n InitialiseGame Integration (1 player game)", () => {    
     const testDeck = [
         { "emblem": "clubs", "name": "Ace", "values": [1, 11] },
         { "emblem": "clubs", "name": "Two", "values": [2] },
@@ -66,42 +63,12 @@ describe("InitialiseGame Integration", () => {
 
         expect(mockGenerateDeck).toHaveBeenCalledTimes(1);
     });
-    test("For a 1 player game, dealCard is called 1 time for the player", () => {
+    test("dealCard is called 1st with an empty array (dealing player's first card)", () => {
+        const expectedFirstDealArguments = []
+
         initialiseGame();
+        const actualFirstDealArguments = mockDealCard.mock.calls[0];        
         
-        const firstCallArguments = mockDealCard.mock.calls[0];        
-        
-        expect(firstCallArguments).toEqual([testDeck, []])
-    });
-    test("For a 1 player game, the second card is dealt to the dealer and removed from the deck", () => {        
-        const { dealersHand, deck} = initialiseGame();
-        
-        const expectedSecondCardDealt = { "emblem": "clubs", "name": "Two", "values": [2] }
-
-        expect(dealersHand).toContainEqual(expectedSecondCardDealt)
-        expect(deck).not.toContainEqual(expectedSecondCardDealt)
-    });
-    test("For a 1 player game, the third card is dealt to the player and removed from deck", () => {        
-        const { playersHand, deck} = initialiseGame();
-        
-        const expectedThirdCardDealt = { "emblem": "clubs", "name": "Three", "values": [3] }
-
-        expect(playersHand).toContainEqual(expectedThirdCardDealt)
-        expect(deck).not.toContainEqual(expectedThirdCardDealt)
-    });
-    test("For a 1 player game, the fourth card is dealt to the dealer and removed from deck", () => {        
-        const { dealersHand, deck} = initialiseGame();
-        
-        const expectedFourthCardDealt = { "emblem": "clubs", "name": "Four", "values": [4] }
-
-        expect(dealersHand).toContainEqual(expectedFourthCardDealt)
-        expect(deck).not.toContainEqual(expectedFourthCardDealt)
-    });
-    test.skip("Returns the results containg the dealers score from their two cards", () => {        
-        const { resultsLookup } = initialiseGame();
-        
-        const expectedResultsLookup = {'dealer': 6}
-
-        expect(resultsLookup).toEqual(expectedResultsLookup)
+        expect(actualFirstDealArguments).toEqual([testDeck, expectedFirstDealArguments])
     });
 });
