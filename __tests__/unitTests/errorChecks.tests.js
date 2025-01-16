@@ -56,13 +56,6 @@ describe("\n errorCheckCardArray", () => {
             }
             expect(errorCheckWrongTypeHand).toThrow("'cardArray' should be an array");
         });
-
-        test.skip("Throws an error if 'hand' is an empty array", () => {        
-            function errorCheckEmptyHand () {
-                errorCheckCardArray([])
-            }
-            expect(errorCheckEmptyHand).toThrow("'cardArray' should not be empty");
-        });        
     })
 
     describe("Error checks each card of hand", () => {
