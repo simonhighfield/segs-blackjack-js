@@ -2,13 +2,13 @@
 
 This repository provides the functions to play a game of Blackjack.
 
-Currently, functions are provided for a single player to begin a game: generating a deck of cards, dealing thee player and a dealer an initial hand, and storing those results. 
+Currently, these provide for a single player to begin a game: generating a deck of cards, dealing the player and a dealer each an initial hand , and storing those results. 
 
 Also provided are game play functions that receive a player's input - whether they want to 'hit' and receive another card, or 'stand' and submit their score.
 
-Future work will provide functions toto shuffle the deck of cards, to evaluate the winner, and a user interface.
+Future work will provide functions to shuffle the deck of cards and to evaluate the winner, and a user interface will be built using React.
 
-This code has been developed with the intention of it being applied in a react project, to visually present the game to the user and receive the user input.
+This front-end will visually present the game to the user, and allow for user input (such as their decision to 'hit' or 'stand').
 
  
 
@@ -32,6 +32,8 @@ This code has been developed with the intention of it being applied in a react p
 
 - Uses pure functions
 
+- Error check functions throw errors in case a function is invioked with invalid arguments
+
 - Intented to be used in React application
 
  
@@ -54,7 +56,7 @@ This code has been developed with the intention of it being applied in a react p
 
 - The **tests folder** contains tests written with jest, organised into sub-folders:
 
-    - The **unitTests** folder has tests for each of the gameInitialisation, gamePlay, and errorChecks functions;
+    - The **unitTests** folder has tests for each of the **gameInitialisation**, **gamePlay**, and **errorChecks** functions;
 
     - **integration.tests.js** has tests that prove functions correctly invoke other functions;
 
@@ -184,16 +186,10 @@ To run only scenario.tests.js:
 
 initialiseGame will generate the deck of cards, serve 2 cards to the player and dealer, and provide a look up for the results, that initially stores the dealers score.
 
- 
-
 The user will be provided with buttons that invoked nextPlay with either 'hit' (to receive another card) or 'stand' to submit their score.
 
 In the case of 'stand', nextPlay invokes updateResultsLookup to submit the players score, and then the winner will be determined.
 
- 
-
 In the case of 'hit', nextPlay invokes dealCard, which updates the state for the player's hand. A useEffect listening to the player's hand will invoke getHandValidity.
-
- 
 
 A useEffect listening to the hand validity determines what happens next: if invalid, the updateResultsLookup will be invoked, submitting the player's score. If valid, then no change, and the player has the option to hit or stand.
