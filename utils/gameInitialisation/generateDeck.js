@@ -1,7 +1,6 @@
 const generateSuit = require("./generateSuit")
 
 module.exports = generateDeck = () => {
-
     const emblems = ['clubs', 'diamonds', 'hearts', 'spades']
 
     let deck = []

@@ -1,39 +1,85 @@
-const { expectedEmblems, expectedNames, lookupValueByName, expectedDeck } = require("../../data/testData");
+const { expectedEmblems, expectedNames, lookupValueByName } = require("../../data/testData");
 const generateDeck = require("../../utils/gameInitialisation/generateDeck");
 const generateSuit = require("../../utils/gameInitialisation/generateSuit");
 const initialiseGame = require("../../utils/gameInitialisation/initialiseGame");
 
-describe("generateDeck", () => {
-    describe("Deck is a valid array ", () => {
-        test("A deck is an array, with a length > 0", () => {
-            const deck = generateDeck();
+describe("generateSuit", () => {
+    let suit = []
+    const emblem = 'hearts'
+    beforeAll(() => {
+        suit = generateSuit(emblem);
+    });
+
+    describe("Returns a suit as an array", () => {
+        test("A suit is an array of 13 cards", () => {
+            expect(suit).toBeArrayOfSize(13);
             
-            expect(deck).toBeArray()
-            expect(deck.length).toBeGreaterThan(0);
         });
     })
 
-    describe("Card properties", () => {
-        let deck = []
-        beforeAll(() => {
-            deck = generateDeck();
+    describe("Generates a suit containing each card name and value ", () => {
+        test("A suit contains one of each card name ranging from Ace, Two, ... Queen, King", () => {
+            let actualNames = []
+            for (let i = 0; i < suit.length; i++) { 
+                const card = suit[i]
+                actualNames.push(card.name)  
+            }
+            
+            expect(actualNames).toIncludeAllMembers(expectedNames)
         });
+        test("A suit has card names that correspond to the correct value", () => {            
+            for (let i = 0; i < suit.length; i++) { 
+                const card = suit[i];
 
-        test("A card is an object", () => {
+                expect(card.values).toEqual(lookupValueByName[card.name]);
+            }
+        })
+        test("A suit has all cards matching the input emblem", () => {     
+            for (let i = 0; i < suit.length; i++) { 
+                const card = suit[i];
+
+                expect(card.emblem).toBe(emblem);
+            }
+        })
+    })
+})
+
+
+describe("\n generateDeck", () => {
+    let deck = []
+    beforeAll(() => {
+        deck = generateDeck();
+    });
+
+    describe("Returns a deck as an array", () => {
+        test("A deck is an array of 52 cards", () => {
+            expect(deck).toBeArrayOfSize(52);
+        })
+        test("A deck contains 13 cards of each emblem", () => {
+            expectedEmblems.forEach(emblem => {
+                const suit = deck.filter((card) => card.emblem === emblem)
+
+                expect(suit.length).toBe(13)
+            });                
+        });
+    })
+
+    describe("Generates a deck of valid card object", () => {
+        test("Each card is an object", () => {
             for (let i = 0; i < deck.length; i++) { 
                 const card = deck[i]                
                 expect(typeof card).toBe('object');
             }
         });
 
-        describe("Card emblem", () => {
-            test("A card has an emblem", () => {
+        describe("Card Emblem", () => {
+            test("Each card has an emblem", () => {
                 for (let i = 0; i < deck.length; i++) {
                     const card = deck[i]                    
                     expect(card).toHaveProperty('emblem');
                 }
             });
-            test("A card's emblem is one of clubs, diamonds, hearts, spades", () => {
+            test("Each card's emblem is one of clubs, diamonds, hearts, spades", () => {
                 for (let i = 0; i < deck.length; i++) { 
                     const card = deck[i]
                     expect(card.emblem).toBeOneOf(expectedEmblems);
@@ -41,14 +87,14 @@ describe("generateDeck", () => {
             });
         })
 
-        describe("Card name", () => {
-            test("A card has a name", () => {
+        describe("Card Name", () => {
+            test("Each card has a name", () => {
                 for (let i = 0; i < deck.length; i++) { 
                     const card = deck[i]
                     expect(card).toHaveProperty('name');
                 }
             });
-            test("A card's name is a string such as Ace, Two, Jack, etc", () => {
+            test("Each card's name is a string such as Ace, Two, Jack, etc", () => {
                 for (let i = 0; i < deck.length; i++) { 
                     const card = deck[i]
                     expect(card.name).toBeOneOf(expectedNames);
@@ -56,8 +102,8 @@ describe("generateDeck", () => {
             });
         })
         
-        describe("Card values", () => {
-            test("A card's values are in a valid array", () => {
+        describe("Card Value", () => {
+            test("Each card's values are in a valid array", () => {
                 for (let i = 0; i < deck.length; i++) { 
                     const card = deck[i]
                     expect(card).toHaveProperty('values');
@@ -65,7 +111,7 @@ describe("generateDeck", () => {
                     expect(card.values.length).toBeWithin(1,3)
                 }
             });
-            test("A card's values are between 1 and 11 ", () => {
+            test("Each card's values are between 1 and 11 ", () => {
                 for (let i = 0; i < deck.length; i++) { 
                     const card = deck[i]
                     const values = card.values
@@ -77,7 +123,7 @@ describe("generateDeck", () => {
                     });
                 }
             });
-            test("A card's values must be [1, 11] or [2-10]", () => {
+            test("Each card's values must be [1, 11] or [2-10]", () => {
                 for (let i = 0; i < deck.length; i++) { 
                     const card = deck[i]
                     const values = card.values
@@ -91,97 +137,88 @@ describe("generateDeck", () => {
             });
         })
     })
-
-    describe("\n generateSuit", () => {
-        describe("Suit Properties", () => {
-            let suit = []
-            const emblem = 'hearts'
-            beforeAll(() => {
-                suit = generateSuit(emblem);
-            });
-    
-            test("A suit is an array of 13 cards", () => {
-                expect(suit).toBeArrayOfSize(13);
-                
-            });
-            test("A suit contains one of each card name ranging from Ace, Two, ... Queen, King", () => {
-                let actualNames = []
-                for (let i = 0; i < suit.length; i++) { 
-                    const card = suit[i]
-                    actualNames.push(card.name)  
-                }
-                
-                expect(actualNames).toIncludeAllMembers(expectedNames)
-            });
-            test("A suit has card names that correspond to the correct value", () => {            
-                for (let i = 0; i < suit.length; i++) { 
-                    const card = suit[i];
-                    expect(card.values).toEqual(lookupValueByName[card.name]);
-                }
-            })
-            test("A suit has all cards matching the input emblem", () => {     
-                for (let i = 0; i < suit.length; i++) { 
-                    const card = suit[i];
-                    expect(card.emblem).toBe(emblem);
-                }
-            })
-        })
-    })
-
-    describe("\n generateDeck", () => {
-        describe("Deck Properties", () => {
-            let deck = []
-            beforeAll(() => {
-                deck = generateDeck();
-            });
-    
-            test("A deck is an array of 52 cards", () => {
-                expect(deck).toBeArrayOfSize(52);
-            })
-            test("A deck contains 13 cards of each emblem", () => {
-                expectedEmblems.forEach(emblem => {
-                    const suit = deck.filter((card) => card.emblem === emblem)
-                    expect(suit.length).toBe(13)
-                });                
-            });
-        })
-    })
 });
-
+// returns an objecting keys (delaersHand, deck, playersHand)
+// each key is an array 
 
 describe("\n initialiseGame", () => {
-    test("For a 1 player game, the second card is dealt to the dealer and removed from the deck", () => {        
-        const { dealersHand, deck} = initialiseGame();
-        
-        const expectedSecondCardDealt = { "emblem": "clubs", "name": "Two", "values": [2] }
 
-        expect(dealersHand).toContainEqual(expectedSecondCardDealt)
-        expect(deck).not.toContainEqual(expectedSecondCardDealt)
+    describe("Returns the deck, dealer's hand, player's hand, and results lookup", () => {
+        let output = {}
+        beforeAll(() => {
+            output = initialiseGame()
+        });
+
+        test("Returns an object", () => {        
+
+            expect(output).toBeObject()
+        })
+
+        test("Object has keys for deck, dealersHand, playersHand", () => {        
+            const expectedKeys = ['deck', 'dealersHand', 'playersHand', 'resultsLookup']
+                
+            expect(output).toContainKeys(expectedKeys)
+        })
+
+        test("deck, dealersHand, and playersHand are arrays", () => {  
+            
+            expect(output.deck).toBeArray()
+            expect(output.dealersHand).toBeArray()
+            expect(output.playersHand).toBeArray()
+            
+        })
+        
+        test("resultsLookup is an object", () => {  
+            
+            expect(output.resultsLookup).toBeObject()  
+        })
+    })
+
+    describe("Correctly deals the first 4 cards from deck to playersHand and dealersHand", () => {
+        test("For a 1 player game, the first card is dealt to the player and removed from the deck", () => {        
+            const expectedFirstCardDealt = { "emblem": "clubs", "name": "Ace", "values": [1, 11] }
+            
+            const { playersHand, deck} = initialiseGame();
+    
+            expect(playersHand).toContainEqual(expectedFirstCardDealt)
+            expect(deck).not.toContainEqual(expectedFirstCardDealt)
+        });
+    
+        test("For a 1 player game, the second card is dealt to the dealer and removed from the deck", () => {        
+            const expectedSecondCardDealt = { "emblem": "clubs", "name": "Two", "values": [2] }
+            
+            const { dealersHand, deck} = initialiseGame();
+    
+            expect(dealersHand).toContainEqual(expectedSecondCardDealt)
+            expect(deck).not.toContainEqual(expectedSecondCardDealt)
+        });
+    
+        test("For a 1 player game, the third card is dealt to the player and removed from deck", () => {        
+            const expectedThirdCardDealt = { "emblem": "clubs", "name": "Three", "values": [3] }
+            
+            const { playersHand, deck} = initialiseGame();
+    
+            expect(playersHand).toContainEqual(expectedThirdCardDealt)
+            expect(deck).not.toContainEqual(expectedThirdCardDealt)
+        });
+    
+        test("For a 1 player game, the fourth card is dealt to the dealer and removed from deck", () => {        
+            const expectedFourthCardDealt = { "emblem": "clubs", "name": "Four", "values": [4] }
+            
+            const { dealersHand, deck} = initialiseGame();
+    
+            expect(dealersHand).toContainEqual(expectedFourthCardDealt)
+            expect(deck).not.toContainEqual(expectedFourthCardDealt)
+        });
     });
 
-    test("For a 1 player game, the third card is dealt to the player and removed from deck", () => {        
-        const { playersHand, deck} = initialiseGame();
-        
-        const expectedThirdCardDealt = { "emblem": "clubs", "name": "Three", "values": [3] }
-
-        expect(playersHand).toContainEqual(expectedThirdCardDealt)
-        expect(deck).not.toContainEqual(expectedThirdCardDealt)
-    });
-
-    test("For a 1 player game, the fourth card is dealt to the dealer and removed from deck", () => {        
-        const { dealersHand, deck} = initialiseGame();
-        
-        const expectedFourthCardDealt = { "emblem": "clubs", "name": "Four", "values": [4] }
-
-        expect(dealersHand).toContainEqual(expectedFourthCardDealt)
-        expect(deck).not.toContainEqual(expectedFourthCardDealt)
-    });
-
-    test("Returns the results containg the dealers score from their two cards", () => {        
-        const { resultsLookup } = initialiseGame();
-        
-        const expectedResultsLookup = {'dealer': 6}
-
-        expect(resultsLookup).toEqual(expectedResultsLookup)
+    describe("Correctly gets the dealer's score and adds it to the results lookup", () => {
+        test("For a 1 player game, the dealer's score is the second + fourth cards", () => {        
+            const expectedResultsLookup = {'dealer': 6}
+            
+            const { resultsLookup } = initialiseGame();
+    
+            expect(resultsLookup).toEqual(expectedResultsLookup)
+        });
     });
 });

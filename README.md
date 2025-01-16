@@ -192,4 +192,4 @@ In the case of 'stand', nextPlay invokes updateResultsLookup to submit the playe
 
 In the case of 'hit', nextPlay invokes dealCard, which updates the state for the player's hand. A useEffect listening to the player's hand will invoke getHandValidity.
 
-A useEffect listening to the hand validity determines what happens next: if invalid, the updateResultsLookup will be invoked, submitting the player's score. If valid, then no change, and the player has the option to hit or stand.
+A useEffect listening to the hand validity determines what happens next: if invalid, the updateResultsLookup will be invoked, submitting the player's score. If valid, then no change, and again the player has the option to 'hit' or 'stand'.

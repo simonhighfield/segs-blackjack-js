@@ -100,8 +100,8 @@ describe("\n getPossibleScoresFromHand", () => {
         });
     })
 
-    describe("Returns scores as an array", () => {
-        test("Returns scores as an array", () => {
+    describe("Returns the possible scores as an array", () => {
+        test("Returns scores as an array of numbers", () => {
             const hand = [{ "emblem": "clubs", "name": "Two", "values": [2] }]
             const scores = getPossibleScoresFromHand(hand)
     
@@ -238,7 +238,7 @@ describe("\n getHandValidityFromScores", () => {
     })
 
     describe("Returns a boolean", () => {
-        test("returns validity as a boolean", () => {
+        test("Returns the hand's validity as a boolean", () => {
             const validScores = [7, 17]
 
             const validity = getHandValidityFromScores(validScores)
